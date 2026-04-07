@@ -1,0 +1,7 @@
+# Large binary source files — track with git-lfs or keep local only
+raw/papers/*.pdf
+raw/head-models/*.zip
+raw/head-models/*.tar.gz
+
+# OS
+.DS_Store
