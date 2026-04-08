@@ -1,0 +1,36 @@
+---
+category: research
+section: methodology
+weight: 40
+title: "Continuous-Time Dynamics"
+status: draft
+slide_summary: "HypergraphNeuralODE and HypergraphNeuralSDE evolve node features in continuous time using hypergraph convolution layers as the learned vector field, integrated via Diffrax."
+tags: [neural-ode, neural-sde, diffrax, continuous-time, dynamics, methodology]
+---
+
+# Continuous-Time Dynamics
+
+Neural ODE and Neural SDE modules that evolve node features in continuous time,
+using hypergraph convolution layers as the learned vector field.
+
+Requires the `dynamics` extra:
+
+```bash
+pip install hgx[dynamics]
+```
+
+!!! note
+    These classes are only available when [Diffrax](https://docs.kidger.site/diffrax/)
+    is installed. They are imported conditionally in `hgx.__init__`.
+
+## HypergraphNeuralODE
+
+::: hgx.HypergraphNeuralODE
+
+## HypergraphNeuralSDE
+
+::: hgx.HypergraphNeuralSDE
+
+## evolve
+
+::: hgx.evolve
