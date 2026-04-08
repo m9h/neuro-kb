@@ -1,4 +1,4 @@
-```yaml
+---
 type: tissue
 title: Scalp
 properties:
@@ -11,7 +11,7 @@ properties:
   optical_n: 1.37
 sources: ["Gabriel1996", "Prahl1999", "MCX_Colin27"]
 related: ["tissue-skull.md", "tissue-csf.md", "tissue-gray-matter.md", "head-model-colin27.md", "modality-fnirs.md", "modality-eeg.md"]
-```
+---
 
 # Scalp
 

@@ -1,10 +1,10 @@
-```yaml
+---
 type: method
 title: Spectral Analysis (multitaper, wavelets)
 category: spectral
 implementations: [neurojax:analysis.spectral, coffeine:compute_coffeine]
 related: [method-time-frequency-analysis.md, method-hilbert-transform.md, method-fourier-transform.md, method-covariance-estimation.md]
-```
+---
 
 # Spectral Analysis (multitaper, wavelets)
 

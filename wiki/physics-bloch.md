@@ -1,10 +1,10 @@
-```yaml
+---
 type: physics
 title: Bloch Equations / MR Physics
 physics: electromagnetic
 governing_equations: dM/dt = γ(M × B) - R(M - M₀)
 related: [physics-nmr.md, modality-fmri.md, modality-dti.md, coordinate-system-scanner.md, tissue-brain.md, tissue-csf.md]
-```
+---
 
 # Bloch Equations / MR Physics
 

@@ -1,10 +1,10 @@
-```yaml
+---
 type: method
 title: Boundary Element Method
 category: BEM
 implementations: [neurojax:geometry/bem_forward.py]
 related: [method-fem.md, physics-bioelectromagnetics.md, head-model-mida.md, coordinate-system-mni152.md]
-```
+---
 
 # Boundary Element Method
 

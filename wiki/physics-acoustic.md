@@ -1,9 +1,9 @@
-```yaml
+---
 type: physics
 title: Acoustic Wave Propagation
 governing_equations: Linear acoustic wave equation, Helmholtz equation (frequency domain)
 related: [modality-fus.md, modality-us.md, tissue-skull.md, tissue-brain.md, method-pseudospectral.md, method-finite-difference.md]
-```
+---
 
 # Acoustic Wave Propagation
 

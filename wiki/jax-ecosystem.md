@@ -1,8 +1,8 @@
-```yaml
+---
 type: concept
 title: JAX Ecosystem for Neuroimaging
 related: [differentiable-programming.md, neural-posterior-estimation.md, equinox-modules.md, scientific-ml.md]
-```
+---
 
 # JAX Ecosystem for Neuroimaging
 

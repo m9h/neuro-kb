@@ -1,4 +1,4 @@
-```yaml
+---
 type: modality
 title: Functional MRI
 physics: hemodynamic
@@ -6,7 +6,7 @@ measurement: Blood oxygen level-dependent (BOLD) contrast from hemodynamic chang
 spatial_resolution: 1-3mm isotropic (typically 2-3mm)
 temporal_resolution: 0.5-3.0s (TR dependent)
 related: [bold-signal.md, hemodynamic-response.md, glm.md, connectivity.md, preprocessing.md]
-```
+---
 
 # Functional MRI
 

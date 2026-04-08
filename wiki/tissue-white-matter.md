@@ -1,4 +1,4 @@
-```yaml
+---
 type: tissue
 title: White Matter
 properties:
@@ -13,7 +13,7 @@ properties:
   t2_relaxation_ms: "80"
 sources: ["gabriel1996", "aubry2022itrusst", "zhang2012noddi", "linka2023cann"]
 related: [tissue-gray-matter.md, tissue-csf.md, coordinate-system-rpi.md, modality-diffusion-mri.md, modality-focused-ultrasound.md]
-```
+---
 
 # White Matter
 

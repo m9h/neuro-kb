@@ -1,4 +1,4 @@
-```yaml
+---
 type: modality
 title: Functional Near-Infrared Spectroscopy
 physics: optical
@@ -6,7 +6,7 @@ measurement: hemoglobin concentration changes via near-infrared light attenuatio
 spatial_resolution: 10-30 mm (standard fNIRS), 10-15 mm (HD-DOT)
 temporal_resolution: 0.1-10 Hz
 related: [diffuse-optical-tomography.md, hemodynamics.md, photon-transport.md, beer-lambert-law.md]
-```
+---
 
 # Functional Near-Infrared Spectroscopy
 

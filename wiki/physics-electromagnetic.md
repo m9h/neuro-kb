@@ -1,10 +1,10 @@
-```yaml
+---
 type: physics
 title: Electromagnetic Forward Problem
 physics: electromagnetic
 governing_equations: Maxwell equations in quasistatic approximation
 related: [tissue-conductivity.md, head-model-bem.md, head-model-fem.md, leadfield-matrix.md]
-```
+---
 
 # Electromagnetic Forward Problem
 

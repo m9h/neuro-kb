@@ -1,4 +1,4 @@
-```yaml
+---
 type: tissue
 title: Skull / Cortical Bone
 properties:
@@ -10,7 +10,7 @@ properties:
   attenuation_dB_cm_MHz: 4.0
 sources: ["aubry2022itrusst", "gabriel1996", "iacono2015mida"]
 related: [tissue-csf.md, tissue-brain.md, head-model-mida.md, head-model-sci.md, physics-acoustic-wave-equation.md, modality-tfus.md]
-```
+---
 
 # Skull / Cortical Bone
 

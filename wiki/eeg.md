@@ -1,4 +1,4 @@
-```yaml
+---
 type: modality
 title: Electroencephalography
 physics: electromagnetic
@@ -6,7 +6,7 @@ measurement: electrical potentials at scalp surface
 spatial_resolution: 1-3 cm
 temporal_resolution: 1 ms
 related: [meg.md, forward-modeling.md, source-imaging.md, conductivity.md, head-models.md]
-```
+---
 
 # Electroencephalography
 

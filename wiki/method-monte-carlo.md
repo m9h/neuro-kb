@@ -1,4 +1,4 @@
-```yaml
+---
 type: method
 title: Monte Carlo Simulation
 category: stochastic
@@ -7,7 +7,7 @@ implementations:
   - MCMRSimulator.jl:Spins
   - sbi4dwi:forward_models
 related: [method-finite-element.md, physics-diffusion.md, physics-photon-transport.md]
-```
+---
 
 # Monte Carlo Simulation
 

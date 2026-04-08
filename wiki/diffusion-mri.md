@@ -1,4 +1,4 @@
-```yaml
+---
 type: modality
 title: Diffusion MRI
 physics: electromagnetic
@@ -6,7 +6,7 @@ measurement: water molecule diffusion via signal attenuation
 spatial_resolution: 1-3mm isotropic voxels
 temporal_resolution: seconds to minutes per image
 related: [monte-carlo-simulation.md, finite-element-methods.md, bloch-torrey-equation.md, tissue-microstructure.md, apparent-diffusion-coefficient.md]
-```
+---
 
 # Diffusion MRI
 

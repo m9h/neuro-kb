@@ -1,4 +1,4 @@
-```yaml
+---
 ---
 type: modality
 title: Structural MRI
@@ -74,7 +74,7 @@ Multi-parameter protocols enable tissue property estimation:
 
 ## BIDS Structure
 
-```
+---
 sub-XX/
 ├── ses-YY/
 │   └── anat/

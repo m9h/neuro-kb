@@ -1,9 +1,10 @@
 ---
+---
 type: method
 title: Simulation-Based Inference
 category: inference
 implementations: [sbi4dwi:pipeline, sbi4dwi:inference]
-related: [diffusion-mri.md, tus.md, method-neural-ode.md, method-monte-carlo.md, method-fem.md]
+related: [method-npe.md, method-mcmc.md, method-abc.md]
 ---
 
 # Simulation-Based Inference
@@ -36,7 +37,7 @@ model = compose_models([
 def forward_fn(params, acquisition):
     return model(params, acquisition.gradient_directions, 
                  acquisition.b_values)
-```
+---
 
 ### Stage 2: Simulation and Training
 ```python
@@ -176,14 +177,6 @@ Flags inputs that deviate significantly from training distribution:
 3. **Black box**: Less interpretable than analytical fitting
 4. **Computational setup**: Requires GPU infrastructure and ML expertise
 
-## Key References
-
-- **Cranmer2020sbi**: Cranmer et al. (2020). The frontier of simulation-based inference. PNAS 117:30055-30062. Comprehensive review of SBI methodology.
-- **manzanopatron2025sbi**: Manzano-Patron et al. (2025). Uncertainty mapping and probabilistic tractography using SBI in diffusion MRI. Medical Image Analysis 103:103580.
-- **zhang2012noddi**: Zhang et al. (2012). NODDI: practical in vivo neurite orientation dispersion and density imaging. NeuroImage 61:1000-1016.
-- **palombo2020sandi**: Palombo et al. (2020). SANDI: a compartment-based model for non-invasive apparent soma and neurite imaging. NeuroImage 215:116835.
-- **fick2019dmipy**: Fick et al. (2019). The Dmipy Toolbox: Diffusion MRI Multi-Compartment Modeling and Microstructure Recovery Made Easy. Frontiers in Neuroinformatics 13:64.
-
 ## Relevant Projects
 
 - **sbi4dwi**: Primary implementation with JAX/Equinox
@@ -193,8 +186,9 @@ Flags inputs that deviate significantly from training distribution:
 
 ## See Also
 
-- [diffusion-mri.md](diffusion-mri.md) — Diffusion-weighted imaging physics
-- [tus.md](tus.md) — Transcranial focused ultrasound
-- [method-neural-ode.md](method-neural-ode.md) — Neural ODEs / differentiable simulation
-- [method-monte-carlo.md](method-monte-carlo.md) — Monte Carlo simulation methods
-- [method-fem.md](method-fem.md) — Finite element methods for forward models
+- [method-npe.md](method-npe.md) - Neural Posterior Estimation specifics
+- [method-mcmc.md](method-mcmc.md) - MCMC alternative approaches
+- [modality-dwi.md](modality-dwi.md) - Diffusion-weighted imaging physics
+- [modality-tfus.md](modality-tfus.md) - Transcranial focused ultrasound
+- [concept-microstructure.md](concept-microstructure.md) - Tissue microstructure modeling
+```

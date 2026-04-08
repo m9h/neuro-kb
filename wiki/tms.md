@@ -1,4 +1,4 @@
-```yaml
+---
 type: modality
 title: Transcranial Magnetic Stimulation
 physics: electromagnetic
@@ -6,7 +6,7 @@ measurement: neural activation via magnetic field induction
 spatial_resolution: 0.5-1.0 cm
 temporal_resolution: milliseconds
 related: [eeg.md, tms-eeg.md, neural-mass-models.md, electromagnetic-forward-modeling.md]
-```
+---
 
 # Transcranial Magnetic Stimulation
 

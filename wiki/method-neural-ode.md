@@ -1,10 +1,10 @@
-```yaml
+---
 type: method
 title: Neural ODEs / Differentiable Simulation
 category: differentiable
 implementations: [sbi4dwi:biophysics, jaxctrl:core, vbjax:integration]
 related: [method-matrix-formalism.md, method-sde-simulation.md, physics-diffusion-equation.md]
-```
+---
 
 # Neural ODEs / Differentiable Simulation
 

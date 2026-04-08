@@ -1,4 +1,4 @@
-```yaml
+---
 type: tissue
 title: Tissue Acoustic Properties (cross-tissue)
 properties:
@@ -28,7 +28,7 @@ properties:
     attenuation_db_mhz_cm: 0.002
 sources: [aubry2022itrusst, stanziola2023jwave]
 related: [tissue-electrical-properties.md, head-models.md, acoustic-forward-modeling.md, tus-simulation.md]
-```
+---
 
 # Tissue Acoustic Properties (cross-tissue)
 
