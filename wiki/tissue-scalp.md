@@ -114,6 +114,12 @@ For TMS/tDCS modeling:
 - **neurojax**: Incorporates scalp conductivity in BEM/FEM head models for source localization
 - **sbi4dwi**: May include scalp in diffusion-informed tissue property estimation
 
+## Key References
+
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG forward modeling. NeuroImage 30:813-826.
+- **Brigadoi2015short**: Brigadoi & Cooper (2015). How short is short? Optimum source-detector distance for short-separation channels in fNIRS. Neurophotonics 2(2):025005. Impact of scalp hemodynamics on fNIRS.
+- **Saager2005short**: Saager & Berger (2005). Direct characterization and removal of interfering absorption trends in two-layered turbid media. JOSA A 22:1874-1882.
+
 ## See Also
 
 - [tissue-skull.md](tissue-skull.md) - Next inward tissue layer

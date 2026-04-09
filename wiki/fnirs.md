@@ -145,6 +145,17 @@ Source: MCX Colin27 benchmark values
 | **Cerebral blood flow** | 50 | +20-50% | ml/100g/min |
 | **Blood volume** | 3-4 | +10-30% | ml/100g |
 
+## Key References
+
+- **Jobsis1977noninvasive**: Jobsis (1977). Noninvasive, infrared monitoring of cerebral and myocardial oxygen sufficiency and circulatory parameters. Science 198:1264-1267.
+- **Scholkmann2014review**: Scholkmann et al. (2014). A review on continuous wave functional near-infrared spectroscopy and imaging instrumentation and methodology. NeuroImage 85:6-27.
+- **Brigadoi2015short**: Brigadoi & Cooper (2015). How short is short? Optimum source-detector distance for short-separation channels in fNIRS. Neurophotonics 2(2):025005.
+- **Eggebrecht2014mapping**: Eggebrecht et al. (2014). Mapping distributed brain function and networks with diffuse optical tomography. Nature Photonics 8:448-454.
+- **Cope1988system**: Cope & Delpy (1988). System for long-term measurement of cerebral blood and tissue oxygenation on newborn infants by near infra-red transillumination.
+- **Prahl1999omlc**: Prahl (1999). Optical absorption of hemoglobin. Oregon Medical Laser Center spectra database.
+- **Luke2021bids**: Luke et al. (2021). fNIRS-BIDS: the brain imaging data structure extended to functional near-infrared spectroscopy.
+- **Sherafati2025hddot**: Sherafati et al. (2025). A high-density diffuse optical tomography dataset of naturalistic viewing. Scientific Data 12:1762.
+
 ## Relevant Projects
 
 - **dot-jax**: Differentiable DOT forward modeling and image reconstruction pipeline

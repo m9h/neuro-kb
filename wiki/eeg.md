@@ -156,6 +156,16 @@ plv = phase_connectivity(source_data, method='plv')
 aec = envelope_connectivity(source_data, orthogonalize=True)
 ```
 
+## Key References
+
+- **Michel2004eegsi**: Michel et al. (2004). Comprehensive review of EEG source imaging methods and clinical applications. doi:10.1016/j.clinph.2004.06.001
+- **Hassan2014eeg**: Hassan et al. (2014). EEG source connectivity analysis from dense array recordings to brain networks. doi:10.1371/journal.pone.0105041
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG forward modeling using high-resolution FEM.
+- **PascualMarqui2002sloreta**: Pascual-Marqui (2002). Standardized low-resolution brain electromagnetic tomography (sLORETA) technical details.
+- **Donoghue2020fooof**: Donoghue et al. (2020). Parameterizing neural power spectra into periodic and aperiodic components (specparam/FOOOF). doi:10.1038/s41593-020-00744-x
+- **Bore2024pignn**: Bore et al. (2024). Physics-informed deep learning approach to EEG source imaging.
+- **sabbagh2020predictive**: Sabbagh et al. (2020). Predictive regression modeling with MEG/EEG using source power covariances.
+
 ## Relevant Projects
 
 - **neurojax:** Full EEG processing pipeline with 15 source imaging methods

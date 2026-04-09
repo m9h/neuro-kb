@@ -115,6 +115,14 @@ Skull modeling accuracy directly impacts:
 - **brain-fwi**: Full waveform inversion for skull velocity mapping, ITRUSST benchmarks
 - **jwave**: j-Wave acoustic simulation wrapper with skull attenuation validation
 
+## Key References
+
+- **aubry2022itrusst**: Aubry et al. (2022). Benchmark problems for transcranial ultrasound simulation: intercomparison of compressional wave models. JASA. Consensus acoustic property values.
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG forward modeling. NeuroImage 30:813-826. Skull conductivity impact on source localization.
+- **Wharton_2012**: Wharton & Bowtell (2012). Fiber orientation-dependent white matter contrast in gradient echo MRI. PNAS 109:18559-18564. Myelin susceptibility and skull bone modeling.
+- **schenck96_role_magnet_suscep_magnet_reson_imagin**: Schenck (1996). The role of magnetic susceptibility in magnetic resonance imaging. Med Phys 23:815-850.
+- **martin2025tfus**: Martin et al. (2025). MRI-guided transcranial focused ultrasound neuromodulation with a 256-element helmet array. Nature Communications.
+
 ## See Also
 
 - [tissue-csf.md](tissue-csf.md) - Cerebrospinal fluid properties

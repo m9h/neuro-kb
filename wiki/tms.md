@@ -120,6 +120,14 @@ International safety guidelines specify maximum stimulation intensities and puls
 - Obsessive-compulsive disorder
 - Stroke rehabilitation
 
+## Key References
+
+- **Momi2023virtuallesion**: Momi et al. (2023). TMS-evoked responses are driven by recurrent large-scale network dynamics. eLife 12:e83232.
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG field and return current computation using high-resolution FEM.
+- **SanzLeon2013tvb**: Sanz Leon et al. (2013). The Virtual Brain: a simulator of primate brain network dynamics. Frontiers in Neuroinformatics 7:10.
+- **Deco2013rww**: Deco et al. (2013). Resting-state functional connectivity emerges from structurally and dynamically shaped slow linear fluctuations. J Neurosci 33:11239-11252.
+- **neurotechx2020primer**: NeuroTechX Community (2020). The Neurotech Primer. Open-source neurotechnology education covering TMS safety and protocols.
+
 ## Relevant Projects
 
 **neurojax**: Implements TMS forward modeling with differentiable head models, enabling gradient-based optimization of coil placement for targeted stimulation.

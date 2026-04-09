@@ -172,6 +172,14 @@ exploration_efficiency = 0.78       # Information gain per action
 - Assumes Markovian dynamics (though hierarchical extensions address this)
 - Limited theoretical guarantees compared to RL convergence proofs
 
+## Key References
+
+- **friston2022active**: Friston et al. (2022). Active inference and the free energy principle. Nature Reviews Neuroscience. Comprehensive overview of AIF from its originator.
+- **smith2022step**: Smith et al. (2022). A Step-by-Step Tutorial on Active Inference. J Math Psychology 107:102632. Practical implementation guide.
+- **george2024ratinabox**: George et al. (2024). RatInABox: A toolkit for modelling locomotion and neuronal activity in continuous environments. eLife. Spatial navigation benchmark for AIF agents.
+- **Hess2025bayesian**: Hess et al. (2025). Bayesian Workflow for Generative Modeling in Computational Psychiatry. Computational Psychiatry 9:76-99.
+- **weber2024pyhgf**: Weber et al. (2024). The generalized Hierarchical Gaussian Filter. pyhgf package for Bayesian filtering in JAX.
+
 ## See Also
 
 - [method-variational-inference.md](method-variational-inference.md) — Mathematical foundations

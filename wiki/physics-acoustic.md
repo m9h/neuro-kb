@@ -153,6 +153,14 @@ Absorbing boundary conditions prevent artificial reflections:
 - Matches impedance of interior medium
 - 10-20 grid points thickness typical
 
+## Key References
+
+- **aubry2022itrusst**: Aubry et al. (2022). Benchmark problems for transcranial ultrasound simulation: intercomparison of compressional wave models. JASA.
+- **stanziola2023jwave**: Stanziola et al. (2023). j-Wave: an open-source differentiable wave simulator. SoftwareX.
+- **martin2025tfus**: Martin et al. (2025). MRI-guided transcranial focused ultrasound neuromodulation with a 256-element helmet array. Nature Communications.
+- **Ishimaru1978wave**: Ishimaru (1978). Wave Propagation and Scattering in Random Media. Academic Press. Foundational text on wave propagation in heterogeneous media.
+- **Fang2010mcx**: Fang (2010). Mesh-based Monte Carlo method using fast ray-tracing in Plucker coordinates. Biomed Optics Express 1:165-175.
+
 ## Relevant Projects
 
 - **jwave**: JAX-based pseudospectral acoustic simulator with automatic differentiation

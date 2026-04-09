@@ -102,6 +102,15 @@ Acoustic simulation → Radiation force → Tissue mechanics → MRI signal
 
 This enables end-to-end modeling from transducer parameters to MRI-visible effects.
 
+## Key References
+
+- **aubry2022itrusst**: Aubry et al. (2022). Benchmark problems for transcranial ultrasound simulation: intercomparison of compressional wave models. JASA.
+- **stanziola2023jwave**: Stanziola et al. (2023). j-Wave: an open-source differentiable wave simulator. SoftwareX.
+- **martin2025tfus**: Martin et al. (2025). MRI-guided transcranial focused ultrasound neuromodulation with a 256-element helmet array. Nature Communications.
+- **kaye2011mrarfi**: Kaye et al. (2011). Rapid MR-ARFI method for focal spot localization during focused ultrasound therapy. doi:10.1002/mrm.22662
+- **kaye2013mrarfi**: Kaye & Pauly (2013). Adapting MRI acoustic radiation force imaging for in vivo human brain focused ultrasound. doi:10.1002/mrm.24316
+- **rieke2008mr**: Rieke & Butts Pauly (2008). MR Thermometry. JMRI 27:376-390.
+
 ## Relevant Projects
 
 - **sbi4dwi**: j-Wave adapter, TUS optimization, radiation force modeling, MR-ARFI simulation

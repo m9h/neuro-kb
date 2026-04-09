@@ -128,6 +128,13 @@ Common state types: alpha-rich (8-13 Hz), theta (4-8 Hz), beta (13-30 Hz), broad
 - Virtual brain state sequences for forward EEG modeling
 - Parameter estimation via HMM constraints on simulated dynamics
 
+## Key References
+
+- **Vidaurre2018hmm**: Vidaurre et al. (2018). Spontaneous cortical activity transiently organises into frequency specific phase-coupling networks. Nature Communications 9:2987.
+- **Gohil2023dynemo**: Gohil et al. (2023). osl-dynamics, a toolbox for modeling fast dynamic brain activity. eLife 12:e91949.
+- **vanEs2025oslephys**: van Es et al. (2025). osl-ephys: A Python toolbox for preprocessing and source reconstruction of MEG data. Frontiers in Neuroscience.
+- **sabbagh2020predictive**: Sabbagh et al. (2020). Predictive regression modeling with MEG/EEG: from source power to signals and cognitive states. NeuroImage 222:116893.
+
 ## See Also
 
 - [method-dynemo.md](method-dynemo.md) — Continuous alternative to discrete HMMs

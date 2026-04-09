@@ -130,6 +130,13 @@ W(a,b) = (1/√a) * ∫ x(t) * ψ*((t-b)/a) dt
 ```
 where ψ is the mother wavelet, a is scale, b is translation.
 
+## Key References
+
+- **thomson1982spectrum**: Thomson (1982). Spectrum estimation and harmonic analysis. Proceedings of the IEEE 70:1055-1096. Foundational paper on multitaper spectral estimation.
+- **Donoghue2020fooof**: Donoghue et al. (2020). Parameterizing neural power spectra into periodic and aperiodic components. Nature Neuroscience 23:1655-1665.
+- **sabbagh2020predictive**: Sabbagh et al. (2020). Predictive regression modeling with MEG/EEG: from source power to signals and cognitive states. NeuroImage 222:116893.
+- **ValdesSosa2026xialphanet**: Valdes-Sosa et al. (2026). xi-alphaNet: conduction delays shape alpha oscillations across the lifespan. National Science Review.
+
 ## See Also
 
 - [method-hilbert-transform.md](method-hilbert-transform.md) - Analytic signal and instantaneous frequency

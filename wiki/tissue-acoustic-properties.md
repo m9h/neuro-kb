@@ -125,6 +125,14 @@ where γ ranges from 1.0-2.0 depending on tissue type. ITRUSST values represent 
 - **Temperature effects**: Sound speed increases ~1-2 m/s per °C, relevant for therapeutic heating applications
 - **Age effects**: Skull density and cortical thickness increase with age, affecting acoustic penetration
 
+## Key References
+
+- **aubry2022itrusst**: Aubry et al. (2022). Benchmark problems for transcranial ultrasound simulation: intercomparison of compressional wave models. JASA.
+- **stanziola2023jwave**: Stanziola et al. (2023). j-Wave: an open-source differentiable wave simulator. SoftwareX.
+- **martin2025tfus**: Martin et al. (2025). MRI-guided transcranial focused ultrasound neuromodulation with a 256-element helmet array. Nature Communications.
+- **linka2023cann**: Linka et al. (2023). A new family of Constitutive Artificial Neural Networks towards automated model discovery. Acta Biomaterialia 160:134-151.
+- **linka2025bayesian**: Linka & Kuhl (2025). Bayesian Constitutive Artificial Neural Networks. CMAME 433. doi:10.1016/j.cma.2024.117356
+
 ## Relevant Projects
 
 - **sbi4dwi**: Tissue property mapping, j-Wave simulation adapter, TUS delay optimization

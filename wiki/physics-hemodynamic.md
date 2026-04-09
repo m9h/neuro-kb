@@ -167,6 +167,15 @@ Combining BOLD with CBF (ASL) and CMRO₂ measurements:
 
 where α≈0.2, β≈1.3 are calibration constants.
 
+## Key References
+
+- **Riera2006neurovascular**: Riera et al. (2006). A state-space model of the hemodynamic approach: nonlinear filtering of BOLD signals. NeuroImage 21:547-567.
+- **He2007qbold**: He & Yablonskiy (2007). Quantitative BOLD: mapping of human cerebral deoxygenated blood volume and oxygen extraction fraction. MRM 57:115-126.
+- **Germuska2019dualcal**: Germuska et al. (2019). Dual-calibrated fMRI measurement of absolute cerebral metabolic rate of oxygen consumption. NeuroImage 184:717-728.
+- **Lu2008trust**: Lu & Ge (2008). Quantitative evaluation of oxygenation in venous vessels using T2-relaxation-under-spin-tagging MRI. MRM 60:357-363.
+- **Deco2013rww**: Deco et al. (2013). Resting-state functional connectivity emerges from structurally and dynamically shaped slow linear fluctuations. J Neurosci 33:11239-11252.
+- **SanzLeon2013tvb**: Sanz Leon et al. (2013). The Virtual Brain: a simulator of primate brain network dynamics. Frontiers in Neuroinformatics 7:10.
+
 ## Relevant Projects
 
 - **vbjax**: Differentiable balloon models, neural mass-hemodynamic coupling

@@ -171,6 +171,14 @@ def epg_rf(F, alpha):
 - [tissue-brain.md](tissue-brain.md) - Brain tissue relaxation properties
 - [coordinate-system-scanner.md](coordinate-system-scanner.md) - Scanner coordinate reference frames
 
+## Key References
+
+- **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512. doi:10.1002/mrm.20605
+- **wansapura1999nmr**: Wansapura et al. (1999). NMR relaxation times in the human brain at 3.0 Tesla. JMRI 9:531-538.
+- **degraafinvivo**: de Graaf (2019). In Vivo NMR Spectroscopy: Principles and Techniques. 3rd ed. Wiley. Comprehensive MRS physics textbook.
+- **Deoni2003despot**: Deoni et al. (2003). Rapid combined T1 and T2 mapping using gradient recalled acquisition in the steady state (DESPOT). MRM 49:515-526.
+- **Alsop2015asl**: Alsop et al. (2015). Recommended implementation of arterial spin-labeled perfusion MRI for clinical applications. MRM 73:102-116.
+
 ## References
 
 - Haacke EM, Brown RW, Thompson MR, Venkatesan R. *Magnetic Resonance Imaging: Physical Principles and Sequence Design*. Wiley, 1999.

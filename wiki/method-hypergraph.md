@@ -121,6 +121,14 @@ Tested on hypergraphs up to 10^4 nodes and 10^3 hyperedges. Performance bottlene
 - Hyperedges: reactions (multiple reactants/products)
 - Control: reaction rate optimization
 
+## Key References
+
+- **dong2024controllability**: Dong et al. (2024). Controllability and Observability of Temporal Hypergraphs. arXiv:2408.12085.
+- **sharf2022functional**: Sharf et al. (2022). Functional neuronal circuitry and oscillatory dynamics in human brain organoids. Nature Communications 13:4403.
+- **Kidger2021equinox**: Kidger & Garcia (2021). Equinox: neural networks in JAX via callable PyTrees and filtered transformations. Differentiable Programming workshop at NeurIPS.
+- **Kidger2022neuralDE**: Kidger (2022). On Neural Differential Equations. PhD thesis, University of Oxford. Theoretical foundations for continuous-time dynamics on graphs.
+- **delathauwer2000multilinear**: De Lathauwer et al. (2000). A multilinear singular value decomposition. SIAM J Matrix Analysis 21:1253-1278.
+
 ## Relevant Projects
 
 - **hgx**: Core hypergraph neural network implementations, 14 convolution layers, dynamic topology, continuous dynamics via Diffrax

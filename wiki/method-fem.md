@@ -120,6 +120,15 @@ For concentric sphere models with analytical solutions:
 - **Leadfield correlation** vs 3-layer BEM: r > 0.95 for superficial sources
 - **Deep source improvement**: 10-20% better localization than BEM (Huang et al. 2016)
 
+## Key References
+
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG field and return current computation using high-resolution FEM. NeuroImage 30:813-826.
+- **Arridge1993fem**: Arridge et al. (1993). A finite element approach for modeling photon transport in tissue. Medical Physics 20:299-309.
+- **Schweiger1993fem**: Schweiger et al. (1995). The finite element method for the propagation of light in scattering media: boundary and source conditions. Medical Physics 22:1779-1792.
+- **Li2019**: Li et al. (2019). SpinDoctor: A MATLAB toolbox for diffusion MRI simulation. NeuroImage 202:116120.
+- **Agdestein2021**: Agdestein et al. (2022). Practical computation of the diffusion MRI signal based on Laplace eigenfunctions: permeable interfaces. NMR in Biomedicine, e4646.
+- **Raissi2019pinns**: Raissi et al. (2019). Physics-informed neural networks for solving forward and inverse problems involving nonlinear PDEs. J Comp Physics 378:686-707.
+
 ## Relevant Projects
 
 - **neurojax**: Differentiable FEM for EEG/MEG source imaging with qMRI conductivity

@@ -200,6 +200,15 @@ control_energy = trace(inv(controllability_gramian(connectome, stimulation_sites
 
 **Clinical Translation** — Fast inference enables real-time applications (TUS optimization, MRI reconstruction).
 
+## Key References
+
+- **Bradbury2018jax**: Bradbury et al. (2018). JAX: composable transformations of Python+NumPy programs. Core autodiff and XLA compilation framework.
+- **Kidger2021equinox**: Kidger & Garcia (2021). Equinox: neural networks in JAX via callable PyTrees and filtered transformations.
+- **Kidger2022neuralDE**: Kidger (2022). On Neural Differential Equations. PhD thesis, University of Oxford. Diffrax library for neural ODEs/SDEs.
+- **Raissi2019pinns**: Raissi et al. (2019). Physics-informed neural networks for solving forward and inverse PDEs. J Comp Physics 378:686-707.
+- **Cranmer2020sbi**: Cranmer et al. (2020). The frontier of simulation-based inference. PNAS 117:30055-30062.
+- **deepmind2020jax**: DeepMind et al. (2020). The DeepMind JAX Ecosystem. Comprehensive ML infrastructure built on JAX.
+
 ## See Also
 
 - [neural-posterior-estimation.md](neural-posterior-estimation.md) — SBI methodology and benchmarks

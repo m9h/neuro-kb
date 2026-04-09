@@ -153,6 +153,15 @@ The diffusion equation is closely related to:
 - **Time-domain**: pulse-response simulation
 - **Frequency-domain**: modulated light sources
 
+## Key References
+
+- **Stejskal1965**: Stejskal & Tanner (1965). Spin Diffusion Measurements: Spin Echoes in the Presence of a Time-Dependent Field Gradient. J Chem Phys 42:288-292.
+- **Grebenkov2007**: Grebenkov (2007). NMR survey of reflected Brownian motion. Reviews of Modern Physics 79:1077-1137.
+- **Li2019**: Li et al. (2019). SpinDoctor: A MATLAB toolbox for diffusion MRI simulation. NeuroImage 202:116120.
+- **Agdestein2021**: Agdestein et al. (2022). Practical computation of the diffusion MRI signal based on Laplace eigenfunctions: permeable interfaces. NMR in Biomedicine, e4646.
+- **Farrell1992diffusion**: Farrell et al. (1992). A diffusion theory model of spatially resolved, steady-state diffuse reflectance. Medical Physics 19:879-888.
+- **Haskell1994boundary**: Haskell et al. (1994). Boundary conditions for the diffusion equation in radiative transfer. JOSA A 11:2727-2741.
+
 ## See Also
 
 - [method-fem-spectral.md](method-fem-spectral.md) - Finite element eigendecomposition

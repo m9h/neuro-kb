@@ -126,6 +126,16 @@ sub-XX/
 - **T2w**: TR ~5000ms, TE ~100ms
 - **FLAIR**: TR ~9000ms, TE ~125ms, TI ~2500ms
 
+## Key References
+
+- **Fischl2012freesurfer**: Fischl (2012). FreeSurfer. NeuroImage 62:774-781.
+- **Billot2023synthseg**: Billot et al. (2023). Robust machine learning segmentation for large-scale analysis of heterogeneous clinical brain MRI datasets. PNAS 120(9).
+- **Hoffmann2022synthmorph**: Hoffmann et al. (2022). SynthMorph: learning contrast-invariant registration without acquired images. IEEE TMI 41:543-558.
+- **Puonti2016samseg**: Puonti et al. (2016). Fast and sequence-adaptive whole-brain segmentation using parametric Bayesian modeling. NeuroImage 143:235-249.
+- **Dale1999cortical**: Dale et al. (1999). Cortical surface-based analysis I: segmentation and surface reconstruction. NeuroImage 9:179-194.
+- **Jenkinson2012fsl**: Jenkinson et al. (2012). FSL. NeuroImage 62:782-790.
+- **wansapura1999nmr**: Wansapura et al. (1999). NMR relaxation times in the human brain at 3.0 Tesla. JMRI 9:531-538.
+
 ## Relevant Projects
 
 - **neurojax**: Structural MRI preprocessing and head model construction via FreeSurfer integration

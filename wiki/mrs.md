@@ -204,6 +204,17 @@ hermes_result = process_hermes(data, dwell_time, centre_freq)
 - [head-models.md](head-models.md) - Anatomical localization for SVS
 - [quantitative-mri.md](quantitative-mri.md) - Complementary tissue characterization
 
+## Key References
+
+- **Clarke2021fslmrs**: Clarke et al. (2021). FSL-MRS: An end-to-end spectroscopy analysis package. MRM 85:2950-2964. doi:10.1002/mrm.28630
+- **near2021consensus**: Near et al. (2021). Preprocessing, analysis and quantification in single-voxel MRS: experts' consensus recommendations. NMR in Biomedicine 34:e4257. doi:10.1002/nbm.4257
+- **chan2016hermes**: Chan et al. (2016). HERMES: Hadamard encoding and reconstruction of MEGA-edited spectroscopy. MRM 76:11-19. doi:10.1002/mrm.26233
+- **gasparovic2006tissue**: Gasparovic et al. (2006). Use of tissue water as a concentration reference for proton spectroscopic imaging. MRM 55:1219-1226. doi:10.1002/mrm.20901
+- **oeltzschner2020osprey**: Oeltzschner et al. (2020). Osprey: Open-source processing, reconstruction and estimation of MRS data. J Neurosci Methods 343:108827. doi:10.1016/j.jneumeth.2020.108827
+- **marjanska2022fitting**: Marjanska et al. (2022). Results and interpretation of a fitting challenge for MR spectroscopy. MRM 87:2198-2211. doi:10.1002/mrm.29099
+- **mikkelsen2017biggaba**: Mikkelsen et al. (2017). Big GABA: Edited MR spectroscopy at 24 research sites. NeuroImage 159:32-45. doi:10.1016/j.neuroimage.2017.07.021
+- **ross2005efficacy**: Ross & Lin (2005). Efficacy of proton MRS in neurological diagnosis and neurotherapeutic decision making. Neurotherapeutics 2:197-214. doi:10.1602/neurorx.2.2.197
+
 ## References
 
 - Gasparovic C et al. (2006) Use of tissue water as a concentration reference for proton spectroscopic imaging. *MRM* 55:1219-1226

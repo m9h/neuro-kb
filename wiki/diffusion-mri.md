@@ -178,6 +178,16 @@ Typical SNR requirements:
 - **Partial voluming**: Mixed tissue types within voxels
 - **Rician noise**: Non-Gaussian noise distribution at low SNR
 
+## Key References
+
+- **zhang2012noddi**: Zhang et al. (2012). NODDI: practical in vivo neurite orientation dispersion and density imaging. NeuroImage 61:1000-1016.
+- **palombo2020sandi**: Palombo et al. (2020). SANDI: a compartment-based model for non-invasive apparent soma and neurite imaging by diffusion MRI. NeuroImage 215:116835.
+- **fick2019dmipy**: Fick et al. (2019). The Dmipy Toolbox: Diffusion MRI Multi-Compartment Modeling and Microstructure Recovery Made Easy. Frontiers in Neuroinformatics 13:64.
+- **cottaarMultimodalMonteCarlo2026**: Cottaar et al. (2026). Multi-Modal Monte Carlo MRI Simulator of Tissue Microstructure. Imaging Neuroscience. doi:10.1162/IMAG.a.1177
+- **manzanopatron2025sbi**: Manzano-Patron et al. (2025). Uncertainty mapping and probabilistic tractography using SBI in diffusion MRI. Medical Image Analysis 103:103580.
+- **Jones2022connectom**: Jones et al. (2022). Mapping the human connectome using diffusion MRI at 300 mT/m gradient strength. NeuroImage 254:119146.
+- **Stejskal1965**: Stejskal & Tanner (1965). Spin Diffusion Measurements: Spin Echoes in the Presence of a Time-Dependent Field Gradient. J Chem Phys 42:288-292.
+
 ## Relevant Projects
 
 | Project | Implementation | Focus |

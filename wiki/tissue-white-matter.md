@@ -137,6 +137,15 @@ White matter pathology affects multiple physical properties:
 - `vbjax`: Forward modeling for EEG/MEG source localization
 - `jaxctrl`: Control theory for DBS targeting in white matter
 
+## Key References
+
+- **zhang2012noddi**: Zhang et al. (2012). NODDI: practical in vivo neurite orientation dispersion and density imaging. NeuroImage 61:1000-1016.
+- **linka2023cann**: Linka et al. (2023). A new family of Constitutive Artificial Neural Networks towards automated model discovery. Acta Biomaterialia 160:134-151. Brain tissue mechanical properties.
+- **Stikov2015gratio**: Stikov et al. (2015). In vivo histology of the myelin g-ratio with magnetic resonance imaging. NeuroImage 118:397-405.
+- **Callaghan_2020**: Callaghan et al. (2020). Config: contextual fibre growth to generate realistic axonal packing for diffusion MRI simulation. NeuroImage 220:117107.
+- **Glasser2011myelin**: Glasser & Van Essen (2011). Mapping human cortical areas in vivo based on myelin content as revealed by T1- and T2-weighted MRI. J Neurosci 31:11597-11616.
+- **Wharton_2012**: Wharton & Bowtell (2012). Fiber orientation-dependent white matter contrast in gradient echo MRI. PNAS 109:18559-18564.
+
 ## See Also
 
 - [tissue-gray-matter.md](tissue-gray-matter.md) - Contrasting tissue properties

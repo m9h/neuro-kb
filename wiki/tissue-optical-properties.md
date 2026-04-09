@@ -133,6 +133,15 @@ For validation, tissue-mimicking phantoms use:
 - **vbjax**: Neural mass models requiring optical-electrical property coupling
 - **setae**: Bio-inspired tissue mechanics with optical property constraints
 
+## Key References
+
+- **Prahl1999omlc**: Prahl (1999). Optical absorption of hemoglobin. Oregon Medical Laser Center. Definitive extinction coefficient spectra for HbO2 and Hb.
+- **Matcher1997vivo**: Matcher et al. (1997). In vivo measurements of the wavelength dependence of tissue-scattering coefficients between 760 and 900 nm. Applied Optics 36:386-396.
+- **Patterson1989time**: Patterson et al. (1989). Time resolved reflectance and transmittance for non-invasive measurement of tissue optical properties. Applied Optics 28:2331-2336.
+- **Farrell1992diffusion**: Farrell et al. (1992). A diffusion theory model of spatially resolved, steady-state diffuse reflectance. Medical Physics 19:879-888.
+- **Cope1988system**: Cope & Delpy (1988). System for long-term measurement of cerebral blood and tissue oxygenation on newborn infants by near infra-red transillumination.
+- **Jobsis1977noninvasive**: Jobsis (1977). Noninvasive, infrared monitoring of cerebral and myocardial oxygen sufficiency. Science 198:1264-1267.
+
 ## See Also
 
 - [diffuse-optical-tomography.md](diffuse-optical-tomography.md) - Forward and inverse DOT modeling

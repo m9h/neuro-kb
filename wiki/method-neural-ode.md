@@ -113,6 +113,15 @@ solution = diffrax.diffeqsolve(term, solver, t0=0, t1=10, dt0=0.1, y0=y0)
 3. **Numerical precision**: Integration errors can accumulate
 4. **Solver selection**: Performance depends on problem-specific solver choice
 
+## Key References
+
+- **Chen2018neuralode**: Chen et al. (2018). Neural Ordinary Differential Equations. NeurIPS 31. Foundational paper introducing continuous-depth networks via ODE solvers.
+- **Kidger2022neuralDE**: Kidger (2022). On Neural Differential Equations. PhD thesis, University of Oxford. Comprehensive treatment of neural ODEs, SDEs, and CDEs.
+- **Kidger2021equinox**: Kidger & Garcia (2021). Equinox: neural networks in JAX via callable PyTrees and filtered transformations.
+- **Bradbury2018jax**: Bradbury et al. (2018). JAX: composable transformations of Python+NumPy programs. Core autodiff framework enabling differentiable simulation.
+- **Raissi2019pinns**: Raissi et al. (2019). Physics-informed neural networks for solving forward and inverse PDEs. J Comp Physics 378:686-707.
+- **SanzLeon2013tvb**: Sanz Leon et al. (2013). The Virtual Brain: a simulator of primate brain network dynamics. Frontiers in Neuroinformatics 7:10.
+
 ## Relevant Projects
 
 - **sbi4dwi**: Diffusion MRI microstructure modeling, TUS simulation, SBI pipeline

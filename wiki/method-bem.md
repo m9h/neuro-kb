@@ -86,6 +86,14 @@ For high-resolution CHARM (60-tissue) head models:
 - **Interface detection**: Extract boundaries between conductivity regions
 - **Mesh fusion**: Merge adjacent tissue surfaces when conductivities are similar
 
+## Key References
+
+- **GraveDePeralta2001laura**: Grave de Peralta Menendez et al. (2001). Noninvasive localization of electromagnetic epileptic activity: method descriptions and simulations. Brain Topography 14:131-137.
+- **GraveDePeralta2004laura**: Grave de Peralta Menendez et al. (2004). Electrical neuroimaging based on biophysical constraints. NeuroImage 21:527-539.
+- **Hamalainen1994mne**: Hamalainen & Ilmoniemi (1994). Interpreting magnetic fields of the brain: minimum norm estimates. Med & Biol Eng & Comp 32:35-42.
+- **Michel2004eegsi**: Michel et al. (2004). EEG source imaging. Clinical Neurophysiology 115:2195-2222.
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG field computation using FEM. NeuroImage 30:813-826.
+
 ## Relevant Projects
 
 - **neurojax**: `geometry/bem_forward.py` - JAX-accelerated BEM with OpenMEEG backend

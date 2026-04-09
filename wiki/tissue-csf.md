@@ -127,6 +127,13 @@ In multi-tissue head models (MIDA, Colin27, SimNIBS):
 - **Source imaging**: CSF compartment included in forward model for accurate volume conduction
 - **Multimodal fusion**: CSF segmentation from structural MRI informs M/EEG leadfields
 
+## Key References
+
+- **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512. CSF relaxation parameter source.
+- **wansapura1999nmr**: Wansapura et al. (1999). NMR relaxation times in the human brain at 3.0 Tesla. JMRI 9:531-538.
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG forward modeling. NeuroImage 30:813-826. CSF conductivity impact on forward models.
+- **Scholkmann2014review**: Scholkmann et al. (2014). A review on continuous wave functional near-infrared spectroscopy instrumentation and methodology. NeuroImage 85:6-27.
+
 ## See Also
 
 - [tissue-gray-matter.md](tissue-gray-matter.md) - Primary neural tissue compartment

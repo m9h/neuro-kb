@@ -125,6 +125,16 @@ Unlike EEG, MEG does not require accurate skull conductivity values since magnet
 - **Subject movement**: Rigid head position required during recording
 - **Depth bias**: Exponential sensitivity drop with source depth
 
+## Key References
+
+- **boto2018moving**: Boto et al. (2018). Moving magnetoencephalography towards real-world applications with a wearable OPM system. doi:10.1038/nature26147
+- **Hamalainen1994mne**: Hamalainen & Ilmoniemi (1994). Interpreting magnetic fields of the brain: minimum norm estimates.
+- **VanVeen1997lcmv**: Van Veen et al. (1997). Localization of brain electrical activity via linearly constrained minimum variance spatial filtering.
+- **Wipf2010champagne**: Wipf et al. (2010). Robust Bayesian estimation of location, orientation, and time course of multiple correlated neural sources using MEG.
+- **Dale2000dspm**: Dale et al. (2000). Dynamic statistical parametric mapping: combining fMRI and MEG for high-resolution imaging. doi:10.1016/S0896-6273(00)81138-1
+- **vanEs2025oslephys**: van Es et al. (2025). osl-ephys: A Python toolbox for preprocessing and source reconstruction of MEG data.
+- **ValdesSosa2023higgs**: Valdes-Sosa et al. (2023). The Hidden Gaussian Graphical Spectral model for M/EEG source connectivity.
+
 ## Relevant Projects
 
 - **neurojax**: 15 source imaging algorithms including LAURA, VARETA, PI-GNN; differentiable head modeling; CTF data I/O

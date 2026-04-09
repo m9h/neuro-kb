@@ -171,6 +171,17 @@ The resolution matrix `R = G L` where `G` is the inverse operator quantifies spa
 
 For MNE: `R = L (L^T L + α I)^(-1) L^T`
 
+## Key References
+
+- **Hamalainen1994mne**: Hamalainen & Ilmoniemi (1994). Minimum norm estimates for interpreting magnetic fields of the brain. Med & Biol Eng & Comp 32:35-42.
+- **PascualMarqui1994loreta**: Pascual-Marqui et al. (1994). Low resolution electromagnetic tomography: a new method for localizing electrical activity in the brain. Int J Psychophysiology 18:49-65.
+- **PascualMarqui2002sloreta**: Pascual-Marqui (2002). Standardized low-resolution brain electromagnetic tomography (sLORETA): technical details.
+- **VanVeen1997lcmv**: Van Veen et al. (1997). Localization of brain electrical activity via linearly constrained minimum variance spatial filtering. IEEE Trans BME 44:867-880.
+- **Wipf2010champagne**: Wipf et al. (2010). Robust Bayesian estimation of neural source location and time course using MEG. NeuroImage 49:641-655.
+- **ValdesSosa2023higgs**: Valdes-Sosa et al. (2023). The Hidden Gaussian Graphical Spectral model for M/EEG source connectivity.
+- **Bore2024pignn**: Bore et al. (2024). A physics-informed deep learning approach to EEG source imaging. NeuroImage.
+- **Hecker2021esinet**: Hecker et al. (2021). ConvDip: a convolutional neural network for better EEG source imaging. Frontiers in Neuroscience 15.
+
 ## Relevant Projects
 
 - **neurojax**: 15 inverse solvers (MNE, dSPM, sLORETA, eLORETA, LCMV, SAM, DICS, CHAMPAGNE, VARETA, LAURA, HIGGS, PI-GNN)

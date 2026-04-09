@@ -107,6 +107,16 @@ where βᵢ are regression coefficients, Xᵢ(t) are predicted regressors (task 
 | 3T | ~2× | 2-3mm typical | Moderate |
 | 7T | ~3-4× | 1-2mm achievable | Significant |
 
+## Key References
+
+- **Esteban2019fmriprep**: Esteban et al. (2019). fMRIPrep: a robust preprocessing pipeline for functional MRI. doi:10.1038/s41592-018-0235-4
+- **Beckmann2004melodic**: Beckmann & Smith (2004). Probabilistic independent component analysis for functional MRI.
+- **Bijsterbosch2017rsfmri**: Bijsterbosch et al. (2017). An Introduction to Resting State fMRI Functional Connectivity. Oxford Neuroimaging Primers.
+- **Smith2009correspondence**: Smith et al. (2009). Correspondence of the brain's functional architecture during activation and rest.
+- **Ciric2022hypercoil**: Ciric et al. (2022). Differentiable programming for functional connectomics. PMLR 193:419-455.
+- **Riera2006neurovascular**: Riera et al. (2006). State-space model of the hemodynamic approach: nonlinear filtering of BOLD signals.
+- **hough2026hippyfeat**: Hough (2026). hippy-feat: GPU-accelerated fMRI preprocessing and differentiable connectivity analysis in JAX.
+
 ## Relevant Projects
 
 - **neurojax**: 15 source imaging methods, differentiable head modeling, quantitative MRI integration

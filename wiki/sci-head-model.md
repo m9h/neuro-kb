@@ -51,6 +51,13 @@ This model is natively set up for **fNIRS / diffuse optical tomography** (photon
 
 The tetrahedral mesh is directly usable in FEM solvers (FEniCS, MFEM, custom JAX).
 
+## Key References
+
+- **Fang2010mcx**: Fang (2010). Mesh-based Monte Carlo method using fast ray-tracing in Plucker coordinates. Biomed Optics Express 1:165-175. MCX/MMC photon transport framework.
+- **Dehghani2009nirfast**: Dehghani et al. (2009). Near infrared optical tomography using NIRFAST: Algorithm for numerical model and image reconstruction. Int J Numer Meth Biomed Eng 25:711-732.
+- **Arridge1999inverse**: Arridge (1999). Optical tomography in medical imaging. Inverse Problems 15:R41-R93.
+- **aubry2022itrusst**: Aubry et al. (2022). Benchmark problems for transcranial ultrasound simulation. JASA. ITRUSST acoustic properties applicable to this head model.
+
 ## Usage with MMC
 
 The `sci_head_mmc.json` configures a pencil-beam source at position `[11.06, 87.48, 9.31]` pointing in `-y`, with 10M photons and a 5 ns time gate. This is a starting point for fNIRS simulations.

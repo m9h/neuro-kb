@@ -177,6 +177,14 @@ Monte Carlo estimators must satisfy:
 - **Parameter sensitivity**: Small changes can cause large variance
 - **Memory requirements**: Scale with number of particles
 
+## Key References
+
+- **cottaarMultimodalMonteCarlo2026**: Cottaar et al. (2026). Multi-Modal Monte Carlo MRI Simulator of Tissue Microstructure. Imaging Neuroscience. doi:10.1162/IMAG.a.1177
+- **Fang2010mcx**: Fang (2010). Mesh-based Monte Carlo method using fast ray-tracing in Plucker coordinates. Biomed Optics Express 1:165-175.
+- **Fang2020**: Fang et al. (2020). Diffusion MRI simulation of realistic neurons with SpinDoctor and the Neuron Module. NeuroImage 222:117198.
+- **Ginsburger_2019**: Ginsburger et al. (2019). MEDUSA: A GPU-based tool to create realistic phantoms of the brain microstructure. NeuroImage 193:10-24.
+- **Lee2021**: Lee et al. (2021). Realistic Microstructure Simulator (RMS): Monte Carlo simulations of diffusion in three-dimensional cell segmentations. J Neurosci Methods 350:109018.
+
 ## Relevant Projects
 
 - **dot-jax**: Analytical validation, phantom studies, chromophore spectroscopy

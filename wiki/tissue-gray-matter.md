@@ -167,6 +167,14 @@ Gray matter exhibits structure across scales:
 - **sbi4dwi**: Microstructure parameter estimation in gray matter
 - **SpinDoctor.jl**: Diffusion simulation in realistic neuronal geometries
 
+## Key References
+
+- **Prahl1999omlc**: Prahl (1999). Optical absorption of hemoglobin. Oregon Medical Laser Center. Extinction coefficient database for fNIRS tissue optics.
+- **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512.
+- **Scholkmann2014review**: Scholkmann et al. (2014). A review on continuous wave functional near-infrared spectroscopy instrumentation and methodology. NeuroImage 85:6-27.
+- **Margulies2016situated**: Margulies et al. (2016). Situating the default-mode network along a principal gradient of macroscale cortical organization. PNAS 113:12574-12579.
+- **Sydnor2021axis**: Sydnor et al. (2021). Neurodevelopment of the association cortices: patterns, mechanisms, and implications for psychopathology. Neuron 109:2820-2846.
+
 ## See Also
 
 - [white-matter.md](white-matter.md) - Complementary brain tissue type

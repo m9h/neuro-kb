@@ -1,7 +1,7 @@
 ---
 type: concept
 title: "Neuroimaging Data Formats"
-related: [head-models.md, coordinate-systems.md, preprocessing.md, modalities.md]
+related: [sci-head-model.md, eeg.md, meg.md, fmri.md, diffusion-mri.md, structural-mri.md]
 ---
 
 # Neuroimaging Data Formats
@@ -189,9 +189,19 @@ dataset.ds/
 - **Mesh formats:** Triangle soup (.obj), tetrahedral (.msh) for FEM simulation
 - **SNIRF compliance:** Shared Near Infrared Spectroscopy Format for fNIRS data
 
+## Key References
+
+- **Esteban2019fmriprep**: Esteban et al. (2019). fMRIPrep: a robust preprocessing pipeline for functional MRI. Nature Methods 16:111-116. BIDS-native fMRI preprocessing.
+- **Luke2021bids**: Luke et al. (2021). fNIRS-BIDS: the brain imaging data structure extended to functional near-infrared spectroscopy.
+- **SNIRF2023spec**: fNIRS community (2023). Shared Near Infrared Spectroscopy Format (SNIRF). Standard format for fNIRS data exchange.
+- **Fischl2012freesurfer**: Fischl (2012). FreeSurfer. NeuroImage 62:774-781. Defines surface and annotation file formats.
+- **Clarke2021fslmrs**: Clarke et al. (2021). FSL-MRS: An end-to-end spectroscopy analysis package. MRM 85:2950-2964. NIfTI-MRS format support.
+
 ## See Also
 
-- [head-models.md](head-models.md) — Anatomical head models and mesh formats
-- [coordinate-systems.md](coordinate-systems.md) — Spatial reference frames
-- [preprocessing.md](preprocessing.md) — Data cleaning and artifact removal pipelines
-- [modalities.md](modalities.md) — Neuroimaging acquisition methods
+- [sci-head-model.md](sci-head-model.md) — SCI anatomical head model
+- [eeg.md](eeg.md) — Electroencephalography
+- [meg.md](meg.md) — Magnetoencephalography
+- [fmri.md](fmri.md) — Functional MRI
+- [diffusion-mri.md](diffusion-mri.md) — Diffusion MRI
+- [structural-mri.md](structural-mri.md) — Structural MRI

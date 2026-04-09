@@ -157,6 +157,14 @@ Used for efficient leadfield computation and validation.
 - Piecewise constant conductivity ignores tissue microstructure  
 - Neglect of skull anisotropy introduces ~15% error in EEG forward fields
 
+## Key References
+
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG field and return current computation using high-resolution FEM. NeuroImage 30:813-826.
+- **Michel2004eegsi**: Michel et al. (2004). EEG source imaging. Clinical Neurophysiology 115:2195-2222.
+- **Hamalainen1994mne**: Hamalainen & Ilmoniemi (1994). Interpreting magnetic fields of the brain: minimum norm estimates. Med & Biol Eng & Comp 32:35-42.
+- **Lin2006loose**: Lin et al. (2006). Distributed current estimates using cortical orientation constraints. Human Brain Mapping 27:1-13.
+- **GraveDePeralta2004laura**: Grave de Peralta Menendez et al. (2004). Electrical neuroimaging based on biophysical constraints. NeuroImage 21:527-539.
+
 ## Relevant Projects
 
 **neurojax**: Differentiable BEM/FEM forward modeling with JAX

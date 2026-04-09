@@ -144,6 +144,13 @@ For stimulation applications, conductivity uncertainty requires:
 - Safety factor incorporation
 - Individual head model validation where possible
 
+## Key References
+
+- **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG forward modeling using high-resolution FEM. NeuroImage 30:813-826.
+- **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512.
+- **Stikov2015gratio**: Stikov et al. (2015). In vivo histology of the myelin g-ratio with magnetic resonance imaging. NeuroImage 118:397-405.
+- **Glasser2011myelin**: Glasser & Van Essen (2011). Mapping human cortical areas in vivo based on myelin content as revealed by T1- and T2-weighted MRI. J Neurosci 31:11597-11616.
+
 ## Relevant Projects
 
 - **neurojax**: `geometry/fem_forward.py` - differentiable conductivity assignment
