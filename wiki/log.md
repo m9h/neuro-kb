@@ -40,3 +40,15 @@ description: Chronological audit trail of wiki changes
 
 ## 2026-04-07
 - Created method-variational-inference.md: VI as optimization-based Bayesian inference, covering ELBO/KL formulation, mean-field vs structured approximations, Variational Laplace for DCM, VAEs in neuroimaging, amortized VI (bridge to SBI), active inference connection (alf), JAX implementation patterns (reparameterization trick, vmap batching), and VI vs MCMC vs SBI comparison table. Cross-linked to method-sbi.md, method-active-inference.md, method-neural-ode.md, physics-hemodynamic.md, method-source-imaging.md.
+
+## 2026-06-12
+- **Fleet refresh + new themes.** Refreshed raw sources from the m9h fleet after a ~7.5-week gap (last refresh 2026-04-20). Re-pulled 17 changed already-ingested repos, fetched 18 new public repos, and added 6 previously-missing PRIVATE repos (the four `brainmarks-*` plugins + `cpjax`, `betse-unified`) that `fetch_raw.py`'s `users/m9h/repos` listing had silently skipped (public-only endpoint).
+- **references.bib**: 366 → 424 entries. 54 auto-ingested (notably the wwj HT-SR theory stack: martin2021predicting, martin2026rg, martin2025setol, clauset2009powerlaw, alstott2014powerlaw, vuong1989likelihood; CortexMAE=lane2025scaling; MarS-FM=kapusniak2025mars) + 4 hand-curated (lin2026identity, fisch2024deepmriprep, gao2024scaling, jaynes2003probability).
+- **3 new wiki pages**:
+  - `htsr-weight-analysis.md` (method/spectral) — Heavy-Tailed Self-Regularization: power-law α of the weight ESD, α≈2 RG critical point, participation count, CSN/Hill estimators, differentiable α→2 regularizer, wwjd Bayesian layer, FM pretraining-quality ranking. Sources: wwj, WeightWatcher, emeg-fm.
+  - `foundation-models.md` (concept) — the two-axis (spectral + decoding) + identity-audit benchmark; MedARC FM family (fmri-fm/CortexMAE, smri-fm, emeg-fm) + sibling non-brain FMs (nanopath, mars-fm).
+  - `benchmark-datasets.md` (concept) — Brainmarks fMRI-FM evaluation cohorts: HBN, WAND, DLBS, SYN plugins with state/trait probe heads.
+- **structural-mri.md**: fixed malformed double-frontmatter + broken BIDS code fence; added T1Prep/deepmriprep DL-preprocessing and the smri-fm morphometry-baseline benchmark; cross-linked foundation-models/benchmark-datasets.
+- **distill.py**: registered a `foundation-models` topic cluster and added the new projects (smri-fm, emeg-fm, ephys-tokenizer-jax, T1Prep, brainmarks-*) to existing modality/method clusters so the pipeline maintains the new pages.
+- **Pruned** 9 stale renamed/deleted raw dirs (Thinking_Higher, quantum-cognition, QuantumComp4Neuro, quantum-deeponet, jsPsych2, stac-mjx, track-mjx, organoid-hgx-benchmark, organoid_regulomes); kept LAYNII + neurotech-primer-book (declared connected projects).
+- NOTE: did not mass-re-run distill.py over existing pages — its MAX_TOKENS=4096 cap truncates longer curated pages. New pages hand-authored; existing pages refreshed selectively.

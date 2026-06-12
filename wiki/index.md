@@ -29,7 +29,7 @@ description: Master catalog of all wiki pages
 - [Hemodynamic Response / Neurovascular Coupling](physics-hemodynamic.md)
 
 ## Tissues
-- [Tissue Electrical Conductivity (cross-tissue)](tissue-electrical-properties.md)
+- ["Tissue Electrical Conductivity (cross-tissue)"](tissue-electrical-properties.md)
 - [Cerebrospinal Fluid](tissue-csf.md)
 - [Gray Matter](tissue-gray-matter.md)
 - [Scalp](tissue-scalp.md)
@@ -41,6 +41,7 @@ description: Master catalog of all wiki pages
 - [Active Inference](method-active-inference.md)
 - [Boundary Element Method](method-bem.md)
 - [Finite Element Method](method-fem.md)
+- [HT-SR Weight-Spectrum Analysis](htsr-weight-analysis.md)
 - [Hidden Markov Models for Brain Dynamics](method-hmm-dynamics.md)
 - [Hypergraph Methods](method-hypergraph.md)
 - [Monte Carlo Simulation](method-monte-carlo.md)
@@ -58,7 +59,9 @@ description: Master catalog of all wiki pages
 *(none yet)*
 
 ## Concepts
+- ["Neuroimaging Data Formats"](data-formats.md)
 - [Connectomics](connectomics.md)
-- [Neuroimaging Data Formats](data-formats.md)
 - [JAX Ecosystem for Neuroimaging](jax-ecosystem.md)
+- [Neuroimaging Foundation Models](foundation-models.md)
 - [Tissue Optical Properties (cross-tissue)](tissue-optical-properties.md)
+- [fMRI-FM Benchmark Datasets (Brainmarks)](benchmark-datasets.md)

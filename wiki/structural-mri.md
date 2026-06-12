@@ -1,12 +1,11 @@
 ---
----
 type: modality
 title: Structural MRI
 physics: electromagnetic
 measurement: T1, T2, proton density, tissue contrast
 spatial_resolution: 0.5-2.0 mm
 temporal_resolution: 1-20 minutes per sequence
-related: [quantitative-mri.md, tissue-properties.md, head-models.md, t1-mapping.md, t2-mapping.md]
+related: [quantitative-mri.md, foundation-models.md, coordinate-systems.md, head-model-mida.md, method-sbi.md]
 ---
 
 # Structural MRI
@@ -58,6 +57,16 @@ Structural MRI encompasses T1-weighted, T2-weighted, and proton density-weighted
 - **Cortical parcellation** (Desikan-Killiany, Destrieux)
 - **Subcortical segmentation** (FIRST, ASEG)
 
+### Deep-learning preprocessing
+- **T1Prep / PyCAT** — T1-weighted preprocessing for segmentation and cortical
+  surface reconstruction, integrating **deepmriprep** [@fisch2024deepmriprep] (DL
+  bias-field correction, lesion detection, and an AMAP-segmentation initializer that
+  mimics CAT12) with CAT-Surface for thickness. BIDS-derivatives–compatible naming;
+  single-subject or batch. A fast, FreeSurfer-alternative source of the **morphometry
+  features** used as baselines in structural-MRI foundation-model benchmarks.
+- **DeepMriPrep / SynthSeg / SAMSEG** — contrast-robust DL segmentation for
+  large-scale heterogeneous clinical data.
+
 ## Applications in Connected Projects
 
 ### Head Modeling
@@ -74,7 +83,7 @@ Multi-parameter protocols enable tissue property estimation:
 
 ## BIDS Structure
 
----
+```text
 sub-XX/
 ├── ses-YY/
 │   └── anat/
@@ -136,17 +145,30 @@ sub-XX/
 - **Jenkinson2012fsl**: Jenkinson et al. (2012). FSL. NeuroImage 62:782-790.
 - **wansapura1999nmr**: Wansapura et al. (1999). NMR relaxation times in the human brain at 3.0 Tesla. JMRI 9:531-538.
 
+## Foundation Models & Morphometry Baselines
+
+Structural MRI is the substrate for the **`smri-fm`** structural-MRI foundation model,
+which benchmarks frozen FM representations against **morphometry baselines** — the
+volumetric (ASEG/voxel-based) and surface (cortical thickness/area) features produced
+by FreeSurfer and T1Prep above. The recurring finding in this benchmark family is that
+morphometry floors and minimal preprocessing are strong, so the FM must clear a real
+bar (cf. the cost-utility result that minimal preprocessing is near-optimal for
+segmentation and brain-age). The DLBS (ds004856) cohort is shared with the
+[benchmark-datasets.md](benchmark-datasets.md) fMRI plugin as its structural sibling.
+See [foundation-models.md](foundation-models.md).
+
 ## Relevant Projects
 
+- **smri-fm**: MedARC structural-MRI foundation model; FM features vs FreeSurfer/T1Prep morphometry baselines
+- **T1Prep**: DL-based (deepmriprep + CAT-Surface) T1 preprocessing, segmentation, and cortical thickness — a morphometry-feature source
 - **neurojax**: Structural MRI preprocessing and head model construction via FreeSurfer integration
 - **sbi4dwi**: Anatomical priors for diffusion microstructure estimation
 - **hippy-feat**: T1w reference for fMRI registration and parcellation-based connectivity
 
 ## See Also
 
+- [foundation-models.md](foundation-models.md) — smri-fm and the two-axis FM benchmark
+- [benchmark-datasets.md](benchmark-datasets.md) — evaluation cohorts (DLBS shared with smri-fm)
 - [quantitative-mri.md](quantitative-mri.md) — Relaxometry and tissue property mapping
-- [tissue-properties.md](tissue-properties.md) — Electromagnetic and mechanical properties
-- [head-models.md](head-models.md) — Forward modeling geometry
-- [registration.md](registration.md) — Cross-modal alignment methods
-- [freesurfer.md](freesurfer.md) — Surface-based analysis pipeline
-```
+- [head-model-mida.md](head-model-mida.md) — Forward modeling geometry
+- [coordinate-systems.md](coordinate-systems.md) — MNI / FreeSurfer / surface spaces

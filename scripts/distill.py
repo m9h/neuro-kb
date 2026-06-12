@@ -43,12 +43,12 @@ TOPIC_CLUSTERS = {
     "modalities": {
         "description": "Imaging and stimulation modality pages",
         "pages": [
-            ("eeg.md", "Electroencephalography", ["neurojax", "coffeine", "vbjax"]),
-            ("meg.md", "Magnetoencephalography", ["neurojax", "coffeine", "hippy-feat"]),
+            ("eeg.md", "Electroencephalography", ["neurojax", "coffeine", "vbjax", "emeg-fm", "ephys-tokenizer-jax"]),
+            ("meg.md", "Magnetoencephalography", ["neurojax", "coffeine", "hippy-feat", "emeg-fm", "ephys-tokenizer-jax"]),
             ("fnirs.md", "Functional Near-Infrared Spectroscopy", ["dot-jax", "sbi4dwi"]),
-            ("structural-mri.md", "Structural MRI", ["neurojax", "sbi4dwi", "hippy-feat"]),
+            ("structural-mri.md", "Structural MRI", ["neurojax", "sbi4dwi", "hippy-feat", "smri-fm", "T1Prep"]),
             ("diffusion-mri.md", "Diffusion MRI", ["sbi4dwi", "SpinDoctor.jl", "MCMRSimulator.jl"]),
-            ("fmri.md", "Functional MRI", ["neurojax", "hippy-feat", "vbjax"]),
+            ("fmri.md", "Functional MRI", ["neurojax", "hippy-feat", "vbjax", "brainmarks-hbn", "brainmarks-wand", "brainmarks-dlbs", "brainmarks-syn"]),
             ("mrs.md", "MR Spectroscopy", ["mrs-jax", "neurojax"]),
             ("tus.md", "Transcranial Ultrasound", ["sbi4dwi", "jwave", "brain-fwi", "openlifu-python"]),
             ("tms.md", "Transcranial Magnetic Stimulation", ["neurojax", "vbjax"]),
@@ -80,6 +80,7 @@ TOPIC_CLUSTERS = {
             ("method-hmm-dynamics.md", "Hidden Markov Models for Brain Dynamics", ["neurojax", "vbjax"]),
             ("method-active-inference.md", "Active Inference", ["alf", "spinning-up-alf"]),
             ("method-hypergraph.md", "Hypergraph Methods", ["hgx", "jaxctrl"]),
+            ("htsr-weight-analysis.md", "HT-SR Weight-Spectrum Analysis", ["wwj", "WeightWatcher", "emeg-fm", "smri-fm"]),
         ],
     },
     "physics": {
@@ -97,6 +98,13 @@ TOPIC_CLUSTERS = {
         "pages": [
             ("jax-ecosystem.md", "JAX Ecosystem for Neuroimaging", ["sbi4dwi", "neurojax", "vbjax", "hgx", "alf", "jaxctrl", "setae"]),
             ("data-formats.md", "Neuroimaging Data Formats", ["neurojax", "sbi4dwi", "dot-jax"]),
+        ],
+    },
+    "foundation-models": {
+        "description": "Brain foundation models and weights-first benchmarking",
+        "pages": [
+            ("foundation-models.md", "Neuroimaging Foundation Models", ["smri-fm", "emeg-fm", "ephys-tokenizer-jax", "hippy-feat", "nanopath", "mars-fm"]),
+            ("benchmark-datasets.md", "fMRI-FM Benchmark Datasets (Brainmarks)", ["brainmarks-hbn", "brainmarks-wand", "brainmarks-dlbs", "brainmarks-syn"]),
         ],
     },
 }
