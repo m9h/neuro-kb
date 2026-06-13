@@ -118,7 +118,31 @@ def gh_api(endpoint: str) -> str | None:
 
 
 def list_repos(org: str, since: str) -> list[dict]:
-    """List repos created since a date."""
+    """List repos created since a date, INCLUDING private repos.
+
+    Uses `gh repo list`, which returns private repos the authenticated user
+    owns and paginates beyond 100. The public `users/{org}/repos` API endpoint
+    (used as a fallback) silently omits private repos AND caps at 100 results.
+    """
+    try:
+        result = subprocess.run(
+            ["gh", "repo", "list", org,
+             "--json", "name,createdAt,visibility", "--limit", "1000"],
+            capture_output=True, text=True, timeout=60,
+        )
+        if result.returncode == 0:
+            repos = json.loads(result.stdout)
+            # gh repo list emits camelCase createdAt; normalize to created_at
+            return [
+                {"name": r["name"],
+                 "created_at": r.get("createdAt", ""),
+                 "visibility": r.get("visibility", "")}
+                for r in repos if r.get("createdAt", "") >= since
+            ]
+    except (subprocess.TimeoutExpired, FileNotFoundError,
+            json.JSONDecodeError, KeyError):
+        pass
+    # Fallback: public-only API endpoint (no private repos, capped at 100)
     raw = gh_api(
         f"users/{org}/repos?per_page=100&sort=created&direction=desc"
     )
