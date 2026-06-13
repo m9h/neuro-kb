@@ -3,5 +3,9 @@ raw/papers/*.pdf
 raw/head-models/*.zip
 raw/head-models/*.tar.gz
 
+# Python
+__pycache__/
+*.pyc
+
 # OS
 .DS_Store

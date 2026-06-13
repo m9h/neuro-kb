@@ -25,6 +25,13 @@ These projects study the same underlying problem — imaging and simulating the 
 | `libspm` | Statistical parametric mapping (C) | Registration, segmentation, tissue classification |
 | `LAYNII` | Layer-fMRI analysis (C++) | Cortical layers, laminar fMRI, flattening |
 | `neurotech-primer-book` | Neurotechnology education (MyST) | All modalities, sensor physics, safety |
+| `smri-fm` | Structural-MRI foundation model | FM vs morphometry baselines, T1 features, brain-age |
+| `emeg-fm` | E/MEG FM diagnostics & interpretability | HT-SR α, sparse autoencoders, identity audit, realtime decode |
+| `wwj` | HT-SR weight-spectrum analysis (JAX/Equinox) | Power-law α, RG α≈2, differentiable α-loss, Bayesian wwjd |
+| `ephys-tokenizer-jax` | Sample-level E/MEG tokenization | FM input front-end, masked modeling |
+| `T1Prep` | T1 preprocessing / VBM (deepmriprep + CAT) | Segmentation, cortical thickness, morphometry features |
+| `brainmarks-{hbn,wand,dlbs,syn}` | fMRI-FM evaluation cohorts | State/trait probes, Brainmarks, CortexMAE |
+| `nanopath` | Pathology FM (sibling, non-brain) | Tile-level SSL, broad probe suite |
 
 ## Directory structure
 

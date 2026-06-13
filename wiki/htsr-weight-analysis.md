@@ -73,13 +73,33 @@ Supporting statistics:
   power-law preferred). This is the "is this layer *actually* a power law?" check
   that any α claim requires.
 
-## Differentiable α→2 regularizer
+## Differentiable α→2 regularizer (and why steering α is a Goodhart trap)
 
 `alpha_loss(model, target=2.0)` (Hill estimator, fully differentiable) drops into any
-optax pipeline as `task_loss + weight · alpha_loss(model)`. It is the **explicit**
-alternative to Muon's *indirect* spectral shaping: rather than implicitly nudging the
-spectrum through the optimizer geometry, it directly penalizes each layer's α toward
-the RG-optimal value of 2 [@martin2026rg].
+optax pipeline as `task_loss + weight · alpha_loss(model)`, and was proposed as the
+**explicit** alternative to Muon's *indirect* spectral shaping — directly penalizing
+each layer's α toward the RG-optimal value of 2 [@martin2026rg] rather than nudging
+the spectrum implicitly through the optimizer geometry.
+
+**But the causal test says don't use it as a control knob.** The wwj RG-robustness
+experiments ran a seed-matched controlled comparison — two from-scratch GPT-2-124M
+with *identical* initialization and data order, differing only by the regularizer
+(`λ Σ_ℓ (α_ℓ − 2)²`, λ=1, Hill surrogate) — and found a clean **Goodhart failure**:
+
+- The regularizer drove its *own* (fixed-window Hill) target to ≈2 (penalty <10⁻⁵),
+  yet the rigorous `wwjd` posterior α moved the **wrong way** — ending *further* from 2
+  than the unregularized baseline (≈2.71 vs ≈2.68; worst mid-training, ≈3.17 vs ≈2.82).
+  The spectrum became *less* concentrated (mean stable rank 51 vs 47). The model found
+  weights that satisfy the single-window metric without a genuinely heavier tail; the
+  window-marginalizing Bayesian estimator is exactly what exposes the hack.
+- It bought **no circuit**: language-modeling loss unchanged (≈2.38 vs ≈2.37) and the
+  induction circuit formed at the same time and strength (8 induction heads either way).
+
+The reading: **α is a *diagnostic readout* of training quality, not a control knob.**
+The heavy tail that emerges under good training is *downstream* of the computation;
+optimizing the exponent directly is a metric-hack that the point estimate rewards and
+the posterior catches. This is also the strongest argument for the Bayesian layer
+below over the bare Hill point estimate.
 
 ## Bayesian layer (wwjd)
 
