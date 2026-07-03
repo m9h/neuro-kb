@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-04-08T20:55:09-07:00
 title: Finite Element Method
+description: "The Finite Element Method (FEM) is a numerical technique for solving partial differential equations (PDEs) over complex geometries by discretizing the domain into simple elements (tetrahedra,…"
 category: FEM
 implementations: ["neurojax:geometry/fem_forward.py", "sbi4dwi:simulation/mesh_sim.py", "SpinDoctor.jl:src/solve.jl"]
 related: [method-bem.md, physics-bioelectromagnetism.md, coordinate-system-native.md, tissue-conductivity.md]
@@ -120,8 +122,7 @@ For concentric sphere models with analytical solutions:
 - **Leadfield correlation** vs 3-layer BEM: r > 0.95 for superficial sources
 - **Deep source improvement**: 10-20% better localization than BEM (Huang et al. 2016)
 
-## Key References
-
+## Citations
 - **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG field and return current computation using high-resolution FEM. NeuroImage 30:813-826.
 - **Arridge1993fem**: Arridge et al. (1993). A finite element approach for modeling photon transport in tissue. Medical Physics 20:299-309.
 - **Schweiger1993fem**: Schweiger et al. (1995). The finite element method for the propagation of light in scattering media: boundary and source conditions. Medical Physics 22:1779-1792.

@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-04-15T09:48:27-07:00
 title: Monte Carlo Simulation
+description: "Monte Carlo methods use repeated random sampling to solve computational problems that might be deterministic in principle."
 category: stochastic
 implementations: 
   - dot-jax:analytical
@@ -177,8 +179,7 @@ Monte Carlo estimators must satisfy:
 - **Parameter sensitivity**: Small changes can cause large variance
 - **Memory requirements**: Scale with number of particles
 
-## Key References
-
+## Citations
 - **cottaarMultimodalMonteCarlo2026**: Cottaar et al. (2026). Multi-Modal Monte Carlo MRI Simulator of Tissue Microstructure. Imaging Neuroscience. doi:10.1162/IMAG.a.1177
 - **Fang2010mcx**: Fang (2010). Mesh-based Monte Carlo method using fast ray-tracing in Plucker coordinates. Biomed Optics Express 1:165-175.
 - **Fang2020**: Fang et al. (2020). Diffusion MRI simulation of realistic neurons with SpinDoctor and the Neuron Module. NeuroImage 222:117198.

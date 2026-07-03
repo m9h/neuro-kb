@@ -1,8 +1,10 @@
 ---
 type: method
+timestamp: 2026-04-08T20:55:09-07:00
 title: Neural Mass Models
+description: "Neural mass models (NMMs) describe the collective dynamics of large neuronal populations (10^4--10^7 neurons) as low-dimensional systems of ordinary or stochastic differential equations."
 category: simulation
-implementations: [vbjax:models, vbjax:coupling, neurojax:neural_models]
+implementations: ["vbjax:vbjax/neural_mass.py", "vbjax:vbjax/connectome.py", "vpjax:vpjax/hemodynamics/riera.py", "neurojax:neural_models"]
 related: [method-neural-ode.md, physics-electromagnetic.md, eeg.md, meg.md, method-hmm-dynamics.md, method-spectral-analysis.md, connectomics.md]
 ---
 
@@ -267,8 +269,7 @@ Because vbjax models are fully differentiable, they support:
 - **MCMC with NumPyro**: Bayesian posterior estimation via NUTS (see [method-neural-ode.md](method-neural-ode.md))
 - **Parallel parameter sweeps**: `jax.vmap` over parameter grids, `jax.pmap` over CPU cores or GPUs
 
-## Key References
-
+## Citations
 - **Deco2013rww**: Deco et al. (2013). Resting-state functional connectivity emerges from structurally and dynamically shaped slow linear fluctuations. J Neurosci 33:11239-11252. Reduced Wong-Wang model for resting-state simulation.
 - **SanzLeon2013tvb**: Sanz Leon et al. (2013). The Virtual Brain: a simulator of primate brain network dynamics. Frontiers in Neuroinformatics 7:10. TVB framework for connectome-coupled NMMs.
 - **Griffiths2024whobpyt**: Griffiths et al. (2024). WhoBPyT: Whole-Brain Modelling in PyTorch. Differentiable NMM fitting.

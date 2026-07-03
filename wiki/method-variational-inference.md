@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-04-08T20:55:09-07:00
 title: Variational Inference
+description: "Variational Inference (VI) recasts Bayesian posterior computation as an optimization problem: instead of sampling from the intractable posterior p(theta|y), find the member q*(theta) of a…"
 category: inference
 implementations: [vbjax:inference, alf:variational, sbi4dwi:posteriors]
 related: [method-sbi.md, method-active-inference.md, method-neural-ode.md, physics-hemodynamic.md, method-source-imaging.md]
@@ -246,8 +248,7 @@ The key advantage of JAX here is that `jax.grad` differentiates through the enti
 - **MCMC**: Ground truth validation, multimodal posteriors, small models where exact posteriors matter, diagnostics via R-hat and ESS
 - **SBI**: High-dimensional observations (voxelwise inference), intractable likelihoods, population-level studies where amortization pays off
 
-## Key References
-
+## Citations
 - **friston2022active**: Friston et al. (2022). Active inference and the free energy principle. Nature Reviews Neuroscience. Free energy principle underpinning VI in neuroscience.
 - **Cranmer2020sbi**: Cranmer et al. (2020). The frontier of simulation-based inference. PNAS 117:30055-30062. Amortized VI via normalizing flows.
 - **Hess2025bayesian**: Hess et al. (2025). Bayesian Workflow for Generative Modeling in Computational Psychiatry. Comp Psychiatry 9:76-99. Variational Laplace for DCM.

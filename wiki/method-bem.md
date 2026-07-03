@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-04-15T09:48:27-07:00
 title: Boundary Element Method
+description: "The Boundary Element Method (BEM) is a computational technique for solving partial differential equations in unbounded domains by reformulating volume integrals as surface integrals."
 category: BEM
 implementations: [neurojax:geometry/bem_forward.py]
 related: [method-fem.md, physics-bioelectromagnetics.md, head-model-mida.md, coordinate-system-mni152.md]
@@ -86,8 +88,7 @@ For high-resolution CHARM (60-tissue) head models:
 - **Interface detection**: Extract boundaries between conductivity regions
 - **Mesh fusion**: Merge adjacent tissue surfaces when conductivities are similar
 
-## Key References
-
+## Citations
 - **GraveDePeralta2001laura**: Grave de Peralta Menendez et al. (2001). Noninvasive localization of electromagnetic epileptic activity: method descriptions and simulations. Brain Topography 14:131-137.
 - **GraveDePeralta2004laura**: Grave de Peralta Menendez et al. (2004). Electrical neuroimaging based on biophysical constraints. NeuroImage 21:527-539.
 - **Hamalainen1994mne**: Hamalainen & Ilmoniemi (1994). Interpreting magnetic fields of the brain: minimum norm estimates. Med & Biol Eng & Comp 32:35-42.

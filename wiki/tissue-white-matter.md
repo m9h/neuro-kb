@@ -1,6 +1,8 @@
 ---
 type: tissue
+timestamp: 2026-04-15T09:48:27-07:00
 title: White Matter
+description: "White matter is brain tissue primarily composed of myelinated axons that connect different regions of gray matter."
 properties:
   conductivity_S_m: "0.126 (longitudinal), 0.083 (transverse) at 128 Hz"
   relative_permittivity: "Variable with frequency"
@@ -137,8 +139,7 @@ White matter pathology affects multiple physical properties:
 - `vbjax`: Forward modeling for EEG/MEG source localization
 - `jaxctrl`: Control theory for DBS targeting in white matter
 
-## Key References
-
+## Citations
 - **zhang2012noddi**: Zhang et al. (2012). NODDI: practical in vivo neurite orientation dispersion and density imaging. NeuroImage 61:1000-1016.
 - **linka2023cann**: Linka et al. (2023). A new family of Constitutive Artificial Neural Networks towards automated model discovery. Acta Biomaterialia 160:134-151. Brain tissue mechanical properties.
 - **Stikov2015gratio**: Stikov et al. (2015). In vivo histology of the myelin g-ratio with magnetic resonance imaging. NeuroImage 118:397-405.

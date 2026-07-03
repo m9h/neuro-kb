@@ -1,6 +1,8 @@
 ---
 type: concept
+timestamp: 2026-06-12T16:08:30-07:00
 title: fMRI-FM Benchmark Datasets (Brainmarks)
+description: "introduced with the CortexMAE paper [@lane2025scaling]."
 related: [foundation-models.md, fmri.md, connectomics.md, coordinate-systems.md]
 ---
 
@@ -90,8 +92,7 @@ run, so a `_full` variant may be needed for power.
 - **smri-fm**: the structural-MRI FM that benchmarks against morphometry on the same
   cohorts (notably DLBS / ds004856) — see [foundation-models.md](foundation-models.md).
 
-## Key References
-
+## Citations
 - **lane2025scaling**: CortexMAE — cortical masked-autoencoder fMRI foundation model
   and the Brainmarks evaluation suite (arXiv 2510.13768).
 

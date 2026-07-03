@@ -1,6 +1,8 @@
 ---
 type: physics
+timestamp: 2026-04-15T09:48:27-07:00
 title: Electromagnetic Forward Problem
+description: "The electromagnetic forward problem in neuroimaging computes the electric potential and magnetic field at sensor locations given a current source distribution in the brain."
 physics: electromagnetic
 governing_equations: Maxwell equations in quasistatic approximation
 related: [tissue-conductivity.md, head-model-bem.md, head-model-fem.md, leadfield-matrix.md]
@@ -157,8 +159,7 @@ Used for efficient leadfield computation and validation.
 - Piecewise constant conductivity ignores tissue microstructure  
 - Neglect of skull anisotropy introduces ~15% error in EEG forward fields
 
-## Key References
-
+## Citations
 - **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG field and return current computation using high-resolution FEM. NeuroImage 30:813-826.
 - **Michel2004eegsi**: Michel et al. (2004). EEG source imaging. Clinical Neurophysiology 115:2195-2222.
 - **Hamalainen1994mne**: Hamalainen & Ilmoniemi (1994). Interpreting magnetic fields of the brain: minimum norm estimates. Med & Biol Eng & Comp 32:35-42.

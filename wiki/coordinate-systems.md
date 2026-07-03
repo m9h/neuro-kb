@@ -1,6 +1,8 @@
 ---
 type: coordinate-system
+timestamp: 2026-04-08T20:55:09-07:00
 title: Neuroimaging Coordinate Systems
+description: "Neuroimaging involves multiple coordinate systems: scanner hardware coordinates, standardized anatomical templates, device-specific sensor frames, and electrode placement systems."
 definition: Spatial reference frames for brain imaging, stimulation, and simulation
 used_by: [neurojax, vbjax, libspm, LAYNII, sbi4dwi, brain-fwi]
 related: [data-formats.md, structural-mri.md, eeg.md, meg.md, sci-head-model.md, method-fem.md, method-source-imaging.md]
@@ -232,8 +234,7 @@ libspm provides the core C routines (`spm/diffeo.h`) for diffeomorphic compositi
 T_world = sform_ref * T_flirt * inv(sform_src)
 ```
 
-## Key References
-
+## Citations
 - **Fischl2012freesurfer**: Fischl (2012). FreeSurfer. NeuroImage 62:774-781. Defines surface-based coordinate spaces (tkRAS, scanner RAS, MNI305 transformations).
 - **Fischl1999cortical**: Fischl et al. (1999). Cortical surface-based analysis II: Inflation, flattening, and a surface-based coordinate system. NeuroImage 9:195-207.
 - **Dale1999cortical**: Dale et al. (1999). Cortical surface-based analysis I: Segmentation and surface reconstruction. NeuroImage 9:179-194.

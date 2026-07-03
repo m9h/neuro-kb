@@ -1,6 +1,8 @@
 ---
 type: modality
+timestamp: 2026-06-12T16:08:30-07:00
 title: Structural MRI
+description: "Structural MRI encompasses T1-weighted, T2-weighted, and proton density-weighted imaging sequences that provide anatomical contrast based on tissue-specific magnetic relaxation properties."
 physics: electromagnetic
 measurement: T1, T2, proton density, tissue contrast
 spatial_resolution: 0.5-2.0 mm
@@ -135,8 +137,7 @@ sub-XX/
 - **T2w**: TR ~5000ms, TE ~100ms
 - **FLAIR**: TR ~9000ms, TE ~125ms, TI ~2500ms
 
-## Key References
-
+## Citations
 - **Fischl2012freesurfer**: Fischl (2012). FreeSurfer. NeuroImage 62:774-781.
 - **Billot2023synthseg**: Billot et al. (2023). Robust machine learning segmentation for large-scale analysis of heterogeneous clinical brain MRI datasets. PNAS 120(9).
 - **Hoffmann2022synthmorph**: Hoffmann et al. (2022). SynthMorph: learning contrast-invariant registration without acquired images. IEEE TMI 41:543-558.

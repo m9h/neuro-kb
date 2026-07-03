@@ -1,6 +1,8 @@
 ---
 type: concept
+timestamp: 2026-04-08T20:55:09-07:00
 title: Tissue Optical Properties (cross-tissue)
+description: "Optical properties of biological tissues in the near-infrared (NIR) spectral window (650-950 nm) that determine photon propagation for diffuse optical tomography (DOT) and functional near-infrared…"
 related: [diffuse-optical-tomography.md, chromophore-spectroscopy.md, fem-forward-modeling.md, nirs-signal-processing.md]
 ---
 
@@ -133,8 +135,7 @@ For validation, tissue-mimicking phantoms use:
 - **vbjax**: Neural mass models requiring optical-electrical property coupling
 - **setae**: Bio-inspired tissue mechanics with optical property constraints
 
-## Key References
-
+## Citations
 - **Prahl1999omlc**: Prahl (1999). Optical absorption of hemoglobin. Oregon Medical Laser Center. Definitive extinction coefficient spectra for HbO2 and Hb.
 - **Matcher1997vivo**: Matcher et al. (1997). In vivo measurements of the wavelength dependence of tissue-scattering coefficients between 760 and 900 nm. Applied Optics 36:386-396.
 - **Patterson1989time**: Patterson et al. (1989). Time resolved reflectance and transmittance for non-invasive measurement of tissue optical properties. Applied Optics 28:2331-2336.

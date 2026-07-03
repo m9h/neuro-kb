@@ -1,7 +1,10 @@
 ---
 type: concept
+timestamp: 2026-06-12T16:08:30-07:00
 title: Neuroimaging Foundation Models
-related: [htsr-weight-analysis.md, benchmark-datasets.md, structural-mri.md, fmri.md, eeg.md, meg.md, connectomics.md]
+description: "A foundation model (FM) here is a large model self-supervised on brain data (masked autoencoding, contrastive, or diffusion objectives) that is then *frozen* and evaluated by training light linear…"
+implementations: ["CortexMAE:src/cortex_mae", "BrainIAC:src", "smri-fm-fomo26:src/smri_mae", "reve_eeg:src/train.py", "emeg-fm:emeg_fm", "neural-decoding-transfer:poyo_harness"]
+related: [method-masked-autoencoding.md, fm-diagnostics.md, brain-age-benchmarking.md, spiking-neural-decoding.md, htsr-weight-analysis.md, benchmark-datasets.md, structural-mri.md, fmri.md, eeg.md, meg.md]
 ---
 
 # Neuroimaging Foundation Models
@@ -97,8 +100,7 @@ analogue of the weight-space dominant-tail regime. See
 - **brainmarks-hbn / -wand / -dlbs / -syn**: the fMRI-FM evaluation cohorts ([benchmark-datasets.md](benchmark-datasets.md)).
 - **nanopath**, **mars-fm**: sibling non-brain medical/scientific FMs.
 
-## Key References
-
+## Citations
 - **lane2025scaling**: CortexMAE — scaling cortical masked-autoencoder fMRI foundation
   models (arXiv 2510.13768); the model Brainmarks evaluates.
 - **lin2026identity**: Lin, Wu & Jung (2026). The Identity Trap in EEG Foundation

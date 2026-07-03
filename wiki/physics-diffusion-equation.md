@@ -1,6 +1,8 @@
 ---
 type: physics
+timestamp: 2026-04-08T20:55:09-07:00
 title: Diffusion Equation (water, photon)
+description: "The diffusion equation governs the transport of water molecules, photons, and other diffusing particles through biological tissues."
 governing_equations: ∇·(D∇u) = ∂u/∂t (parabolic), ∇²u = k²u (Helmholtz)
 related: [physics-bloch-torrey-equation.md, physics-acoustic-wave-equation.md, method-fem-spectral.md, tissue-brain-white-matter.md, tissue-csf.md]
 ---
@@ -153,8 +155,7 @@ The diffusion equation is closely related to:
 - **Time-domain**: pulse-response simulation
 - **Frequency-domain**: modulated light sources
 
-## Key References
-
+## Citations
 - **Stejskal1965**: Stejskal & Tanner (1965). Spin Diffusion Measurements: Spin Echoes in the Presence of a Time-Dependent Field Gradient. J Chem Phys 42:288-292.
 - **Grebenkov2007**: Grebenkov (2007). NMR survey of reflected Brownian motion. Reviews of Modern Physics 79:1077-1137.
 - **Li2019**: Li et al. (2019). SpinDoctor: A MATLAB toolbox for diffusion MRI simulation. NeuroImage 202:116120.

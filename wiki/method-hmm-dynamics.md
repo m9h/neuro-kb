@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-04-08T20:55:09-07:00
 title: Hidden Markov Models for Brain Dynamics
+description: "Hidden Markov Models (HMMs) are probabilistic models for discovering discrete brain states from continuous neural time series."
 category: inference
 implementations: [neurojax:models/hmm.py, vbjax:examples/hmm_dynamics.py]
 related: [method-dynemo.md, method-hmm-viterbi.md, concept-brain-states.md, modality-meg.md, modality-eeg.md]
@@ -128,8 +130,7 @@ Common state types: alpha-rich (8-13 Hz), theta (4-8 Hz), beta (13-30 Hz), broad
 - Virtual brain state sequences for forward EEG modeling
 - Parameter estimation via HMM constraints on simulated dynamics
 
-## Key References
-
+## Citations
 - **Vidaurre2018hmm**: Vidaurre et al. (2018). Spontaneous cortical activity transiently organises into frequency specific phase-coupling networks. Nature Communications 9:2987.
 - **Gohil2023dynemo**: Gohil et al. (2023). osl-dynamics, a toolbox for modeling fast dynamic brain activity. eLife 12:e91949.
 - **vanEs2025oslephys**: van Es et al. (2025). osl-ephys: A Python toolbox for preprocessing and source reconstruction of MEG data. Frontiers in Neuroscience.

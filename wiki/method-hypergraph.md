@@ -1,9 +1,11 @@
 ---
 type: method
+timestamp: 2026-04-08T20:55:09-07:00
 title: Hypergraph Methods
+description: "Computational methods for learning and control on hypergraphs, which generalize standard graphs by allowing hyperedges to connect any number of vertices simultaneously."
 category: differentiable
-implementations: [hgx:core, jaxctrl:hypergraph]
-related: [method-neural-ode.md, method-tensor-decomposition.md, concept-controllability.md, concept-higher-order-interactions.md]
+implementations: ["hgx:hgx/_conv", "hgx:hgx/_dynamics.py", "devograph:devograph", "anatomical-compiler:src", "organoid-hgx-benchmark:hgx_prep", "jaxctrl:_hypergraph_control.py"]
+related: [method-neural-ode.md, connectome-harmonics.md, connectomics.md, method-active-inference.md]
 ---
 
 # Hypergraph Methods
@@ -121,8 +123,7 @@ Tested on hypergraphs up to 10^4 nodes and 10^3 hyperedges. Performance bottlene
 - Hyperedges: reactions (multiple reactants/products)
 - Control: reaction rate optimization
 
-## Key References
-
+## Citations
 - **dong2024controllability**: Dong et al. (2024). Controllability and Observability of Temporal Hypergraphs. arXiv:2408.12085.
 - **sharf2022functional**: Sharf et al. (2022). Functional neuronal circuitry and oscillatory dynamics in human brain organoids. Nature Communications 13:4403.
 - **Kidger2021equinox**: Kidger & Garcia (2021). Equinox: neural networks in JAX via callable PyTrees and filtered transformations. Differentiable Programming workshop at NeurIPS.

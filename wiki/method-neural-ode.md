@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-04-15T09:48:27-07:00
 title: Neural ODEs / Differentiable Simulation
+description: "Neural ODEs and differentiable simulation enable end-to-end gradient-based optimization of dynamical systems by making the numerical integration process differentiable with respect to parameters,…"
 category: differentiable
 implementations: [sbi4dwi:biophysics, jaxctrl:core, vbjax:integration]
 related: [method-matrix-formalism.md, method-sde-simulation.md, physics-diffusion-equation.md]
@@ -113,8 +115,7 @@ solution = diffrax.diffeqsolve(term, solver, t0=0, t1=10, dt0=0.1, y0=y0)
 3. **Numerical precision**: Integration errors can accumulate
 4. **Solver selection**: Performance depends on problem-specific solver choice
 
-## Key References
-
+## Citations
 - **Chen2018neuralode**: Chen et al. (2018). Neural Ordinary Differential Equations. NeurIPS 31. Foundational paper introducing continuous-depth networks via ODE solvers.
 - **Kidger2022neuralDE**: Kidger (2022). On Neural Differential Equations. PhD thesis, University of Oxford. Comprehensive treatment of neural ODEs, SDEs, and CDEs.
 - **Kidger2021equinox**: Kidger & Garcia (2021). Equinox: neural networks in JAX via callable PyTrees and filtered transformations.

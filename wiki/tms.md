@@ -1,6 +1,8 @@
 ---
 type: modality
+timestamp: 2026-04-15T09:48:27-07:00
 title: Transcranial Magnetic Stimulation
+description: "Transcranial Magnetic Stimulation (TMS) is a non-invasive neurostimulation technique that uses rapidly changing magnetic fields to induce localized electrical currents in brain tissue, causing…"
 physics: electromagnetic
 measurement: neural activation via magnetic field induction
 spatial_resolution: 0.5-1.0 cm
@@ -120,8 +122,7 @@ International safety guidelines specify maximum stimulation intensities and puls
 - Obsessive-compulsive disorder
 - Stroke rehabilitation
 
-## Key References
-
+## Citations
 - **Momi2023virtuallesion**: Momi et al. (2023). TMS-evoked responses are driven by recurrent large-scale network dynamics. eLife 12:e83232.
 - **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG field and return current computation using high-resolution FEM.
 - **SanzLeon2013tvb**: Sanz Leon et al. (2013). The Virtual Brain: a simulator of primate brain network dynamics. Frontiers in Neuroinformatics 7:10.

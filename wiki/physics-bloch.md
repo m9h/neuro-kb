@@ -1,6 +1,8 @@
 ---
 type: physics
+timestamp: 2026-04-15T09:48:27-07:00
 title: Bloch Equations / MR Physics
+description: "The Bloch equations describe the quantum mechanical evolution of nuclear magnetic moments in external magnetic fields, forming the fundamental physics underlying all MRI modalities including…"
 physics: electromagnetic
 governing_equations: dM/dt = γ(M × B) - R(M - M₀)
 related: [physics-nmr.md, modality-fmri.md, modality-dti.md, coordinate-system-scanner.md, tissue-brain.md, tissue-csf.md]
@@ -171,16 +173,14 @@ def epg_rf(F, alpha):
 - [tissue-brain.md](tissue-brain.md) - Brain tissue relaxation properties
 - [coordinate-system-scanner.md](coordinate-system-scanner.md) - Scanner coordinate reference frames
 
-## Key References
-
+## Citations
 - **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512. doi:10.1002/mrm.20605
 - **wansapura1999nmr**: Wansapura et al. (1999). NMR relaxation times in the human brain at 3.0 Tesla. JMRI 9:531-538.
 - **degraafinvivo**: de Graaf (2019). In Vivo NMR Spectroscopy: Principles and Techniques. 3rd ed. Wiley. Comprehensive MRS physics textbook.
 - **Deoni2003despot**: Deoni et al. (2003). Rapid combined T1 and T2 mapping using gradient recalled acquisition in the steady state (DESPOT). MRM 49:515-526.
 - **Alsop2015asl**: Alsop et al. (2015). Recommended implementation of arterial spin-labeled perfusion MRI for clinical applications. MRM 73:102-116.
 
-## References
-
+## Citations
 - Haacke EM, Brown RW, Thompson MR, Venkatesan R. *Magnetic Resonance Imaging: Physical Principles and Sequence Design*. Wiley, 1999.
 - Stanisz GJ, et al. T₁, T₂ relaxation and magnetization transfer in tissue at 3T. *Magn Reson Med* 2005;54:507-512.
 - Bernstein MA, King KF, Zhou XJ. *Handbook of MRI Pulse Sequences*. Elsevier, 2004.

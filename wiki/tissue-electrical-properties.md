@@ -1,6 +1,8 @@
 ---
 type: tissue
+timestamp: 2026-04-08T20:55:09-07:00
 title: "Tissue Electrical Conductivity (cross-tissue)"
+description: "Electrical conductivity values for brain and head tissues across neuroimaging modalities (EEG, MEG, ECoG, tDCS, TMS)."
 properties:
   conductivity_S_m:
     scalp: "0.33 ± 0.05 (10 Hz - 1 kHz)"
@@ -144,8 +146,7 @@ For stimulation applications, conductivity uncertainty requires:
 - Safety factor incorporation
 - Individual head model validation where possible
 
-## Key References
-
+## Citations
 - **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG forward modeling using high-resolution FEM. NeuroImage 30:813-826.
 - **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512.
 - **Stikov2015gratio**: Stikov et al. (2015). In vivo histology of the myelin g-ratio with magnetic resonance imaging. NeuroImage 118:397-405.

@@ -1,6 +1,8 @@
 ---
 type: tissue
+timestamp: 2026-04-15T09:48:27-07:00
 title: Tissue Acoustic Properties (cross-tissue)
+description: "Acoustic tissue properties are fundamental parameters for ultrasound simulation and transcranial focused ultrasound (TUS) applications."
 properties:
   skull_cortical:
     sound_speed_m_s: 2800
@@ -125,8 +127,7 @@ where γ ranges from 1.0-2.0 depending on tissue type. ITRUSST values represent 
 - **Temperature effects**: Sound speed increases ~1-2 m/s per °C, relevant for therapeutic heating applications
 - **Age effects**: Skull density and cortical thickness increase with age, affecting acoustic penetration
 
-## Key References
-
+## Citations
 - **aubry2022itrusst**: Aubry et al. (2022). Benchmark problems for transcranial ultrasound simulation: intercomparison of compressional wave models. JASA.
 - **stanziola2023jwave**: Stanziola et al. (2023). j-Wave: an open-source differentiable wave simulator. SoftwareX.
 - **martin2025tfus**: Martin et al. (2025). MRI-guided transcranial focused ultrasound neuromodulation with a 256-element helmet array. Nature Communications.

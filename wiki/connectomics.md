@@ -1,7 +1,9 @@
 ---
 type: concept
+timestamp: 2026-04-08T20:55:09-07:00
 title: Connectomics
-related: [diffusion-mri.md, structural-mri.md, method-hypergraph.md, method-source-imaging.md, method-spectral-analysis.md, jax-ecosystem.md]
+description: "Connectomics is the study of the brain's wiring diagram at scales ranging from individual synapses to whole-brain white matter tracts."
+related: [connectome-harmonics.md, diffusion-mri.md, structural-mri.md, method-hypergraph.md, method-source-imaging.md, method-spectral-analysis.md, jax-ecosystem.md]
 ---
 
 # Connectomics
@@ -147,8 +149,7 @@ Network control theory, implemented in **jaxctrl**, quantifies how external inpu
 - **Minimum driver nodes**: smallest set of nodes to control the full network (Liu, Slotine & Barabasi 2011).
 - **Hypergraph controllability**: jaxctrl extends control theory to hypergraphs via tensor Kalman rank and algebraic Riccati tensor equations (ARTE), enabling controllability analysis of higher-order brain network structure.
 
-## Key References
-
+## Citations
 - **Margulies2016situated**: Margulies et al. (2016). Situating the default-mode network along a principal gradient of macroscale cortical organization. PNAS 113:12574-12579.
 - **Sydnor2021axis**: Sydnor et al. (2021). Neurodevelopment of the association cortices: patterns, mechanisms, and implications for psychopathology. Neuron 109:2820-2846.
 - **Hansen2022neurotransmitter**: Hansen et al. (2022). Mapping neurotransmitter systems to the structural and functional organization of the human neocortex. Nature Neuroscience 25:1569-1581.

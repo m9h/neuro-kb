@@ -1,6 +1,8 @@
 ---
 type: concept
+timestamp: 2026-04-15T09:48:27-07:00
 title: JAX Ecosystem for Neuroimaging
+description: "The JAX ecosystem has emerged as the dominant framework for differentiable neuroimaging research, enabling end-to-end gradient flow from raw sensor data to biophysical parameters."
 related: [differentiable-programming.md, neural-posterior-estimation.md, equinox-modules.md, scientific-ml.md]
 ---
 
@@ -200,8 +202,7 @@ control_energy = trace(inv(controllability_gramian(connectome, stimulation_sites
 
 **Clinical Translation** — Fast inference enables real-time applications (TUS optimization, MRI reconstruction).
 
-## Key References
-
+## Citations
 - **Bradbury2018jax**: Bradbury et al. (2018). JAX: composable transformations of Python+NumPy programs. Core autodiff and XLA compilation framework.
 - **Kidger2021equinox**: Kidger & Garcia (2021). Equinox: neural networks in JAX via callable PyTrees and filtered transformations.
 - **Kidger2022neuralDE**: Kidger (2022). On Neural Differential Equations. PhD thesis, University of Oxford. Diffrax library for neural ODEs/SDEs.

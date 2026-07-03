@@ -1,6 +1,8 @@
 ---
 type: physics
+timestamp: 2026-04-08T20:55:09-07:00
 title: Hemodynamic Response / Neurovascular Coupling
+description: "The hemodynamic response function (HRF) describes how neural activity translates into measurable BOLD signal changes through neurovascular coupling mechanisms."
 physics: hemodynamic
 governing_equations: Balloon model, Windkessel dynamics, oxygen consumption
 related: [modality-bold.md, tissue-blood.md, physics-electromagnetic.md, method-forward-models.md]
@@ -167,8 +169,7 @@ Combining BOLD with CBF (ASL) and CMRO₂ measurements:
 
 where α≈0.2, β≈1.3 are calibration constants.
 
-## Key References
-
+## Citations
 - **Riera2006neurovascular**: Riera et al. (2006). A state-space model of the hemodynamic approach: nonlinear filtering of BOLD signals. NeuroImage 21:547-567.
 - **He2007qbold**: He & Yablonskiy (2007). Quantitative BOLD: mapping of human cerebral deoxygenated blood volume and oxygen extraction fraction. MRM 57:115-126.
 - **Germuska2019dualcal**: Germuska et al. (2019). Dual-calibrated fMRI measurement of absolute cerebral metabolic rate of oxygen consumption. NeuroImage 184:717-728.

@@ -1,9 +1,21 @@
----
-title: Change Log
-description: Chronological audit trail of wiki changes
----
-
 # Change Log
+
+## 2026-07-03
+- **OKF conformance pass**: aligned the bundle to Google's Open Knowledge Format v0.1. Reduced `index.md` frontmatter to only `okf_version: "0.1"`; stripped frontmatter from `log.md` (reserved files); backfilled `description` (first-sentence) and `timestamp` (git last-commit, ISO 8601) on all 46 concept pages; normalized 43 reference headings to `## Citations`. Body-link graph (`## See Also`) was already OKF-visible.
+- **Repo sweep of ~/dev/ (~80 repos)** across 5 clusters (acoustic/optical, dMRI/qMRI, foundation-models, simulation/connectomics, segmentation/tools). Created 11 new cross-cutting pages, each recurring across ≥2 repos:
+  - method-full-waveform-inversion (brain-fwi, stride, jwave)
+  - connectome-harmonics (connectome_harmonic_core/CHAP, HADES, anatomical-compiler)
+  - quantitative-susceptibility-mapping (QSM.jl, QUIT, qMRLab)
+  - diffuse-optical-tomography (dot-jax, redbirdpy)
+  - method-pinn (dmijl, dmipy, neurojax, dot-jax)
+  - method-masked-autoencoding (CortexMAE, reve_eeg, smri-fm*, fomo25; JEPA variant smri-fm-neurojepa)
+  - tes-efield-modeling (simnibs / CHARM)
+  - in-vitro-mea-cultures (bl1, neurosim)
+  - fm-diagnostics (fmscope, emeg-fm, wwj, neural-decoding-transfer)
+  - brain-age-benchmarking (meeg-brain-age-benchmark-paper, BrainIAC, fomo25, neoba)
+  - spiking-neural-decoding (neural-decoding-transfer / POYO)
+- Refreshed `implementations:` + backlinks on diffusion-mri, quantitative-mri, neural-mass-models (added vpjax), method-hypergraph (added devograph/anatomical-compiler/organoid-hgx-benchmark/jaxctrl), foundation-models, physics-acoustic (added jwave/stride/brain-fwi), fnirs (added dot-jax/redbirdpy), method-sbi (added dmipy_jax/dmijl), connectomics; fixed several dangling `related:` targets to valid slugs.
+- Repos surveyed but not given standalone pages (captured as implementations/notes to keep scope on imaging domain knowledge): vbjax, vpjax, hgx, jaxctrl, MARBLE, quantum-cognition, evo-embodied, agentsciml, ai-scientist-v2-wwj, moabb, mnelab, Slicer, ITK, vmtk, samseg, T1Prep, charm-gems-cli, brainmarks-{hbn,dlbs,syn}, zuna-*, hippy-feat, mr-to-pct, openlifu-python, cudimot, SpinDoctor.jl.
 
 ## 2026-04-07
 - Initialized wiki structure with CLAUDE.md schema

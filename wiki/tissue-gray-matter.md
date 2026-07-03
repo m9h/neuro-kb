@@ -1,6 +1,8 @@
 ---
 type: tissue
+timestamp: 2026-04-08T20:55:09-07:00
 title: Gray Matter
+description: "Gray matter is neural tissue composed primarily of neuronal cell bodies, dendrites, unmyelinated axons, and glial cells."
 properties:
   conductivity_S_m: 0.33
   relative_permittivity: 1000
@@ -167,8 +169,7 @@ Gray matter exhibits structure across scales:
 - **sbi4dwi**: Microstructure parameter estimation in gray matter
 - **SpinDoctor.jl**: Diffusion simulation in realistic neuronal geometries
 
-## Key References
-
+## Citations
 - **Prahl1999omlc**: Prahl (1999). Optical absorption of hemoglobin. Oregon Medical Laser Center. Extinction coefficient database for fNIRS tissue optics.
 - **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512.
 - **Scholkmann2014review**: Scholkmann et al. (2014). A review on continuous wave functional near-infrared spectroscopy instrumentation and methodology. NeuroImage 85:6-27.

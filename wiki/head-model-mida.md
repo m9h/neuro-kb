@@ -1,6 +1,8 @@
 ---
 type: head-model
+timestamp: 2026-04-08T20:55:09-07:00
 title: MIDA Head Model
+description: "MIDA (Multimodal Imaging-Based Detailed Anatomical model) is the most anatomically detailed publicly available head model, with 115+ distinct tissue structures segmented at 0.5 mm isotropic…"
 source: IT'IS Foundation (Zurich)
 tissues: 115+
 resolution: 0.5 mm isotropic
@@ -146,8 +148,7 @@ For pseudospectral solvers (j-Wave in brain-fwi), the 0.5 mm voxel grid can be u
 - **vbjax** -- whole-brain simulation; MIDA brain parcellation can provide region boundaries for neural mass models on the cortical surface
 - **dot-jax** -- diffuse optical tomography; MIDA tissue segmentation supports FEM mesh generation for photon transport simulation with anatomically realistic geometry
 
-## Key References
-
+## Citations
 1. Iacono MI, Neufeld E, Akinnagbe E, et al. (2015). MIDA: a multimodal imaging-based detailed anatomical model of the human head and neck. *PLOS ONE* 10(4):e0124126.
 2. Aubry JF, Bhatt O, et al. (2022). Benchmark problems for transcranial ultrasound simulation. *JASA* 152(2):1003-1019.
 3. Gabriel S, Lau RW, Gabriel C (1996). The dielectric properties of biological tissues. *Phys Med Biol* 41:2231-2249.

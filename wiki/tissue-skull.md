@@ -1,6 +1,8 @@
 ---
 type: tissue
+timestamp: 2026-04-15T09:48:27-07:00
 title: Skull / Cortical Bone
+description: "The skull (cortical bone) is the primary challenge in transcranial neuroimaging and neuromodulation."
 properties:
   conductivity_S_m: ~0.02
   relative_permittivity: ~20
@@ -115,8 +117,7 @@ Skull modeling accuracy directly impacts:
 - **brain-fwi**: Full waveform inversion for skull velocity mapping, ITRUSST benchmarks
 - **jwave**: j-Wave acoustic simulation wrapper with skull attenuation validation
 
-## Key References
-
+## Citations
 - **aubry2022itrusst**: Aubry et al. (2022). Benchmark problems for transcranial ultrasound simulation: intercomparison of compressional wave models. JASA. Consensus acoustic property values.
 - **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG forward modeling. NeuroImage 30:813-826. Skull conductivity impact on source localization.
 - **Wharton_2012**: Wharton & Bowtell (2012). Fiber orientation-dependent white matter contrast in gradient echo MRI. PNAS 109:18559-18564. Myelin susceptibility and skull bone modeling.

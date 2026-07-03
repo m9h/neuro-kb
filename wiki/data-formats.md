@@ -1,6 +1,8 @@
 ---
 type: concept
+timestamp: 2026-04-08T20:55:09-07:00
 title: "Neuroimaging Data Formats"
+description: "Standard file formats for storing and exchanging neuroimaging data across different modalities and analysis pipelines."
 related: [sci-head-model.md, eeg.md, meg.md, fmri.md, diffusion-mri.md, structural-mri.md]
 ---
 
@@ -189,8 +191,7 @@ dataset.ds/
 - **Mesh formats:** Triangle soup (.obj), tetrahedral (.msh) for FEM simulation
 - **SNIRF compliance:** Shared Near Infrared Spectroscopy Format for fNIRS data
 
-## Key References
-
+## Citations
 - **Esteban2019fmriprep**: Esteban et al. (2019). fMRIPrep: a robust preprocessing pipeline for functional MRI. Nature Methods 16:111-116. BIDS-native fMRI preprocessing.
 - **Luke2021bids**: Luke et al. (2021). fNIRS-BIDS: the brain imaging data structure extended to functional near-infrared spectroscopy.
 - **SNIRF2023spec**: fNIRS community (2023). Shared Near Infrared Spectroscopy Format (SNIRF). Standard format for fNIRS data exchange.

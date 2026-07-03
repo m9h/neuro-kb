@@ -1,6 +1,8 @@
 ---
 type: head-model
+timestamp: 2026-04-08T20:55:09-07:00
 title: SCI Head Model
+description: "Open-source 8-layer head model designed for photon transport simulation (Monte Carlo, MMC)."
 source: Neurophotonics Lab (Fang group, Northeastern University)
 tissues: 8
 resolution: tetrahedral mesh (9.9M tet4 elements)
@@ -51,8 +53,7 @@ This model is natively set up for **fNIRS / diffuse optical tomography** (photon
 
 The tetrahedral mesh is directly usable in FEM solvers (FEniCS, MFEM, custom JAX).
 
-## Key References
-
+## Citations
 - **Fang2010mcx**: Fang (2010). Mesh-based Monte Carlo method using fast ray-tracing in Plucker coordinates. Biomed Optics Express 1:165-175. MCX/MMC photon transport framework.
 - **Dehghani2009nirfast**: Dehghani et al. (2009). Near infrared optical tomography using NIRFAST: Algorithm for numerical model and image reconstruction. Int J Numer Meth Biomed Eng 25:711-732.
 - **Arridge1999inverse**: Arridge (1999). Optical tomography in medical imaging. Inverse Problems 15:R41-R93.

@@ -1,6 +1,8 @@
 ---
 type: tissue
+timestamp: 2026-04-15T09:48:27-07:00
 title: Scalp
+description: "The scalp is the outermost tissue layer of the head, consisting of skin, connective tissue, aponeurosis, loose areolar tissue, and periosteum."
 properties:
   conductivity_S_m: 0.435
   relative_permittivity: 1106
@@ -114,8 +116,7 @@ For TMS/tDCS modeling:
 - **neurojax**: Incorporates scalp conductivity in BEM/FEM head models for source localization
 - **sbi4dwi**: May include scalp in diffusion-informed tissue property estimation
 
-## Key References
-
+## Citations
 - **Wolters2004fem**: Wolters et al. (2006). Influence of tissue conductivity anisotropy on EEG/MEG forward modeling. NeuroImage 30:813-826.
 - **Brigadoi2015short**: Brigadoi & Cooper (2015). How short is short? Optimum source-detector distance for short-separation channels in fNIRS. Neurophotonics 2(2):025005. Impact of scalp hemodynamics on fNIRS.
 - **Saager2005short**: Saager & Berger (2005). Direct characterization and removal of interfering absorption trends in two-layered turbid media. JOSA A 22:1874-1882.

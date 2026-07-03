@@ -1,11 +1,14 @@
 ---
 type: modality
+timestamp: 2026-04-08T20:55:09-07:00
 title: Quantitative MRI
+description: "Quantitative MRI (qMRI) produces maps of physical tissue properties---relaxation times (T1, T2, T2*), proton density (PD), and magnetization transfer (MT) parameters---rather than the…"
 physics: electromagnetic
 measurement: tissue-specific relaxation times, proton density, magnetization transfer
 spatial_resolution: 1-2 mm isotropic
 temporal_resolution: 5-30 min per map
-related: [structural-mri.md, physics-bloch.md, tissue-gray-matter.md, tissue-white-matter.md, tissue-csf.md, diffusion-mri.md, method-sbi.md]
+implementations: ["QSM.jl:src/inversion", "QUIT:Source/Relaxometry", "qMRLab:src/Models", "mrs-jax:mega_press.py"]
+related: [quantitative-susceptibility-mapping.md, structural-mri.md, physics-bloch.md, mrs.md, diffusion-mri.md, method-sbi.md]
 ---
 
 # Quantitative MRI
@@ -180,8 +183,7 @@ See [data-formats.md](data-formats.md) for general BIDS conventions.
 - **Repeatability**: Test-retest CoV for T1 at 3T is typically 2-5% in WM, 3-7% in GM.
 - **Phantom validation**: NIST/ISMRM system phantom with known T1/T2 values (14 spheres, T1: 20-2000 ms, T2: 5-600 ms).
 
-## Key References
-
+## Citations
 - **Deoni2003despot**: Deoni et al. (2003). Rapid combined T1 and T2 mapping using gradient recalled acquisition in the steady state (DESPOT). MRM 49:515-526.
 - **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512. doi:10.1002/mrm.20605
 - **Sled2001qmt**: Sled & Pike (2001). Quantitative imaging of magnetization transfer exchange and relaxation properties in vivo using MRI. MRM 46:923-931.
@@ -209,8 +211,7 @@ See [data-formats.md](data-formats.md) for general BIDS conventions.
 - [tissue-csf.md](tissue-csf.md) -- CSF properties and relaxation times
 - [method-neural-ode.md](method-neural-ode.md) -- Neural ODEs for biophysical model fitting
 
-## References
-
+## Citations
 - Stanisz GJ, et al. T1, T2 relaxation and magnetization transfer in tissue at 3T. *Magn Reson Med* 2005;54:507-512.
 - Rooney WD, et al. Magnetic field and tissue dependencies of human brain longitudinal 1H2O relaxation in vivo. *Magn Reson Med* 2007;57:308-318.
 - Marques JP, et al. MP2RAGE, a self bias-field corrected sequence for improved segmentation and T1-mapping at high field. *NeuroImage* 2010;49:1271-1281.

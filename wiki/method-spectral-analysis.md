@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-04-15T09:48:27-07:00
 title: Spectral Analysis (multitaper, wavelets)
+description: "Spectral analysis methods for extracting frequency-domain features from neural signals, including multitaper spectral estimation and wavelet transforms."
 category: spectral
 implementations: [neurojax:analysis.spectral, coffeine:compute_coffeine]
 related: [method-time-frequency-analysis.md, method-hilbert-transform.md, method-fourier-transform.md, method-covariance-estimation.md]
@@ -130,8 +132,7 @@ W(a,b) = (1/√a) * ∫ x(t) * ψ*((t-b)/a) dt
 ```
 where ψ is the mother wavelet, a is scale, b is translation.
 
-## Key References
-
+## Citations
 - **thomson1982spectrum**: Thomson (1982). Spectrum estimation and harmonic analysis. Proceedings of the IEEE 70:1055-1096. Foundational paper on multitaper spectral estimation.
 - **Donoghue2020fooof**: Donoghue et al. (2020). Parameterizing neural power spectra into periodic and aperiodic components. Nature Neuroscience 23:1655-1665.
 - **sabbagh2020predictive**: Sabbagh et al. (2020). Predictive regression modeling with MEG/EEG: from source power to signals and cognitive states. NeuroImage 222:116893.

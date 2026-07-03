@@ -1,11 +1,14 @@
 ---
 type: modality
+timestamp: 2026-04-15T09:48:27-07:00
 title: Diffusion MRI
+description: "Diffusion MRI (dMRI) is a non-invasive magnetic resonance imaging technique that measures the random motion of water molecules in biological tissues."
 physics: electromagnetic
 measurement: water molecule diffusion via signal attenuation
 spatial_resolution: 1-3mm isotropic voxels
 temporal_resolution: seconds to minutes per image
-related: [monte-carlo-simulation.md, finite-element-methods.md, bloch-torrey-equation.md, tissue-microstructure.md, apparent-diffusion-coefficient.md]
+implementations: ["dmipy:signal_models", "dmipy:dmipy_jax/inference", "sbi4dwi:dmipy_jax/biophysics", "dmijl:src/pinn", "SpinDoctor.jl:src/btpde", "cudimot:Levenberg_Marquardt.cu"]
+related: [method-sbi.md, method-pinn.md, method-monte-carlo.md, method-fem.md, physics-diffusion-equation.md, quantitative-mri.md, connectomics.md]
 ---
 
 # Diffusion MRI
@@ -178,8 +181,7 @@ Typical SNR requirements:
 - **Partial voluming**: Mixed tissue types within voxels
 - **Rician noise**: Non-Gaussian noise distribution at low SNR
 
-## Key References
-
+## Citations
 - **zhang2012noddi**: Zhang et al. (2012). NODDI: practical in vivo neurite orientation dispersion and density imaging. NeuroImage 61:1000-1016.
 - **palombo2020sandi**: Palombo et al. (2020). SANDI: a compartment-based model for non-invasive apparent soma and neurite imaging by diffusion MRI. NeuroImage 215:116835.
 - **fick2019dmipy**: Fick et al. (2019). The Dmipy Toolbox: Diffusion MRI Multi-Compartment Modeling and Microstructure Recovery Made Easy. Frontiers in Neuroinformatics 13:64.

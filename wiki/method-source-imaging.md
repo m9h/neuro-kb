@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-04-08T20:55:09-07:00
 title: Source Imaging / Inverse Problems
+description: "Source imaging (also called source localization or inverse modeling) reconstructs the spatial distribution of neural current sources from sensor measurements recorded outside the head."
 category: inference
 implementations: [neurojax:source, brain-fwi:inversion]
 related: [method-bem-forward-modeling.md, method-fem-forward-modeling.md, physics-electromagnetic-fields.md, head-model-mida.md, coordinate-system-mni.md]
@@ -171,8 +173,7 @@ The resolution matrix `R = G L` where `G` is the inverse operator quantifies spa
 
 For MNE: `R = L (L^T L + α I)^(-1) L^T`
 
-## Key References
-
+## Citations
 - **Hamalainen1994mne**: Hamalainen & Ilmoniemi (1994). Minimum norm estimates for interpreting magnetic fields of the brain. Med & Biol Eng & Comp 32:35-42.
 - **PascualMarqui1994loreta**: Pascual-Marqui et al. (1994). Low resolution electromagnetic tomography: a new method for localizing electrical activity in the brain. Int J Psychophysiology 18:49-65.
 - **PascualMarqui2002sloreta**: Pascual-Marqui (2002). Standardized low-resolution brain electromagnetic tomography (sLORETA): technical details.

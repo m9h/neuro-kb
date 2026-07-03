@@ -1,6 +1,8 @@
 ---
 type: method
+timestamp: 2026-06-13T08:55:27-07:00
 title: HT-SR Weight-Spectrum Analysis
+description: "Heavy-Tailed Self-Regularization (HT-SR) is a data-free diagnostic that scores the quality of a trained neural-network layer from its weights alone — no training or test data, no forward pass."
 category: spectral
 implementations: [wwj:core, wwj:bayes, WeightWatcher, emeg-fm:eeg_fm]
 related: [foundation-models.md, method-spectral-analysis.md, method-variational-inference.md, jax-ecosystem.md]
@@ -166,8 +168,7 @@ masked-diffusion bottleneck).
 - **smri-fm**, **nanopath**, **hippy-feat**: additional weight-matrix sources used to
   validate `wwj` against the reference implementation.
 
-## Key References
-
+## Citations
 - **martin2021predicting**: Martin, Peng & Mahoney (2021). Predicting trends in the
   quality of state-of-the-art neural networks without access to training or test data.
   Nature Communications 12:4122. *(WeightWatcher / HT-SR foundational paper.)*

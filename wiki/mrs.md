@@ -1,6 +1,8 @@
 ---
 type: modality
+timestamp: 2026-04-08T20:55:09-07:00
 title: MR Spectroscopy
+description: "Magnetic Resonance Spectroscopy (MRS) is the only non-invasive technique that can measure neurochemical concentrations *in vivo* in the human brain."
 physics: electromagnetic
 measurement: Chemical shifts and metabolite concentrations via nuclear magnetic resonance
 spatial_resolution: 8 cm³ (single voxel) to 1 mL (whole-brain MRSI)
@@ -204,8 +206,7 @@ hermes_result = process_hermes(data, dwell_time, centre_freq)
 - [head-models.md](head-models.md) - Anatomical localization for SVS
 - [quantitative-mri.md](quantitative-mri.md) - Complementary tissue characterization
 
-## Key References
-
+## Citations
 - **Clarke2021fslmrs**: Clarke et al. (2021). FSL-MRS: An end-to-end spectroscopy analysis package. MRM 85:2950-2964. doi:10.1002/mrm.28630
 - **near2021consensus**: Near et al. (2021). Preprocessing, analysis and quantification in single-voxel MRS: experts' consensus recommendations. NMR in Biomedicine 34:e4257. doi:10.1002/nbm.4257
 - **chan2016hermes**: Chan et al. (2016). HERMES: Hadamard encoding and reconstruction of MEGA-edited spectroscopy. MRM 76:11-19. doi:10.1002/mrm.26233
@@ -215,8 +216,7 @@ hermes_result = process_hermes(data, dwell_time, centre_freq)
 - **mikkelsen2017biggaba**: Mikkelsen et al. (2017). Big GABA: Edited MR spectroscopy at 24 research sites. NeuroImage 159:32-45. doi:10.1016/j.neuroimage.2017.07.021
 - **ross2005efficacy**: Ross & Lin (2005). Efficacy of proton MRS in neurological diagnosis and neurotherapeutic decision making. Neurotherapeutics 2:197-214. doi:10.1602/neurorx.2.2.197
 
-## References
-
+## Citations
 - Gasparovic C et al. (2006) Use of tissue water as a concentration reference for proton spectroscopic imaging. *MRM* 55:1219-1226
 - Mikkelsen M et al. (2017) Big GABA: Edited MR spectroscopy at 24 research sites. *NeuroImage* 159:32-45
 - Near J et al. (2015) Frequency and phase drift correction by spectral registration in the time domain. *MRM* 73:44-50

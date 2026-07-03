@@ -1,11 +1,14 @@
 ---
 type: modality
+timestamp: 2026-04-15T09:48:27-07:00
 title: Functional Near-Infrared Spectroscopy
+description: "The \"biological window\" spans approximately 650-950 nm wavelengths, where:"
 physics: optical
 measurement: hemoglobin concentration changes via near-infrared light attenuation
 spatial_resolution: 10-30 mm (standard fNIRS), 10-15 mm (HD-DOT)
 temporal_resolution: 0.1-10 Hz
-related: [diffuse-optical-tomography.md, hemodynamics.md, photon-transport.md, beer-lambert-law.md]
+implementations: ["dot-jax:src/dot_jax/forward.py", "redbirdpy:redbirdpy/forward.py", "neurojax:fnirs"]
+related: [diffuse-optical-tomography.md, physics-diffusion-equation.md, tissue-optical-properties.md, physics-hemodynamic.md, method-monte-carlo.md]
 ---
 
 # Functional Near-Infrared Spectroscopy
@@ -145,8 +148,7 @@ Source: MCX Colin27 benchmark values
 | **Cerebral blood flow** | 50 | +20-50% | ml/100g/min |
 | **Blood volume** | 3-4 | +10-30% | ml/100g |
 
-## Key References
-
+## Citations
 - **Jobsis1977noninvasive**: Jobsis (1977). Noninvasive, infrared monitoring of cerebral and myocardial oxygen sufficiency and circulatory parameters. Science 198:1264-1267.
 - **Scholkmann2014review**: Scholkmann et al. (2014). A review on continuous wave functional near-infrared spectroscopy and imaging instrumentation and methodology. NeuroImage 85:6-27.
 - **Brigadoi2015short**: Brigadoi & Cooper (2015). How short is short? Optimum source-detector distance for short-separation channels in fNIRS. Neurophotonics 2(2):025005.

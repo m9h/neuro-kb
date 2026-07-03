@@ -1,8 +1,11 @@
 ---
 type: physics
+timestamp: 2026-04-15T09:48:27-07:00
 title: Acoustic Wave Propagation
+description: "The physics of acoustic wave propagation forms the foundation of ultrasound imaging, focused ultrasound therapy, and transcranial ultrasound applications."
 governing_equations: Linear acoustic wave equation, Helmholtz equation (frequency domain)
-related: [modality-fus.md, modality-us.md, tissue-skull.md, tissue-brain.md, method-pseudospectral.md, method-finite-difference.md]
+implementations: ["jwave:jwave/acoustics/time_varying.py", "stride:stride/physics", "brain-fwi:src/brain_fwi/simulation/forward.py"]
+related: [method-full-waveform-inversion.md, tus.md, tms.md, tissue-skull.md, tissue-acoustic-properties.md]
 ---
 
 # Acoustic Wave Propagation
@@ -153,8 +156,7 @@ Absorbing boundary conditions prevent artificial reflections:
 - Matches impedance of interior medium
 - 10-20 grid points thickness typical
 
-## Key References
-
+## Citations
 - **aubry2022itrusst**: Aubry et al. (2022). Benchmark problems for transcranial ultrasound simulation: intercomparison of compressional wave models. JASA.
 - **stanziola2023jwave**: Stanziola et al. (2023). j-Wave: an open-source differentiable wave simulator. SoftwareX.
 - **martin2025tfus**: Martin et al. (2025). MRI-guided transcranial focused ultrasound neuromodulation with a 256-element helmet array. Nature Communications.

@@ -1,10 +1,12 @@
 ---
 ---
 type: method
+timestamp: 2026-04-15T09:48:27-07:00
 title: Simulation-Based Inference
+description: "Simulation-Based Inference (SBI) is a family of methods for Bayesian parameter estimation when the likelihood function is intractable but forward simulation is feasible."
 category: inference
-implementations: [sbi4dwi:pipeline, sbi4dwi:inference]
-related: [method-npe.md, method-mcmc.md, method-abc.md]
+implementations: ["sbi4dwi:dmipy_jax/inference", "dmipy:dmipy_jax/inference", "dmijl:src/inference"]
+related: [diffusion-mri.md, method-pinn.md, method-variational-inference.md]
 ---
 
 # Simulation-Based Inference
