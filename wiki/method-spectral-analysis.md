@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-15T09:48:27-07:00
 title: Spectral Analysis (multitaper, wavelets)
+tags: [method, spectral]
 description: "Spectral analysis methods for extracting frequency-domain features from neural signals, including multitaper spectral estimation and wavelet transforms."
 category: spectral
 implementations: [neurojax:analysis.spectral, coffeine:compute_coffeine]

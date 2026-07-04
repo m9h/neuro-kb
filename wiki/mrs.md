@@ -2,6 +2,7 @@
 type: modality
 timestamp: 2026-04-08T20:55:09-07:00
 title: MR Spectroscopy
+tags: [modality, electromagnetic, spectroscopy]
 description: "Magnetic Resonance Spectroscopy (MRS) is the only non-invasive technique that can measure neurochemical concentrations *in vivo* in the human brain."
 physics: electromagnetic
 measurement: Chemical shifts and metabolite concentrations via nuclear magnetic resonance

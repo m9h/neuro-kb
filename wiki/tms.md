@@ -2,6 +2,7 @@
 type: modality
 timestamp: 2026-04-15T09:48:27-07:00
 title: Transcranial Magnetic Stimulation
+tags: [modality, electromagnetic, neurostimulation]
 description: "Transcranial Magnetic Stimulation (TMS) is a non-invasive neurostimulation technique that uses rapidly changing magnetic fields to induce localized electrical currents in brain tissue, causing…"
 physics: electromagnetic
 measurement: neural activation via magnetic field induction

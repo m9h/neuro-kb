@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-08T20:55:09-07:00
 title: Source Imaging / Inverse Problems
+tags: [method, inference, inverse-problem]
 description: "Source imaging (also called source localization or inverse modeling) reconstructs the spatial distribution of neural current sources from sensor measurements recorded outside the head."
 category: inference
 implementations: [neurojax:source, brain-fwi:inversion]

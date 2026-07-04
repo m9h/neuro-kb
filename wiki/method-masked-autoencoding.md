@@ -1,6 +1,7 @@
 ---
 type: method
 title: Masked Autoencoding for Brain Data
+tags: [method, representation-learning, foundation-models]
 description: "Self-supervised pretraining that masks part of a brain scan or recording and trains an encoder-decoder to reconstruct it, yielding transferable foundation-model representations."
 timestamp: 2026-07-03T00:00:00-07:00
 category: representation-learning

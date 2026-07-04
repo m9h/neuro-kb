@@ -2,6 +2,7 @@
 type: tissue
 timestamp: 2026-04-15T09:48:27-07:00
 title: Tissue Acoustic Properties (cross-tissue)
+tags: [tissue, biophysical-properties, acoustics]
 description: "Acoustic tissue properties are fundamental parameters for ultrasound simulation and transcranial focused ultrasound (TUS) applications."
 properties:
   skull_cortical:

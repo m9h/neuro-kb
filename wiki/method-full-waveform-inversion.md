@@ -1,6 +1,7 @@
 ---
 type: method
 title: Full-Waveform Inversion
+tags: [method, optimization, ultrasound]
 description: "PDE-constrained inversion that recovers a spatial physical-property map (e.g. speed-of-sound) by minimizing the misfit between simulated and measured wavefields via adjoint gradients."
 timestamp: 2026-07-03T00:00:00-07:00
 category: optimization

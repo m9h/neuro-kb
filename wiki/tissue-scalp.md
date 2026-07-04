@@ -2,6 +2,7 @@
 type: tissue
 timestamp: 2026-04-15T09:48:27-07:00
 title: Scalp
+tags: [tissue, biophysical-properties]
 description: "The scalp is the outermost tissue layer of the head, consisting of skin, connective tissue, aponeurosis, loose areolar tissue, and periosteum."
 properties:
   conductivity_S_m: 0.435

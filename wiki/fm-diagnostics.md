@@ -1,6 +1,7 @@
 ---
 type: method
 title: Foundation-Model Diagnostics
+tags: [method, interpretability, foundation-models]
 description: "Data-light audits of trained brain foundation models — weight-spectrum quality, subject-identity leakage, and sparse-autoencoder interpretability — that probe a frozen encoder without retraining it."
 timestamp: 2026-07-03T00:00:00-07:00
 category: interpretability

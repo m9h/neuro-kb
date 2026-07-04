@@ -1,6 +1,7 @@
 ---
 type: method
 title: Connectome Harmonics
+tags: [method, spectral, connectomics]
 description: "A structure-function basis in which brain activity is expressed as a weighted sum of the eigenvectors of the graph Laplacian of the structural connectome."
 timestamp: 2026-07-03T00:00:00-07:00
 category: spectral

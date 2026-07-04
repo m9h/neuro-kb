@@ -1,6 +1,7 @@
 ---
 type: concept
 title: Brain-Age Benchmarking
+tags: [foundation-models, benchmarks]
 description: "Predicting chronological age from brain data and using the residual (brain-age delta) as a downstream benchmark task shared across MRI and M/EEG foundation models."
 timestamp: 2026-07-03T00:00:00-07:00
 implementations: ["meeg-brain-age-benchmark-paper:compute_benchmark_age_prediction.py", "BrainIAC:src/generate_brainage_vit_saliency.py", "fomo25:src/finetune.py", "neoba:src/neoba"]

@@ -2,6 +2,7 @@
 type: tissue
 timestamp: 2026-04-08T20:55:09-07:00
 title: Cerebrospinal Fluid
+tags: [tissue, biophysical-properties]
 description: "Cerebrospinal fluid (CSF) is a clear, colorless fluid that surrounds the brain and spinal cord within the subarachnoid space."
 properties:
   conductivity_S_m: 1.79

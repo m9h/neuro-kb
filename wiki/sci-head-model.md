@@ -2,6 +2,7 @@
 type: head-model
 timestamp: 2026-04-08T20:55:09-07:00
 title: SCI Head Model
+tags: [head-model]
 description: "Open-source 8-layer head model designed for photon transport simulation (Monte Carlo, MMC)."
 source: Neurophotonics Lab (Fang group, Northeastern University)
 tissues: 8

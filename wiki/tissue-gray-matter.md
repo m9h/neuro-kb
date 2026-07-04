@@ -2,6 +2,7 @@
 type: tissue
 timestamp: 2026-04-08T20:55:09-07:00
 title: Gray Matter
+tags: [tissue, biophysical-properties]
 description: "Gray matter is neural tissue composed primarily of neuronal cell bodies, dendrites, unmyelinated axons, and glial cells."
 properties:
   conductivity_S_m: 0.33

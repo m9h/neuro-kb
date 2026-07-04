@@ -2,6 +2,7 @@
 type: physics
 timestamp: 2026-04-15T09:48:27-07:00
 title: Acoustic Wave Propagation
+tags: [physics, acoustics]
 description: "The physics of acoustic wave propagation forms the foundation of ultrasound imaging, focused ultrasound therapy, and transcranial ultrasound applications."
 governing_equations: Linear acoustic wave equation, Helmholtz equation (frequency domain)
 implementations: ["jwave:jwave/acoustics/time_varying.py", "stride:stride/physics", "brain-fwi:src/brain_fwi/simulation/forward.py"]

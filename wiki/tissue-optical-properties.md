@@ -2,6 +2,7 @@
 type: concept
 timestamp: 2026-04-08T20:55:09-07:00
 title: Tissue Optical Properties (cross-tissue)
+tags: [optical]
 description: "Optical properties of biological tissues in the near-infrared (NIR) spectral window (650-950 nm) that determine photon propagation for diffuse optical tomography (DOT) and functional near-infrared…"
 related: [diffuse-optical-tomography.md, chromophore-spectroscopy.md, fem-forward-modeling.md, nirs-signal-processing.md]
 ---

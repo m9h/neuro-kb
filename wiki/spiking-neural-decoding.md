@@ -1,6 +1,7 @@
 ---
 type: method
 title: Spiking Neural Decoding
+tags: [method, representation-learning, foundation-models]
 description: "Decoding behavior from populations of spiking neurons with transformer foundation models (POYO/torch_brain) that tokenize individual spikes across sessions and animals."
 timestamp: 2026-07-03T00:00:00-07:00
 category: representation-learning

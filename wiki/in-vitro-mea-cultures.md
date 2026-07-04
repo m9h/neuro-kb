@@ -1,6 +1,7 @@
 ---
 type: modality
 title: In-Vitro MEA Cortical Cultures
+tags: [modality, electromagnetic, electrophysiology]
 description: "Dissociated or organotypic neuronal cultures grown on multi-electrode arrays, and their in-silico simulation, used as a reduced experimental model of learning networks."
 timestamp: 2026-07-03T00:00:00-07:00
 physics: electromagnetic

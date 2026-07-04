@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-15T09:48:27-07:00
 title: Neural ODEs / Differentiable Simulation
+tags: [method, differentiable, differentiable-simulation]
 description: "Neural ODEs and differentiable simulation enable end-to-end gradient-based optimization of dynamical systems by making the numerical integration process differentiable with respect to parameters,…"
 category: differentiable
 implementations: [sbi4dwi:biophysics, jaxctrl:core, vbjax:integration]

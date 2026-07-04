@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-15T09:48:27-07:00
 title: Monte Carlo Simulation
+tags: [method, stochastic, simulation]
 description: "Monte Carlo methods use repeated random sampling to solve computational problems that might be deterministic in principle."
 category: stochastic
 implementations: 

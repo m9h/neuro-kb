@@ -2,6 +2,7 @@
 type: tissue
 timestamp: 2026-04-15T09:48:27-07:00
 title: Skull / Cortical Bone
+tags: [tissue, biophysical-properties]
 description: "The skull (cortical bone) is the primary challenge in transcranial neuroimaging and neuromodulation."
 properties:
   conductivity_S_m: ~0.02

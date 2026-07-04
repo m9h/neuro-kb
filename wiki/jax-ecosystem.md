@@ -2,6 +2,7 @@
 type: concept
 timestamp: 2026-04-15T09:48:27-07:00
 title: JAX Ecosystem for Neuroimaging
+tags: [jax]
 description: "The JAX ecosystem has emerged as the dominant framework for differentiable neuroimaging research, enabling end-to-end gradient flow from raw sensor data to biophysical parameters."
 related: [differentiable-programming.md, neural-posterior-estimation.md, equinox-modules.md, scientific-ml.md]
 ---

@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-08T20:55:09-07:00
 title: Active Inference
+tags: [method, inference, active-inference]
 description: "Active Inference (AIF) is a unified framework for perception, action selection, and learning based on the minimization of variational free energy."
 category: inference
 implementations: [alf:agent, spinning-up-alf:notebooks/08-12]

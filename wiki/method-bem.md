@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-15T09:48:27-07:00
 title: Boundary Element Method
+tags: [method, BEM, numerical-methods]
 description: "The Boundary Element Method (BEM) is a computational technique for solving partial differential equations in unbounded domains by reformulating volume integrals as surface integrals."
 category: BEM
 implementations: [neurojax:geometry/bem_forward.py]

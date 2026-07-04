@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-08T20:55:09-07:00
 title: Neural Mass Models
+tags: [method, simulation, whole-brain-modeling]
 description: "Neural mass models (NMMs) describe the collective dynamics of large neuronal populations (10^4--10^7 neurons) as low-dimensional systems of ordinary or stochastic differential equations."
 category: simulation
 implementations: ["vbjax:vbjax/neural_mass.py", "vbjax:vbjax/connectome.py", "vpjax:vpjax/hemodynamics/riera.py", "neurojax:neural_models"]

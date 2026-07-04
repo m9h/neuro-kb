@@ -2,6 +2,7 @@
 type: head-model
 timestamp: 2026-04-08T20:55:09-07:00
 title: MIDA Head Model
+tags: [head-model]
 description: "MIDA (Multimodal Imaging-Based Detailed Anatomical model) is the most anatomically detailed publicly available head model, with 115+ distinct tissue structures segmented at 0.5 mm isotropic…"
 source: IT'IS Foundation (Zurich)
 tissues: 115+

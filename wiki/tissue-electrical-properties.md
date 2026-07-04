@@ -2,6 +2,7 @@
 type: tissue
 timestamp: 2026-04-08T20:55:09-07:00
 title: "Tissue Electrical Conductivity (cross-tissue)"
+tags: [tissue, biophysical-properties]
 description: "Electrical conductivity values for brain and head tissues across neuroimaging modalities (EEG, MEG, ECoG, tDCS, TMS)."
 properties:
   conductivity_S_m:

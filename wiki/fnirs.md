@@ -2,7 +2,8 @@
 type: modality
 timestamp: 2026-04-15T09:48:27-07:00
 title: Functional Near-Infrared Spectroscopy
-description: "The \"biological window\" spans approximately 650-950 nm wavelengths, where:"
+tags: [modality, optical]
+description: "Non-invasive optical neuroimaging that infers cortical hemoglobin concentration changes from near-infrared light attenuation at the scalp."
 physics: optical
 measurement: hemoglobin concentration changes via near-infrared light attenuation
 spatial_resolution: 10-30 mm (standard fNIRS), 10-15 mm (HD-DOT)

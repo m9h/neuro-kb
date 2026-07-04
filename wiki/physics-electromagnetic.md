@@ -2,6 +2,7 @@
 type: physics
 timestamp: 2026-04-15T09:48:27-07:00
 title: Electromagnetic Forward Problem
+tags: [physics, electromagnetic]
 description: "The electromagnetic forward problem in neuroimaging computes the electric potential and magnetic field at sensor locations given a current source distribution in the brain."
 physics: electromagnetic
 governing_equations: Maxwell equations in quasistatic approximation

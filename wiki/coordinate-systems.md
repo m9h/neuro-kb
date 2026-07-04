@@ -2,6 +2,7 @@
 type: coordinate-system
 timestamp: 2026-04-08T20:55:09-07:00
 title: Neuroimaging Coordinate Systems
+tags: [coordinate-systems]
 description: "Neuroimaging involves multiple coordinate systems: scanner hardware coordinates, standardized anatomical templates, device-specific sensor frames, and electrode placement systems."
 definition: Spatial reference frames for brain imaging, stimulation, and simulation
 used_by: [neurojax, vbjax, libspm, LAYNII, sbi4dwi, brain-fwi]

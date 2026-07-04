@@ -25,12 +25,12 @@ Conformance criteria (OKF §9) — all met:
 | 5 | `description` (RECOMMENDED) | ✅ resolved | backfilled on all 46 pages |
 | 6 | `timestamp` (RECOMMENDED, ISO 8601) | ✅ resolved | backfilled from git last-commit date |
 | 7 | `## Citations` conventional heading | ✅ resolved | 43 reference headings normalized |
-| 8 | `resource` / `tags` (RECOMMENDED) | ⚪ optional, partial | `head-model` pages carry `source`/`local_path`; no `tags` yet |
-| 9 | Index entries carry descriptions | ⚪ optional, partial | new (2026-07 sweep) entries have inline descriptions; older entries are bare links |
+| 8 | `resource` / `tags` (RECOMMENDED) | ✅ resolved | `tags` backfilled on all 55 concept pages; `head-model` pages also carry `source`/`local_path` (→ `resource`) |
+| 9 | Index entries carry descriptions | ✅ resolved | every `index.md` entry has an inline description |
 
-Legend: ✅ resolved · ⚪ optional and not blocking conformance.
+Legend: ✅ resolved.
 
-The two remaining ⚪ items are RECOMMENDED-only under OKF's permissive consumption model (§9) and do not affect conformance; they can be backfilled incrementally.
+All RECOMMENDED fields are now populated; the bundle is fully conformant with OKF v0.1 with no outstanding gaps.
 
 ### Frontmatter example (OKF-conformant concept page)
 

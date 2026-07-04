@@ -2,6 +2,7 @@
 type: tissue
 timestamp: 2026-04-15T09:48:27-07:00
 title: White Matter
+tags: [tissue, biophysical-properties]
 description: "White matter is brain tissue primarily composed of myelinated axons that connect different regions of gray matter."
 properties:
   conductivity_S_m: "0.126 (longitudinal), 0.083 (transverse) at 128 Hz"

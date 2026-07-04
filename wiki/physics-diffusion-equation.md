@@ -2,6 +2,7 @@
 type: physics
 timestamp: 2026-04-08T20:55:09-07:00
 title: Diffusion Equation (water, photon)
+tags: [physics]
 description: "The diffusion equation governs the transport of water molecules, photons, and other diffusing particles through biological tissues."
 governing_equations: ∇·(D∇u) = ∂u/∂t (parabolic), ∇²u = k²u (Helmholtz)
 related: [physics-bloch-torrey-equation.md, physics-acoustic-wave-equation.md, method-fem-spectral.md, tissue-brain-white-matter.md, tissue-csf.md]

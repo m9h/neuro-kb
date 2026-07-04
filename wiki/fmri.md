@@ -2,6 +2,7 @@
 type: modality
 timestamp: 2026-04-15T09:48:27-07:00
 title: Functional MRI
+tags: [modality, hemodynamic, fmri]
 description: "Functional magnetic resonance imaging (fMRI) measures brain activity indirectly through blood oxygen level-dependent (BOLD) contrast, which reflects hemodynamic changes following neural activity."
 physics: hemodynamic
 measurement: Blood oxygen level-dependent (BOLD) contrast from hemodynamic changes

@@ -1,6 +1,7 @@
 ---
 type: method
 title: Quantitative Susceptibility Mapping
+tags: [method, optimization, quantitative-mri]
 description: "Reconstructs a voxelwise map of magnetic susceptibility from gradient-echo MRI phase by unwrapping, removing background fields, and solving an ill-posed dipole deconvolution."
 timestamp: 2026-07-03T00:00:00-07:00
 category: optimization

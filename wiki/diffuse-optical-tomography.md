@@ -1,6 +1,7 @@
 ---
 type: modality
 title: Diffuse Optical Tomography
+tags: [modality, optical]
 description: "3D reconstruction of tissue optical properties from near-infrared light measured on the scalp, modelled by the photon diffusion equation."
 timestamp: 2026-07-03T00:00:00-07:00
 physics: optical

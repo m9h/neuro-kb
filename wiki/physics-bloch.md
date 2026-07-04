@@ -2,6 +2,7 @@
 type: physics
 timestamp: 2026-04-15T09:48:27-07:00
 title: Bloch Equations / MR Physics
+tags: [physics, electromagnetic, mr-physics]
 description: "The Bloch equations describe the quantum mechanical evolution of nuclear magnetic moments in external magnetic fields, forming the fundamental physics underlying all MRI modalities including…"
 physics: electromagnetic
 governing_equations: dM/dt = γ(M × B) - R(M - M₀)

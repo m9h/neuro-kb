@@ -2,6 +2,7 @@
 type: modality
 timestamp: 2026-04-08T20:55:09-07:00
 title: Quantitative MRI
+tags: [modality, electromagnetic, quantitative-mri]
 description: "Quantitative MRI (qMRI) produces maps of physical tissue properties---relaxation times (T1, T2, T2*), proton density (PD), and magnetization transfer (MT) parameters---rather than the…"
 physics: electromagnetic
 measurement: tissue-specific relaxation times, proton density, magnetization transfer

@@ -2,6 +2,7 @@
 type: concept
 timestamp: 2026-04-08T20:55:09-07:00
 title: "Neuroimaging Data Formats"
+tags: [data-standards]
 description: "Standard file formats for storing and exchanging neuroimaging data across different modalities and analysis pipelines."
 related: [sci-head-model.md, eeg.md, meg.md, fmri.md, diffusion-mri.md, structural-mri.md]
 ---

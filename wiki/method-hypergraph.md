@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-08T20:55:09-07:00
 title: Hypergraph Methods
+tags: [method, differentiable, higher-order]
 description: "Computational methods for learning and control on hypergraphs, which generalize standard graphs by allowing hyperedges to connect any number of vertices simultaneously."
 category: differentiable
 implementations: ["hgx:hgx/_conv", "hgx:hgx/_dynamics.py", "devograph:devograph", "anatomical-compiler:src", "organoid-hgx-benchmark:hgx_prep", "jaxctrl:_hypergraph_control.py"]

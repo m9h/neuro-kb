@@ -2,6 +2,7 @@
 type: concept
 timestamp: 2026-06-12T16:08:30-07:00
 title: Neuroimaging Foundation Models
+tags: [foundation-models]
 description: "A foundation model (FM) here is a large model self-supervised on brain data (masked autoencoding, contrastive, or diffusion objectives) that is then *frozen* and evaluated by training light linear…"
 implementations: ["CortexMAE:src/cortex_mae", "BrainIAC:src", "smri-fm-fomo26:src/smri_mae", "reve_eeg:src/train.py", "emeg-fm:emeg_fm", "neural-decoding-transfer:poyo_harness"]
 related: [method-masked-autoencoding.md, fm-diagnostics.md, brain-age-benchmarking.md, spiking-neural-decoding.md, htsr-weight-analysis.md, benchmark-datasets.md, structural-mri.md, fmri.md, eeg.md, meg.md]

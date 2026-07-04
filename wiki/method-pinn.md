@@ -1,6 +1,7 @@
 ---
 type: method
 title: Physics-Informed Neural Networks
+tags: [method, differentiable, differentiable-simulation]
 description: "Neural networks trained with the governing PDE/ODE residual as a loss term, used here to invert biophysical models without meshing the forward problem."
 timestamp: 2026-07-03T00:00:00-07:00
 category: differentiable

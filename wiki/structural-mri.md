@@ -2,6 +2,7 @@
 type: modality
 timestamp: 2026-06-12T16:08:30-07:00
 title: Structural MRI
+tags: [modality, electromagnetic, morphometry]
 description: "Structural MRI encompasses T1-weighted, T2-weighted, and proton density-weighted imaging sequences that provide anatomical contrast based on tissue-specific magnetic relaxation properties."
 physics: electromagnetic
 measurement: T1, T2, proton density, tissue contrast

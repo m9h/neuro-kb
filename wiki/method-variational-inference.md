@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-08T20:55:09-07:00
 title: Variational Inference
+tags: [method, inference, bayesian-inference]
 description: "Variational Inference (VI) recasts Bayesian posterior computation as an optimization problem: instead of sampling from the intractable posterior p(theta|y), find the member q*(theta) of a…"
 category: inference
 implementations: [vbjax:inference, alf:variational, sbi4dwi:posteriors]

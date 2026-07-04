@@ -2,6 +2,7 @@
 type: concept
 timestamp: 2026-06-12T16:08:30-07:00
 title: fMRI-FM Benchmark Datasets (Brainmarks)
+tags: [benchmarks]
 description: "introduced with the CortexMAE paper [@lane2025scaling]."
 related: [foundation-models.md, fmri.md, connectomics.md, coordinate-systems.md]
 ---

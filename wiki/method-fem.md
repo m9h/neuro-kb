@@ -2,6 +2,7 @@
 type: method
 timestamp: 2026-04-08T20:55:09-07:00
 title: Finite Element Method
+tags: [method, FEM, numerical-methods]
 description: "The Finite Element Method (FEM) is a numerical technique for solving partial differential equations (PDEs) over complex geometries by discretizing the domain into simple elements (tetrahedra,…"
 category: FEM
 implementations: ["neurojax:geometry/fem_forward.py", "sbi4dwi:simulation/mesh_sim.py", "SpinDoctor.jl:src/solve.jl"]

@@ -2,6 +2,7 @@
 type: modality
 timestamp: 2026-04-15T09:48:27-07:00
 title: Diffusion MRI
+tags: [modality, electromagnetic, diffusion-mri]
 description: "Diffusion MRI (dMRI) is a non-invasive magnetic resonance imaging technique that measures the random motion of water molecules in biological tissues."
 physics: electromagnetic
 measurement: water molecule diffusion via signal attenuation

@@ -2,6 +2,7 @@
 type: modality
 timestamp: 2026-04-08T20:55:09-07:00
 title: Transcranial Ultrasound
+tags: [modality, acoustic, ultrasound]
 description: "Transcranial ultrasound (TUS) is an acoustic modality that uses focused ultrasound beams to non-invasively target brain tissue through the skull."
 physics: acoustic
 measurement: pressure waves, radiation force, tissue displacement

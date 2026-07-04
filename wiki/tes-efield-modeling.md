@@ -1,6 +1,7 @@
 ---
 type: modality
 title: Transcranial Electric Stimulation E-Field Modeling
+tags: [modality, electromagnetic, neurostimulation]
 description: "FEM computation of the electric field delivered to the brain by scalp electrodes in tDCS/tACS/tES, on individualized head models."
 timestamp: 2026-07-03T00:00:00-07:00
 physics: electromagnetic

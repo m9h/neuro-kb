@@ -2,6 +2,7 @@
 type: concept
 timestamp: 2026-04-08T20:55:09-07:00
 title: Connectomics
+tags: [connectomics]
 description: "Connectomics is the study of the brain's wiring diagram at scales ranging from individual synapses to whole-brain white matter tracts."
 related: [connectome-harmonics.md, diffusion-mri.md, structural-mri.md, method-hypergraph.md, method-source-imaging.md, method-spectral-analysis.md, jax-ecosystem.md]
 ---
