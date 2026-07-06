@@ -51,3 +51,15 @@ related: [physics-acoustic.md, tus.md, method-fem.md]
 ## Repo coverage
 
 The wiki maps cross-cutting concepts to their implementations across the `~/dev/` neuroimaging project family via the `implementations:` field (`repo:module` form). The most recent [repo sweep](wiki/log.md) (2026-07-03, ~80 repos) added 11 cross-cutting pages spanning full-waveform inversion, connectome harmonics, QSM, diffuse optical tomography, PINNs, masked autoencoding, tES E-field modeling, in-vitro MEA cultures, FM diagnostics, brain-age benchmarking, and spiking neural decoding.
+
+## Development
+
+The wiki renders to a self-contained interactive graph via
+[`scripts/build_viz.py`](scripts/build_viz.py) → `okf-visualizer.html` (gitignored).
+
+A tracked git hook rebuilds it automatically after any commit that touches
+`wiki/`. Enable it once per clone:
+
+```bash
+scripts/setup-hooks.sh   # sets core.hooksPath=scripts/hooks
+```

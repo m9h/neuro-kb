@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Auto-rebuild the OKF HTML visualizer after a commit that touched the wiki.
+# Regenerates okf-visualizer.html (gitignored); the systemd --user service
+# serves it via symlink, so the live site updates with no restart.
+# Enable in a fresh clone with: scripts/setup-hooks.sh
+set -euo pipefail
+repo="$(git rev-parse --show-toplevel)"
+if git diff-tree --no-commit-id --name-only -r HEAD | grep -qE '^(wiki/|scripts/build_viz\.py)'; then
+  if python3 "$repo/scripts/build_viz.py" >/dev/null 2>&1; then
+    echo "[post-commit] rebuilt okf-visualizer.html"
+  else
+    echo "[post-commit] WARN: build_viz.py failed (commit unaffected)" >&2
+  fi
+fi
