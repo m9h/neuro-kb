@@ -6,7 +6,7 @@ tags: [method, inference, dynamics]
 description: "Hidden Markov Models (HMMs) are probabilistic models for discovering discrete brain states from continuous neural time series."
 category: inference
 implementations: [neurojax:models/hmm.py, vbjax:examples/hmm_dynamics.py]
-related: [method-dynemo.md, method-hmm-viterbi.md, concept-brain-states.md, modality-meg.md, modality-eeg.md]
+related: [meg.md, eeg.md]
 ---
 
 # Hidden Markov Models for Brain Dynamics
@@ -139,8 +139,8 @@ Common state types: alpha-rich (8-13 Hz), theta (4-8 Hz), beta (13-30 Hz), broad
 
 ## See Also
 
-- [method-dynemo.md](method-dynemo.md) — Continuous alternative to discrete HMMs
-- [method-hmm-viterbi.md](method-hmm-viterbi.md) — Viterbi algorithm implementation details
-- [concept-brain-states.md](concept-brain-states.md) — Theoretical foundation of discrete brain states
-- [modality-meg.md](modality-meg.md) — MEG-specific preprocessing for HMM analysis
+- method-dynemo.md — Continuous alternative to discrete HMMs
+- method-hmm-viterbi.md — Viterbi algorithm implementation details
+- concept-brain-states.md — Theoretical foundation of discrete brain states
+- [modality-meg.md](meg.md) — MEG-specific preprocessing for HMM analysis
 - [method-source-imaging.md](method-source-imaging.md) — Source reconstruction pipeline before HMM

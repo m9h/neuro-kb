@@ -8,7 +8,7 @@ physics: electromagnetic
 measurement: Chemical shifts and metabolite concentrations via nuclear magnetic resonance
 spatial_resolution: 8 cm³ (single voxel) to 1 mL (whole-brain MRSI)
 temporal_resolution: 2-20 minutes (static) to 100 ms (dynamic fMRS)
-related: [electromagnetic-fields.md, tissue-properties.md, head-models.md, quantitative-mri.md]
+related: [physics-electromagnetic.md, tissue-electrical-properties.md, head-model-mida.md, quantitative-mri.md]
 ---
 
 # MR Spectroscopy
@@ -202,9 +202,9 @@ hermes_result = process_hermes(data, dwell_time, centre_freq)
 
 ## See Also
 
-- [electromagnetic-fields.md](electromagnetic-fields.md) - Physical basis of NMR
-- [tissue-properties.md](tissue-properties.md) - T₁, T₂ relaxation parameters
-- [head-models.md](head-models.md) - Anatomical localization for SVS
+- [electromagnetic-fields.md](physics-electromagnetic.md) - Physical basis of NMR
+- [tissue-properties.md](tissue-electrical-properties.md) - T₁, T₂ relaxation parameters
+- [head-models.md](head-model-mida.md) - Anatomical localization for SVS
 - [quantitative-mri.md](quantitative-mri.md) - Complementary tissue characterization
 
 ## Citations

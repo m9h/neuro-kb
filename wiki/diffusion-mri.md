@@ -201,8 +201,8 @@ Typical SNR requirements:
 
 ## See Also
 
-- [monte-carlo-simulation.md](monte-carlo-simulation.md) - Random walk methods for diffusion
-- [finite-element-methods.md](finite-element-methods.md) - FEM solutions to Bloch-Torrey
-- [bloch-torrey-equation.md](bloch-torrey-equation.md) - Governing physics equations
-- [tissue-microstructure.md](tissue-microstructure.md) - Biological basis for diffusion
-- [apparent-diffusion-coefficient.md](apparent-diffusion-coefficient.md) - Key quantitative measure
+- [monte-carlo-simulation.md](method-monte-carlo.md) - Random walk methods for diffusion
+- [finite-element-methods.md](method-fem.md) - FEM solutions to Bloch-Torrey
+- [bloch-torrey-equation.md](physics-bloch.md) - Governing physics equations
+- [tissue-microstructure.md](tissue-white-matter.md) - Biological basis for diffusion
+- apparent-diffusion-coefficient.md - Key quantitative measure

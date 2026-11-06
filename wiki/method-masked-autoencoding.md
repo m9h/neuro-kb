@@ -6,7 +6,7 @@ description: "Self-supervised pretraining that masks part of a brain scan or rec
 timestamp: 2026-07-03T00:00:00-07:00
 category: representation-learning
 implementations: ["CortexMAE:src/cortex_mae/main_pretrain.py", "CortexMAE:src/cortex_mae/masking.py", "reve_eeg:src/train.py", "smri-fm-fomo26:src/smri_mae", "fomo25:src/pretrain.py"]
-related: [foundation-models.md, fmri.md, structural-mri.md, eeg.md, benchmark-datasets.md, fm-diagnostics.md]
+related: [foundation-models.md, fmri.md, structural-mri.md, eeg.md, benchmark-datasets.md, fm-diagnostics.md, method-eeg-foundation-models.md]
 ---
 
 # Masked Autoencoding for Brain Data
@@ -37,6 +37,7 @@ Reconstruction-space MAE predicts the *input*; **JEPA** (joint-embedding predict
 
 ## See Also
 
+- [EEG Foundation Models and Representation Learning](method-eeg-foundation-models.md)
 - [foundation-models.md](foundation-models.md) - foundation-model overview
 - [fm-diagnostics.md](fm-diagnostics.md) - auditing the resulting encoders
 - [fmri.md](fmri.md) / [structural-mri.md](structural-mri.md) / [eeg.md](eeg.md) - input modalities

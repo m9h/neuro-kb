@@ -1,6 +1,6 @@
 # neuro-kb — Shared Knowledge Base for Neuroimaging Projects
 
-This is an LLM-maintained knowledge base (following the Karpathy "LLM Wiki" pattern) that serves as shared infrastructure across the neuroimaging project family in `~/dev/`.
+This is an LLM-maintained knowledge base (following the Karpathy "LLM Wiki" pattern) that serves as shared infrastructure across the neuroimaging project family in `~/Workspace/` (GitHub: m9h/*).
 
 ## Purpose
 
@@ -32,6 +32,22 @@ These projects study the same underlying problem — imaging and simulating the 
 | `T1Prep` | T1 preprocessing / VBM (deepmriprep + CAT) | Segmentation, cortical thickness, morphometry features |
 | `brainmarks-{hbn,wand,dlbs,syn}` | fMRI-FM evaluation cohorts | State/trait probes, Brainmarks, CortexMAE |
 | `nanopath` | Pathology FM (sibling, non-brain) | Tile-level SSL, broad probe suite |
+| `neurojax` | Differentiable neuroimaging (JAX) | BEM/FEM forward models, 15 inverse solvers, qMRI, pharmaco-EEG spectral models |
+| `vpjax` | Virtual physiology (JAX) | Cerebrovascular/metabolic models, pharmacokinetics, state-space identifiability |
+| `brain-fwi` | Transcranial ultrasound FWI (JAX) | Acoustic wave propagation, skull, FNO surrogates |
+| `ti-sim` | Temporal interference stimulation | Grossman phantom, FEM field solves, TI envelopes |
+| `ae-sim` | Acoustoelectric neuroimaging simulation | Coupled acoustic + electric FEM, open solvers |
+| `neuroelectric-mri` | Neuronal-current MRI / MREIT / MRCDI | Lorentz-effect and current-density imaging, evidence review |
+| `mri-rf-stack` | MRI RF benchmarks | B1 field physics, Hertzon, inverse imaging |
+| `open-fus-plan` | Open functional ultrasound bench | Power Doppler, ULM, clutter filtering |
+| `hnn-jax` | HNN forward model in JAX | Neocortical column neural mass, MEG/EEG dipoles |
+| `gnf-jax` | Graph neural fields (JAX) | Stochastic Wilson-Cowan on connectome harmonics |
+| `inferjax` | Amortized SBI | Posterior calibration for any simulator |
+| `mrs-jax` | MR spectroscopy (JAX) | MEGA-PRESS, HERMES, quantification |
+| `hippy-feat` | fMRI preprocessing + MindEye RT | GLMsingle, AR(1) GLM, real-time decoding |
+| `nanoeeg`, `emeg-fm`, `zuna-eeg-pipeline` | EEG foundation models | Pretraining, REVE/SAE probes, channel imputation |
+| `nsg-agent-kit`, `neurofedora`, `neurodebian` | Compute and packaging | NSG/Expanse jobs, Fedora COPR, Debian packaging |
+| `bsccm-jax`, `openconfocal-cm` | Computational microscopy | DPC/IDEAL, galvo confocal forward model |
 
 ## Directory structure
 

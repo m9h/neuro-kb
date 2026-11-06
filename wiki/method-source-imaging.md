@@ -6,7 +6,7 @@ tags: [method, inference, inverse-problem]
 description: "Source imaging (also called source localization or inverse modeling) reconstructs the spatial distribution of neural current sources from sensor measurements recorded outside the head."
 category: inference
 implementations: [neurojax:source, brain-fwi:inversion]
-related: [method-bem-forward-modeling.md, method-fem-forward-modeling.md, physics-electromagnetic-fields.md, head-model-mida.md, coordinate-system-mni.md]
+related: [method-bem.md, method-fem.md, physics-electromagnetic.md, head-model-mida.md, coordinate-systems.md]
 ---
 
 # Source Imaging / Inverse Problems
@@ -27,7 +27,7 @@ where:
 - `J` ∈ ℝ^(N×T) is the neural current density to be estimated
 - `n` is measurement noise
 
-The leadfield `L` encapsulates the physics of signal propagation from brain sources to sensors, computed via [method-bem-forward-modeling.md](method-bem-forward-modeling.md) or [method-fem-forward-modeling.md](method-fem-forward-modeling.md).
+The leadfield `L` encapsulates the physics of signal propagation from brain sources to sensors, computed via [method-bem-forward-modeling.md](method-bem.md) or [method-fem-forward-modeling.md](method-fem.md).
 
 ## Problem Characteristics
 
@@ -193,7 +193,7 @@ For MNE: `R = L (L^T L + α I)^(-1) L^T`
 
 ## See Also
 
-- [method-bem-forward-modeling.md](method-bem-forward-modeling.md) — Boundary Element Method for leadfield computation
-- [method-fem-forward-modeling.md](method-fem-forward-modeling.md) — Finite Element Method for detailed head modeling  
+- [method-bem-forward-modeling.md](method-bem.md) — Boundary Element Method for leadfield computation
+- [method-fem-forward-modeling.md](method-fem.md) — Finite Element Method for detailed head modeling  
 - [head-model-mida.md](head-model-mida.md) — High-resolution anatomical reference
-- [physics-electromagnetic-fields.md](physics-electromagnetic-fields.md) — Maxwell equations underlying M/EEG forward models
+- [physics-electromagnetic-fields.md](physics-electromagnetic.md) — Maxwell equations underlying M/EEG forward models

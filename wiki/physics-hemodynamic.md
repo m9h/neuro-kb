@@ -1,192 +1,176 @@
 ---
 type: physics
-timestamp: 2026-04-08T20:55:09-07:00
 title: Hemodynamic Response / Neurovascular Coupling
-tags: [physics, hemodynamic, hemodynamics]
-description: "The hemodynamic response function (HRF) describes how neural activity translates into measurable BOLD signal changes through neurovascular coupling mechanisms."
 physics: hemodynamic
-governing_equations: Balloon model, Windkessel dynamics, oxygen consumption
-related: [modality-bold.md, tissue-blood.md, physics-electromagnetic.md, method-forward-models.md]
+governing_equations: "Balloon–Windkessel model (flow-inducing signal s, inflow f, venous volume v, deoxyhemoglobin q); BOLD observation y = V0[k1(1-q) + k2(1-q/v) + k3(1-v)]; linear convolution y = x ⊗ h; Fick principle CMRO2 = CBF·OEF·CaO2; Davis calibrated-BOLD model"
+related: [fmri.md, physics-cerebrovascular.md, neural-mass-models.md, quantitative-mri.md, fnirs.md, eeg.md, meg.md, physics-bloch.md, physics-electromagnetic.md, method-neural-ode.md, method-sbi.md, method-variational-inference.md, method-neural-fields.md, connectomics.md, fus.md, method-pharmaco-eeg.md, structural-mri.md]
+description: "Neurovascular coupling is the chain linking neuronal activity to local changes in cerebral blood flow (CBF), blood volume (CBV) and oxygen metabolism (CMRO₂)."
+timestamp: 2026-11-05T15:59:53-08:00
+tags: [physics, hemodynamic, neurovascular]
 ---
 
 # Hemodynamic Response / Neurovascular Coupling
 
-The hemodynamic response function (HRF) describes how neural activity translates into measurable BOLD signal changes through neurovascular coupling mechanisms. This fundamental relationship underlies fMRI interpretation and forward modeling in multi-modal neuroimaging.
+Neurovascular coupling is the chain linking neuronal activity to local changes in cerebral blood flow (CBF), blood volume (CBV) and oxygen metabolism (CMRO₂). The **hemodynamic response function (HRF)** is the system's impulse response as seen by a given sensor: BOLD [fmri.md](fmri.md), HbO/HbR in [fnirs.md](fnirs.md), or CBV-weighted power Doppler in [fus.md](fus.md). It is the forward model connecting fast electrophysiology ([eeg.md](eeg.md), [meg.md](meg.md), [neural-mass-models.md](neural-mass-models.md)) to slow hemodynamic measurements. Vessel-level mechanics (Windkessel compliance, autoregulation, CO₂ reactivity) live in [physics-cerebrovascular.md](physics-cerebrovascular.md); this page covers the neural-to-signal transfer.
 
-## Physical Mechanisms
+## Causal chain
 
-### Neurovascular Coupling
-Neural activity triggers a cascade of vascular responses:
+1. **Neural drive** — synaptic activity (glutamate release, astrocytic Ca²⁺, NO/prostaglandin signalling), not spiking per se, is the primary vasoactive driver.
+2. **Vasodilation** — arteriolar smooth muscle and capillary pericytes relax within ~0.5–1 s.
+3. **Functional hyperemia** — CBF rises ~30–70%, while CMRO₂ rises only ~10–30%; the coupling ratio n = ΔCBF/ΔCMRO₂ ≈ 2–4.
+4. **Washout of deoxyhemoglobin** — because flow outpaces consumption, venous O₂ saturation rises and paramagnetic dHb falls. This produces the *positive* BOLD signal (longer T2*, see [physics-bloch.md](physics-bloch.md)).
+5. **Venous volume lag** — slow venous compliance ("balloon") delays CBV recovery. Together with persistent CMRO₂ elevation, this contributes to the post-stimulus undershoot.
 
-1. **Metabolic demand**: Increased ATP consumption and oxygen extraction
-2. **Vasodilation**: Smooth muscle relaxation in arterioles and capillaries
-3. **Hyperemia**: Increased cerebral blood flow (CBF) overshooting metabolic demand
-4. **Venous pooling**: Blood volume changes in venous compartments
-5. **Oxygenation changes**: BOLD signal via deoxyhemoglobin concentration
+## Governing equations: Balloon–Windkessel model
 
-### Balloon Model Dynamics
-The Buxton-Friston balloon model (Buxton et al. 1998; Friston et al. 2000) describes hemodynamic state evolution:
+This is the hemodynamic model of Friston et al. (2000), built on Buxton et al. (1998), in the parameterisation of Stephan et al. (2007). It is the same model used by TVB-style simulators. With neural input x(t):
 
 ```
-dv/dt = (f_in - v^(1/α)) / τ_v     # venous blood volume
-dq/dt = (f_in * E(f_in) - q * v^((1-α)/α)) / τ_q   # deoxyhemoglobin content
+ds/dt = x − κ·s − γ·(f − 1)                 # vasodilatory (flow-inducing) signal
+df/dt = s                                    # normalised inflow f = F/F0
+τ0·dv/dt = f − v^(1/α)                       # normalised venous volume (Windkessel outflow)
+τ0·dq/dt = f·E(f,E0)/E0 − v^(1/α)·q/v        # normalised deoxyhemoglobin
+E(f,E0) = 1 − (1 − E0)^(1/f)                 # flow-dependent O2 extraction
 ```
 
-where:
-- `v`: normalized venous blood volume
-- `q`: normalized deoxyhemoglobin content  
-- `f_in`: normalized blood flow
-- `E(f_in) = 1 - (1-E_0)^(1/f_in)`: oxygen extraction fraction
-- `α = 0.33`: Grubb's exponent (volume-flow relationship)
+The BOLD observation equation separates intravascular and extravascular contributions:
 
-## Properties/Parameters
+```
+y = V0 · [ k1·(1 − q) + k2·(1 − q/v) + k3·(1 − v) ]
+k1 = 4.3·ϑ0·E0·TE,   k2 = ε·r0·E0·TE,   k3 = 1 − ε      (Stephan 2007)
+```
+
+In the original Friston 2000 form, the coefficients are k1 = 7E0, k2 = 2, k3 = 2E0 − 0.2.
+
+### Parameters
 
 | Parameter | Symbol | Value | Units | Source |
-|-----------|--------|-------|-------|---------|
-| **Resting oxygen extraction** | E₀ | 0.34 | - | Buxton et al. 1998 |
-| **Venous time constant** | τᵥ | 35.0 | s | Friston et al. 2000 |
-| **Oxygen time constant** | τᵩ | 20.0 | s | Friston et al. 2000 |
-| **Grubb's exponent** | α | 0.33 | - | Grubb et al. 1974 |
-| **Peak latency (canonical)** | t_peak | 5.0-6.0 | s | Glover 1999 |
-| **Time to undershoot** | t_under | 15-17 | s | Glover 1999 |
-| **Peak amplitude** | A_peak | 0.5-1.5 | % signal | @ 3T, visual cortex |
-| **Undershoot amplitude** | A_under | 0.1-0.3 | % signal | @ 3T |
+|---|---|---|---|---|
+| Rate constant of vasodilatory signal decay | κ (1/τ_s) | 0.65 (0.64 in Stephan 2007) | s⁻¹ | Friston 2000 |
+| Rate constant of flow-dependent autoregulation | γ (1/τ_f) | 0.41 (0.32 in Stephan 2007) | s⁻¹ | Friston 2000 |
+| Mean venous transit time | τ0 | 0.98 (2.0 in Stephan 2007) | s | Friston 2000 |
+| Grubb exponent (outflow–volume) | α | 0.32 | – | Friston 2000 |
+| Grubb exponent, total CBV–CBF (original) | α_Grubb | 0.38 | – | Grubb 1974 |
+| Grubb exponent, venous CBV only | α_v | ~0.2–0.23 | – | Chen & Pike 2010 |
+| Resting O₂ extraction fraction | E0 | 0.34 (Friston 2000); 0.4 (Buxton 1998, Stephan 2007) | – | — |
+| Resting venous blood volume fraction | V0 | 0.02 (Friston 2000); 0.04 (Stephan 2007) | – | — |
+| Frequency offset of magnetised vessel surface | ϑ0 | 40.3 at 1.5 T; scales ∝ B0 (≈80.6 at 3 T) | s⁻¹ | Obata 2004 |
+| Intravascular relaxation slope | r0 | 25 at 1.5 T (field-dependent, larger at 3 T) | s⁻¹ | Obata 2004 |
+| Intra/extravascular signal ratio | ε | ~0.5–1.4 (field- and TE-dependent) | – | Obata 2004 |
+| Echo time | TE | 0.04 (typical 3 T GRE-EPI default) | s | — |
 
-### Field Strength Dependencies
+> **Correction note.** A previous version of this page listed τ_v = 35 s and τ_q = 20 s. These are not balloon-model values; the transit time τ0 is ≈1–2 s. It also omitted the 1/E0 normalisation in the dq/dt equation. Both errors are fixed above.
 
-| Field | Peak Amplitude | CNR | Key Characteristics |
-|-------|---------------|-----|-------------------|
-| **1.5T** | 0.2-0.8% | 1.0× | Linear BOLD-CBF relationship |
-| **3T** | 0.5-1.5% | 2.2× | Standard clinical/research |
-| **7T** | 1.0-3.0% | 3.8× | Microvascular weighting, draining vein bias |
-| **9.4T** | 2.0-5.0% | 5.2× | High spatial specificity |
+## Canonical HRF shapes
 
-### Tissue-Specific Parameters
+For linear GLM analysis, the balloon dynamics are summarised by a fixed kernel h(t), and the predicted signal is y(t) = (x ⊗ h)(t) + drift + ε.
 
-| Tissue | Peak Latency | FWHM | Peak Amplitude | Notes |
-|--------|-------------|------|----------------|--------|
-| **Primary visual** | 4.8 ± 0.3s | 3.2s | 1.2 ± 0.4% | Fast, stereotyped response |
-| **Primary motor** | 5.2 ± 0.4s | 3.5s | 1.0 ± 0.3% | Sharp, well-localized |
-| **Prefrontal** | 6.1 ± 0.8s | 4.2s | 0.8 ± 0.5% | Delayed, broader |
-| **Default network** | 5.8 ± 0.6s | 4.8s | 0.6 ± 0.3% | Sustained, diffuse |
+| Model | Form | Key numbers |
+|---|---|---|
+| SPM canonical double-gamma | Γ(t; 6, 1) − (1/6)·Γ(t; 16, 1) | Peak ≈ 5 s, undershoot minimum ≈ 15 s, return to baseline ≈ 25–30 s |
+| Glover (1999) | (t/d1)^a1·e^{−(t−d1)/b1} − c·(t/d2)^a2·e^{−(t−d2)/b2}, with d_i = a_i·b_i | a1 = 6, a2 = 12, b1 = b2 = 0.9 s, c = 0.35 → peak ≈ 5.4 s, undershoot ≈ 10.8 s |
+| Canonical + temporal/dispersion derivatives | 3 regressors | Absorbs ±1 s latency and width variation |
+| FLOBS (Woolrich et al. 2004) | 3-basis optimal set | Used by hippy-feat Variant B |
+| Per-voxel library (GLMsingle-style) | 20 candidate HRFs, one selected per voxel | Used by hippy-feat Variant C |
+| FIR | 1 regressor per post-stimulus bin | Unconstrained; typically spans 0–30 s |
 
-## Canonical HRF Models
+The previous version of this page gave Glover parameters a2 = 16 and c = 0.167. Those values mix the SPM gamma-pdf convention with the Glover formula. Use one convention or the other, not both.
 
-### Glover Model (1999)
-Double-gamma function widely used in GLM analyses:
+An **initial dip** (~1–2 s, a transient dHb increase) is reported mainly at high field and in optical imaging. It is small and inconsistently observed, so treat it as optional in forward models.
 
-```
-h(t) = (t/d₁)^a₁ * exp(-(t-d₁)/b₁) - c * (t/d₂)^a₂ * exp(-(t-d₂)/b₂)
-```
+### Variability and nonlinearity
 
-Standard parameters:
-- a₁=6, b₁=1, d₁=0 (main response)
-- a₂=16, b₂=1, d₂=0, c=0.167 (undershoot)
+- **Latency variability:** HRF peak latency varies across regions and subjects by roughly ±1–2 s. This is why fixed-HRF real-time pipelines lose accuracy relative to GLMsingle ([@hough2026hippyfeat]).
+- **Refractory nonlinearity:** responses to closely spaced events (ISI < ~2 s) are sub-additive. This is captured by the nonlinear balloon equations, not by convolution.
+- **Draining-vein bias:** gradient-echo BOLD is weighted toward pial veins, which displaces and delays signal at the cortical surface. This motivates laminar analysis (LAYNII) and spin-echo or VASO contrasts at 7 T.
 
-### FIR (Finite Impulse Response)
-Non-parametric approach estimating HRF shape directly from data. Commonly used with 20-32 time bins spanning 0-30 seconds post-stimulus.
+## Measuring the coupling quantities directly
 
-### Basis Functions
-- **Canonical + derivatives**: Canonical HRF plus temporal and dispersion derivatives
-- **FLOBS**: Fourier Linear Optimal Basis Set (Woolrich et al. 2004)
-- **Gamma functions**: Multiple gamma functions with varying shape parameters
+These measurements constrain balloon-model parameters (E0, V0, CBF0) per subject instead of relying on literature priors. See [quantitative-mri.md](quantitative-mri.md).
 
-## Multi-Modal Integration
+| Quantity | MRI method | Protocol detail (WAND, [@mcnabb2025wand]) | Model |
+|---|---|---|---|
+| Venous O₂ saturation Yv → global OEF | TRUST | `ep2d_TRUST_AsymShTE`, 24 volumes. Standard eTEs are 0/40/80/160 ms; the asymmetric variant is unconfirmed (`neurojax:docs/CUBRIC_QUESTIONS.md`) | Blood T2 → Yv calibration; OEF = (Ya − Yv)/Ya |
+| CBF | pCASL | PLD 2.0 s, 110 volumes (≈55 control–label pairs), background suppression (`SAT2`) | Single-PLD kinetic model; needs blood T1 |
+| Blood T1 | Inversion recovery | `mg_IR_T1_VE11c`, 960 timepoints (probably Look-Locker; needs T1* → T1 correction) | Literature ~1.6–1.7 s at 3 T |
+| Local OEF, deoxygenated blood volume (DBV) | qBOLD (multi-echo GRE, ses-06) | T2*/R2* maps in `derivatives/qmri/` | R2′ = DBV·(4/3)πγ·Δχ0·Hct·(1−Y)·B0 (He & Yablonskiy 2007) |
+| CMRO₂ | TRUST + pCASL | — | Fick principle: CMRO₂ = CBF · OEF · CaO₂ |
 
-### EEG-fMRI Forward Models
-Hemodynamic responses bridge electrical and metabolic neural activity:
+**Calibrated BOLD (Davis model).** The relative BOLD change is
 
-```
-Y_BOLD(t) = ∫ J_neural(τ) * h(t-τ) dτ + ε
-```
+ΔS/S0 = M·[1 − (CBF/CBF0)^(α−β)·(CMRO₂/CMRO₂,0)^β]
 
-where J_neural comes from EEG/MEG source imaging. Projects like **neurojax** implement this coupling through:
-- Source-space neural dynamics (Wendling models)
-- Hemodynamic convolution with tissue-specific HRFs
-- Multi-modal leadfield calculations
+with α ≈ 0.2 (venous Grubb exponent) and β ≈ 1.3–1.5. M is the maximum BOLD change, obtained from hypercapnia or hyperoxia calibration; dual-calibrated fMRI (Germuska et al. 2019) uses both. The earlier version of this page stated a different, incorrect formula.
 
-### TMS-fMRI Integration
-TMS pulse timing relative to hemodynamic delays:
-- **Early component** (0-5s): Direct neural response
-- **Peak response** (5-8s): Maximum BOLD signal
-- **Late component** (10-20s): Undershoot, network effects
+## Multi-modal forward models
 
-## Computational Models
-
-### JAX-Based Implementation (vbjax)
-The vbjax project implements differentiable balloon models:
-
-```python
-def balloon_step(state, neural_input):
-    v, q = state
-    # Flow-volume coupling
-    f_in = 1.0 + neural_input
-    # Volume dynamics  
-    dv_dt = (f_in - v**0.33) / tau_v
-    # Oxygen dynamics
-    E = 1.0 - (1.0 - E0)**(1.0/f_in)
-    dq_dt = (f_in * E - q * v**(-0.67)) / tau_q
-    return (dv_dt, dq_dt)
-```
-
-### Neural Mass Coupling
-Projects like **vbjax** couple Wilson-Cowan, Jansen-Rit, or CMC models to hemodynamics:
-
-```python
-# Neural dynamics -> metabolic demand -> hemodynamic response
-neural_activity = neural_mass_step(populations, connectivity)
-metabolic_demand = activity_to_oxygen_demand(neural_activity)
-bold_signal = balloon_model(metabolic_demand, hemodynamic_state)
-```
-
-## Pathological Variations
-
-### Aging Effects
-- **Prolonged latency**: +0.5-1.0s peak delay
-- **Reduced amplitude**: 20-30% decrease
-- **Altered undershoot**: Often absent or reversed
-
-### Disease States
-- **Alzheimer's disease**: Delayed and reduced responses
-- **Stroke**: Altered coupling, delayed peaks
-- **Epilepsy**: Abnormal negative BOLD, altered kinetics
-
-## Recent Advances
-
-### Layer-Specific BOLD
-High-resolution 7T studies reveal laminar differences:
-- **Superficial layers**: Faster, larger responses
-- **Deep layers**: Delayed but sustained responses
-- **Middle layers**: Intermediate kinetics
-
-Tools like **LAYNII** enable layer-resolved hemodynamic modeling.
-
-### Calibrated BOLD
-Combining BOLD with CBF (ASL) and CMRO₂ measurements:
+The generic simulation path from electrophysiology to BOLD is:
 
 ```
-ΔCMRO₂/CMRO₂₀ = ((ΔCBF/CBF₀) - α(ΔCBV/CBV₀)) / β
+neural mass state (e.g. RWW S_E, Jansen-Rit PSP)  ──►  x(t)  ──►  balloon ODE  ──►  y_BOLD (sampled at TR)
+            └──►  dipoles × leadfield  ──►  EEG/MEG
 ```
 
-where α≈0.2, β≈1.3 are calibration constants.
+- **Timescale separation.** Neural dynamics are integrated at dt ≈ 0.1–1 ms, the balloon ODE at ~1–10 ms, and BOLD is sampled at TR ≈ 0.5–2 s. In JAX, the stiff balloon ODE can be integrated with Diffrax and differentiated end-to-end ([method-neural-ode.md](method-neural-ode.md)).
+- **Units matter.** neurojax found that the reduced Wong–Wang model had γ_E = 0.641/1000 where it should have been 0.641 s⁻¹. The error drove the single-node fixed point to S_E ≈ 0.0002 instead of the Deco 2013 value of ≈0.164, which would silently corrupt any simulated BOLD derived from it (`neurojax:docs/BUG_REPORTS.md`, fixed in commit `49acac2`).
+- **Connectome-scale BOLD.** Simulated BOLD functional connectivity is the standard fit target for whole-brain models on structural connectomes ([connectomics.md](connectomics.md), [method-neural-fields.md](method-neural-fields.md)). vbjax provides network SDE integrators and a BOLD monitor for this ([@woodman2024insamuvbjax]); neurojax wraps it via `neurojax:src/neurojax/bench/` (vbjax adapter).
+- **EEG–fMRI fusion.** hippy-feat's `jaxoccoli/fusion.py` drives a balloon model from EEG features. It is marked experimental (`hippy-feat:README.md`).
 
-## Citations
-- **Riera2006neurovascular**: Riera et al. (2006). A state-space model of the hemodynamic approach: nonlinear filtering of BOLD signals. NeuroImage 21:547-567.
-- **He2007qbold**: He & Yablonskiy (2007). Quantitative BOLD: mapping of human cerebral deoxygenated blood volume and oxygen extraction fraction. MRM 57:115-126.
-- **Germuska2019dualcal**: Germuska et al. (2019). Dual-calibrated fMRI measurement of absolute cerebral metabolic rate of oxygen consumption. NeuroImage 184:717-728.
-- **Lu2008trust**: Lu & Ge (2008). Quantitative evaluation of oxygenation in venous vessels using T2-relaxation-under-spin-tagging MRI. MRM 60:357-363.
-- **Deco2013rww**: Deco et al. (2013). Resting-state functional connectivity emerges from structurally and dynamically shaped slow linear fluctuations. J Neurosci 33:11239-11252.
-- **SanzLeon2013tvb**: Sanz Leon et al. (2013). The Virtual Brain: a simulator of primate brain network dynamics. Frontiers in Neuroinformatics 7:10.
+## Inference, identifiability, and real-time use
+
+**Identifiability.** κ, γ, τ0, α and E0 are strongly correlated given BOLD alone. E0 and V0 in particular trade off almost perfectly. Practical remedies:
+
+- Fix them from TRUST/qBOLD/ASL measurements.
+- Use informative priors with variational Laplace ([method-variational-inference.md](method-variational-inference.md)).
+- Check posterior calibration with simulation-based inference ([method-sbi.md](method-sbi.md)).
+
+vpjax targets this structural and practical identifiability analysis for cerebrovascular and metabolic state-space models. Drug effects on vascular tone confound pharmaco-fMRI and pharmaco-EEG comparisons ([method-pharmaco-eeg.md](method-pharmaco-eeg.md)).
+
+**Beta-series estimation.** Single-trial betas depend on the HRF assumed, and least-squares-separate estimation reduces collinearity for fast event designs ([@mumford2012deconvolving]). Correlating OLS point estimates discards variance and biases beta-series connectivity ([@rissman2004measuring]). hippy-feat addresses this with conjugate and AR(1)-prewhitened Bayesian GLMs following BROCCOLI ([@eklund2014broccoli]), and propagates (β mean, β variance) through differentiable parcellation ([@ciric2022differentiable]).
+
+**Real-time HRF trade-offs.** hippy-feat benchmarks HRF strategies for real-time MindEye decoding ([@scotti2024mindeye2]). Each variant outputs 8627 z-scored betas, with TR = 1.5 s; the core per-volume preprocessing takes ~54 ms, giving 28× headroom.
+
+| Variant | HRF treatment | Per-TR time |
+|---|---|---|
+| A | Glover canonical | 163 ms |
+| A+N | Glover + CSF/WM nuisance regressors | ~170 ms |
+| B | FLOBS 3-basis | 155 ms |
+| C | Per-voxel HRF (20-HRF library, preselected) | 33 ms |
+| D | Bayesian shrinkage (conjugate Gaussian) | 237 ms |
+| C+D | Per-voxel HRF + Bayesian | 39 ms |
+
+Source: `hippy-feat:README.md`.
 
 ## Relevant Projects
 
-- **vbjax**: Differentiable balloon models, neural mass-hemodynamic coupling
-- **neurojax**: EEG-fMRI forward models, TMS-BOLD integration  
-- **hippy-feat**: Real-time HRF deconvolution, per-voxel HRF libraries
+- **vbjax** — network SDE simulation of neural mass models with BOLD monitoring; differentiable, so balloon parameters can be fit by gradient descent or NumPyro MCMC.
+- **neurojax** — qBOLD OEF and multi-echo T2* fitting (`src/neurojax/qmri/`). Also covers WAND TRUST/pCASL/blood-T1 processing, reduced Wong–Wang neural drive, and the vbjax adapter for BOLD-level simulation.
+- **hippy-feat** — HRF libraries (Glover, FLOBS, per-voxel), Bayesian and AR(1) GLMs, variance-propagating beta series, and experimental EEG–fMRI balloon fusion.
+- **vpjax** — virtual physiology: cerebrovascular and metabolic models, pharmacokinetic modulation of vascular tone, and state-space identifiability of hemodynamic parameters.
+- **LAYNII** — laminar fMRI analysis where draining-vein HRF bias is central.
+- **open-fus-plan** — CBV-weighted power Doppler, an alternative hemodynamic readout.
 
 ## See Also
 
-- [modality-bold.md](modality-bold.md) - BOLD fMRI measurement principles
-- [tissue-blood.md](tissue-blood.md) - Blood tissue properties and modeling
-- [method-forward-models.md](method-forward-models.md) - Multi-modal forward modeling
-- [physics-electromagnetic.md](physics-electromagnetic.md) - EEG/MEG neural activity measurement
+- [fmri.md](fmri.md) — BOLD acquisition and contrast mechanisms
+- [physics-cerebrovascular.md](physics-cerebrovascular.md) — vessel mechanics, autoregulation, CBF/CBV physiology
+- [physics-bloch.md](physics-bloch.md) — T2/T2* relaxation underlying BOLD
+- [quantitative-mri.md](quantitative-mri.md) — qBOLD, T2*, relaxometry
+- [fnirs.md](fnirs.md) and [tissue-optical-properties.md](tissue-optical-properties.md) — optical hemodynamic measurement
+- [fus.md](fus.md) — functional ultrasound CBV imaging
+- [neural-mass-models.md](neural-mass-models.md) — neural drive x(t)
+- [method-neural-fields.md](method-neural-fields.md), [connectomics.md](connectomics.md) — whole-brain BOLD simulation
+- [method-neural-ode.md](method-neural-ode.md), [method-sbi.md](method-sbi.md), [method-variational-inference.md](method-variational-inference.md) — fitting hemodynamic models
+- [eeg.md](eeg.md), [meg.md](meg.md), [physics-electromagnetic.md](physics-electromagnetic.md) — electrophysiological counterpart in multimodal fusion
+
+## Literature (not yet in bibliography; add BibTeX keys before citing)
+
+- Buxton, Wong & Frank (1998). Dynamics of blood flow and oxygenation changes during brain activation: the balloon model. *MRM* 39:855–864.
+- Friston, Mechelli, Turner & Price (2000). Nonlinear responses in fMRI: the Balloon model, Volterra kernels, and other hemodynamics. *NeuroImage* 12:466–477.
+- Stephan et al. (2007). Comparing hemodynamic models with DCM. *NeuroImage* 38:387–401.
+- Obata et al. (2004). Discrepancies between BOLD and flow dynamics in primary and supplementary motor areas. *NeuroImage* 21:144–153.
+- Glover (1999). Deconvolution of impulse response in event-related BOLD fMRI. *NeuroImage* 9:416–429.
+- Grubb et al. (1974). *Stroke* 5:630–639. Chen & Pike (2010). *JCBFM* 30:1094–1099.
+- Riera et al. (2004). A state-space model of the hemodynamic approach. *NeuroImage* 21:547–567. (The previous version of this page misdated this paper as 2006.)
+- He & Yablonskiy (2007). *MRM* 57:115–126. Lu & Ge (2008). *MRM* 60:357–363. Germuska et al. (2019). *NeuroImage* 184:717–728.
+- Deco et al. (2013). *J Neurosci* 33:11239–11252.

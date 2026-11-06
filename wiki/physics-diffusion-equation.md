@@ -5,7 +5,7 @@ title: Diffusion Equation (water, photon)
 tags: [physics]
 description: "The diffusion equation governs the transport of water molecules, photons, and other diffusing particles through biological tissues."
 governing_equations: ∇·(D∇u) = ∂u/∂t (parabolic), ∇²u = k²u (Helmholtz)
-related: [physics-bloch-torrey-equation.md, physics-acoustic-wave-equation.md, method-fem-spectral.md, tissue-brain-white-matter.md, tissue-csf.md]
+related: [physics-bloch.md, physics-acoustic.md, method-fem.md, tissue-white-matter.md, tissue-csf.md]
 ---
 
 # Diffusion Equation (water, photon)
@@ -132,8 +132,8 @@ Penetration depth: δ = √(2D/ω)
 ## Related Physics
 
 The diffusion equation is closely related to:
-- [physics-bloch-torrey-equation.md](physics-bloch-torrey-equation.md) - adds T₂ relaxation and phase evolution
-- [physics-acoustic-wave-equation.md](physics-acoustic-wave-equation.md) - wave vs diffusive transport
+- [physics-bloch-torrey-equation.md](physics-bloch.md) - adds T₂ relaxation and phase evolution
+- [physics-acoustic-wave-equation.md](physics-acoustic.md) - wave vs diffusive transport
 - Heat equation (same mathematical form)
 - Schrödinger equation (imaginary time)
 
@@ -166,7 +166,7 @@ The diffusion equation is closely related to:
 
 ## See Also
 
-- [method-fem-spectral.md](method-fem-spectral.md) - Finite element eigendecomposition
-- [tissue-brain-white-matter.md](tissue-brain-white-matter.md) - Anisotropic diffusion properties
-- [coordinate-system-gradient-table.md](coordinate-system-gradient-table.md) - Experimental encoding
-- [concept-microstructure-modeling.md](concept-microstructure-modeling.md) - Biophysical applications
+- [method-fem-spectral.md](method-fem.md) - Finite element eigendecomposition
+- [tissue-brain-white-matter.md](tissue-white-matter.md) - Anisotropic diffusion properties
+- [coordinate-system-gradient-table.md](coordinate-systems.md) - Experimental encoding
+- [concept-microstructure-modeling.md](tissue-white-matter.md) - Biophysical applications

@@ -1,219 +1,213 @@
 ---
 type: concept
-timestamp: 2026-04-15T09:48:27-07:00
 title: JAX Ecosystem for Neuroimaging
-tags: [jax]
-description: "The JAX ecosystem has emerged as the dominant framework for differentiable neuroimaging research, enabling end-to-end gradient flow from raw sensor data to biophysical parameters."
-related: [differentiable-programming.md, neural-posterior-estimation.md, equinox-modules.md, scientific-ml.md]
+related: [method-sbi.md, method-fem.md, method-bem.md, method-source-imaging.md, method-neural-ode.md, method-variational-inference.md, method-monte-carlo.md, diffusion-mri.md, quantitative-mri.md, mrs.md, physics-acoustic.md, tus.md, neural-mass-models.md, method-neural-fields.md, method-hypergraph.md, method-active-inference.md, method-hmm-dynamics.md, compute-infrastructure.md, sci-head-model.md]
+description: "The neuro-kb project family shares one numerical substrate, JAX, plus the 'Kidger stack' (Equinox, Diffrax, Optimistix, Lineax) and a small set of probabilistic and physics libraries."
+timestamp: 2026-11-05T15:59:53-08:00
+tags: [concept, jax, tooling]
 ---
 
 # JAX Ecosystem for Neuroimaging
 
-The **JAX ecosystem** has emerged as the dominant framework for differentiable neuroimaging research, enabling end-to-end gradient flow from raw sensor data to biophysical parameters. This ecosystem combines automatic differentiation, GPU acceleration, and functional programming to solve previously intractable inverse problems in brain imaging.
+The neuro-kb project family shares one numerical substrate, **JAX**, plus the "Kidger stack" (Equinox, Diffrax, Optimistix, Lineax) and a small set of probabilistic and physics libraries. The common goal is a single computational graph in which `jax.grad` runs from a loss on sensor data back to biophysical parameters. Those parameters include tissue conductivity, skull sound speed, axon radius, and neural-mass coupling. This page lists which libraries each project uses, the conventions they share, and the measured performance reported in project READMEs.
 
-## Core JAX Stack
+> Design principle (sbi4dwi): **"build where differentiable, wrap where not."** JAX models handle gradient-based optimisation. Non-differentiable external simulators produce training data at an HDF5 boundary (`sbi4dwi:CLAUDE.md`).
 
-| Layer | Library | Purpose |
-|-------|---------|---------|
-| **Arrays & autodiff** | JAX | GPU acceleration, `jax.grad`, XLA compilation |
-| **Neural networks** | Equinox | Pytree-compatible `eqx.Module` classes |
-| **Optimization** | Optax/Optimistix | Stochastic training / deterministic fitting |
-| **Dynamics** | Diffrax | Neural ODEs/SDEs for Bloch equations |
-| **Linear algebra** | Lineax | GLM, beamforming, sparse solvers |
-| **Graphs** | jraph | GNNs on cortical meshes |
-| **Flows** | FlowJAX | Normalizing flows for posterior estimation |
-| **MCMC** | BlackJAX | Bayesian inference (NUTS) |
-| **Probabilistic** | NumPyro | Variational inference, hierarchical models |
+## Core Stack
 
-## Neuroimaging-Specific Extensions
+| Layer | Library | Role | Used by (documented) |
+|---|---|---|---|
+| Arrays & autodiff | JAX | XLA compilation, `grad`/`vmap`/`jit` | all projects below |
+| Modules | Equinox (`eqx.Module`) | Immutable pytree models and networks | sbi4dwi, neurojax, hgx |
+| Optimisation | Optax / Optimistix | Stochastic training / deterministic voxel fitting | sbi4dwi (both), neurojax (Optax) |
+| ODE/SDE | Diffrax | Bloch, diffusion SDE, neural ODE/SDE | sbi4dwi, neurojax |
+| Linear algebra | Lineax | GLM, beamforming solves | neurojax |
+| Graphs | jraph | PI-GNN on cortical meshes | neurojax |
+| Normalizing flows | FlowJAX | Neural posterior estimation | sbi4dwi |
+| MCMC | BlackJAX | NUTS posteriors | sbi4dwi |
+| Probabilistic programming | NumPyro | Variational inference, model discovery | sbi4dwi (`bayesian/`) |
+| Equivariance | e3nn-jax | E(3)-equivariant score networks | sbi4dwi |
+| Tensor decomposition | ttax | Tensor-train surrogates | sbi4dwi |
+| Acoustics | j-Wave [@stanziola2023jwave] | Pseudospectral (PSTD) + Helmholtz wave solver | sbi4dwi, brain-fwi |
+| FEM | JAX-FEM + PETSc | Differentiable bioelectric FEM | neurojax |
+| BEM (external) | OpenMEEG, MNE-Python | 3-layer BEM leadfields | neurojax |
+| I/O | nibabel, h5py, meshio, DIPY | NIfTI, HDF5 libraries, meshes, gradient tables | sbi4dwi, neurojax |
 
-### Multi-Modal Signal Models
+Sources: `sbi4dwi:README.md` (Tech Stack), `neurojax:README.md` (The Stack), `neurojax:CLAUDE.md`.
 
-JAX enables differentiable biophysical models across imaging modalities:
+## Shared Conventions
+
+Most of these conventions are written in the per-project `CLAUDE.md` files. They apply across repos.
+
+- **uv only.** Use `uv sync`, `uv add`, and `uv run pytest`. Never use pip, conda, or bare `python` (sbi4dwi, neurojax).
+- **Immutable pytrees.** Never mutate `eqx.Module` fields; use `eqx.tree_at`. Plain Python classes are reserved for orchestration objects such as `ModelSimulator`, `ComparisonRunner`, and `LibraryGenerator` (sbi4dwi).
+- **SI units internally.**
+  - b-values are in s/m². DIPY and FSL use s/mm², so divide by 1e6.
+  - Free-water diffusivity is 2.0e-9 m²/s.
+  - Lengths are in metres; a 5 µm radius is 5e-6.
+- **Train/deploy symmetry.** b0 normalisation must be identical in `ModelSimulator.sample_and_simulate()` and `SBIPredictor.predict_volume()`.
+- **Explicit regularisation.** Use Tikhonov regularisation, not truncated SVD with a hidden rank cutoff, and always report the λ used. Check memory with `psutil` before large matrix operations (neurojax).
+- **Red-green TDD.** neurojax has 120+ tests, for example 26 for PI-GNN, 22 for qMRI, and 9 for LAURA.
+- Use `np.trapezoid`, not `np.trapz`, which was removed in NumPy 2.x.
+
+## Pattern 1 — Differentiable Forward Models as `eqx.Module`
+
+sbi4dwi reimplements the dmipy compartments as Equinox modules [@fick2019dmipy]:
+
+- **Ball/Stick/Zeppelin/Tensor:** Gaussian compartments.
+- **Sphere/Cylinder/Plane:** restricted diffusion, using the GPD, Callaghan, Söderman and Stejskal–Tanner models.
+- **Extended models:**
+  - NODDI [@zhang2012noddi] and Multi-TE NODDI [@gong2020mte]
+  - SANDI [@palombo2020sandi]
+  - IVIM, free-water DTI, mcDESPOT, EPG, QMT
+  - stimulated-echo Kärger exchange [@karger1985nmr]
+
+Models compose via `compose_models()` with Watson/Bingham dispersion and tortuosity constraints. See [diffusion-mri.md](diffusion-mri.md) and [quantitative-mri.md](quantitative-mri.md).
 
 ```python
-# Diffusion MRI microstructure
-class NODDIModel(eqx.Module):
-    def __call__(self, params, acquisition):
-        return watson_stick + tortuosity_zeppelin + csf_ball
-
-# Quantitative MRI relaxometry  
-class McDesspot(eqx.Module):
-    def simulate_sequence(self, tissue_params, flip_angles, TRs):
-        return spoiled_gre_signal + balanced_ssfp_signal
-
-# MEG/EEG source imaging
-class BeamformerLCMV(eqx.Module):
-    def __call__(self, Y, leadfield, regularization):
-        return spatial_filter @ Y
+model = compose_models([C1Stick(), G1Ball()])
+params = fit_voxel(model, acquisition, signal)   # Optimistix, vmapped over voxels
 ```
 
-All models are `eqx.Module` pytrees, making them compatible with `jax.vmap`, `jax.grad`, and `jax.jit`.
+Differentiable simulators extend the analytical models:
 
-## Simulation-Based Inference Pipeline
+- **`MatrixFormalismSimulator`:** FEM spectral reduced-order model on triangular meshes. It solves the generalised eigenproblem S v = λ M v and builds PGSE from 3 matrix exponentials. It switches to BCOO sparse matrices above about 2K vertices.
+- **`DifferentiableWalker`:** confined Brownian motion.
+- **`SDESimulator`:** SDE integration with Diffrax.
 
-The neuroimaging JAX ecosystem excels at **simulation-based inference** (SBI) — training neural networks to invert forward models:
+A non-differentiable `MonteCarloSimulator` with SDF geometry serves as ground truth. See [method-fem.md](method-fem.md), [method-monte-carlo.md](method-monte-carlo.md) and [physics-diffusion-equation.md](physics-diffusion-equation.md).
 
-### 1. Forward Simulation
+## Pattern 2 — Amortized Simulation-Based Inference
+
+The pipeline runs `ModelSimulator → train_sbi() → checkpoint (.eqx + .config.json) → SBIPredictor.predict_volume()`. It generates `(θ, signal)` pairs from prior → forward → noise. Supported estimators are MDN, FlowJAX flows, score-based diffusion, BlackJAX NUTS, and amortized VI. See [method-sbi.md](method-sbi.md) and [method-variational-inference.md](method-variational-inference.md).
+
+### Ball+2Stick NPE configuration (sbi4dwi `autoresearch/program.md`)
+
+| Parameter | Value |
+|---|---|
+| Flow | Masked autoregressive, `RationalQuadraticSpline(knots=8, interval=3.0)` |
+| Layers / hidden | 10 layers / 128 units (2-layer MLPs) |
+| Optimiser | Adam, lr 3e-4, cosine decay, batch 512 |
+| Noise | Rician inside `sim_fn`; SNR 10–50 for training, 30 for evaluation |
+| Acquisition | HCP-like 90 directions, b = 0/1000/2000/3000 s/mm² |
+| Aggregation | 500 posterior samples, then clip, unit-normalise, and take the median |
+| Symmetry breaking | f1 ≥ f2 ordering; hemisphere z ≥ 0 |
+
+### Measured accuracy
+
+| Estimator | Fiber 1 median error | d_stick r | f1 r | Steps |
+|---|---|---|---|---|
+| Affine flow baseline | 10.7° | 0.95 | 0.85 | 30k |
+| Spline + noise fix + label switching | 6.4° | 0.978 | 0.902 | 30k |
+| Spline flow | 3.2° | 0.986 | 0.935 | 200k |
+| Spline flow | **2.8°** | **0.987** | **0.943** | 300k |
+| Score-based (DDPM, spherical coords) | 12.8° | — | — | 100k |
+| MDN (10 components) | ~5–8° | — | — | 30k |
+
+The orientation targets follow Manzano-Patron et al. [@manzanopatron2025sbi]. For the score-based estimator, the SDE sampler diverged (29°) and DDPM sampling was required (15.5°).
+
+### Supporting modules
+
+- **UQ:** SBC, PPC, conformal prediction, OOD detection, and ensembles, all in `pipeline/`.
+- **Multi-fidelity training:** `HybridLibraryGenerator` mixes 70% analytical and 30% oracle data. The oracles are DIPY, ReMiDi (Docker), and MCMRSimulator.jl (Julia subprocess). `OracleModelSimulator` maps these into the training pipeline via k-NN inverse-distance interpolation or an MLP emulator.
+
+## Pattern 3 — End-to-End Differentiable Physics
+
+### Electromagnetic chain (neurojax)
+
+The chain runs: qMRI (T1, QMT bound-pool fraction) → `sigma_from_qmri` → `assemble_stiffness` (FEM) → leadfield L → Y = L·J + n → inverse solver. Gradients flow through the entire chain:
+
 ```python
-# Generate training data
-def simulate_batch(key, n_samples):
-    params = prior.sample(key, n_samples)  # Sample biophysical parameters
-    signals = vmap(forward_model)(params, acquisition)
-    noisy_signals = add_rician_noise(signals, snr=30)
-    return params, noisy_signals
+sigma = sigma_from_qmri(t1_values, bpf_values, labels, params)
+K = assemble_stiffness(vertices, elements, sigma)
+grad_params = jax.grad(loss)(params)
 ```
 
-### 2. Neural Posterior Estimation
-```python
-# Train normalizing flow
-flow = NeuralSplineFlow(input_dim=signal_dim, context_dim=param_dim)
-flow, losses = train_flow(flow, training_data, n_steps=200_000)
+- **Head models:** CHARM 60-tissue segmentation, 3-layer BEM (MNE/OpenMEEG), and differentiable FEM.
+- **15 inverse solvers in five families:**
+  - minimum norm: MNE, dSPM, sLORETA, eLORETA
+  - biophysical prior: LAURA, VARETA
+  - beamformers: LCMV, SAM, DICS
+  - Bayesian sparse: CHAMPAGNE, HIGGS
+  - deep learning: PI-GNN on jraph
+- **Validation data:** the WAND dataset (170 subjects, CTF 275-channel MEG, 300 mT/m Connectom).
 
-# Infer parameters from new data
-posterior_samples = flow.sample(observed_signal, n_samples=1000)
-param_estimate = jnp.median(posterior_samples, axis=0)
-```
+See [method-source-imaging.md](method-source-imaging.md), [method-bem.md](method-bem.md), [meg.md](meg.md), [eeg.md](eeg.md) and [tissue-electrical-properties.md](tissue-electrical-properties.md).
 
-### 3. Uncertainty Quantification
-- **Simulation-Based Calibration** — validate posterior coverage
-- **Conformal Prediction** — distribution-free confidence intervals  
-- **Out-of-Distribution Detection** — flag unreliable estimates
+### Acoustic chain (sbi4dwi → brain-fwi)
 
-## Multi-Fidelity Integration
+j-Wave simulations ran on the [sci-head-model.md](sci-head-model.md) (208×256×256, 1 mm, 8 tissues) on a Modal A100. Tissue properties follow ITRUSST benchmark values [@aubry2022itrusst]. See [tus.md](tus.md), [physics-acoustic.md](physics-acoustic.md) and [tissue-skull.md](tissue-skull.md).
 
-JAX projects seamlessly integrate multiple simulation fidelities:
+| Experiment | Result |
+|---|---|
+| 2D skull attenuation, 400 kHz | 93.0% |
+| Frequency sweep (slab), 180 kHz / 400 kHz / 1 MHz | 32.0% / 55.1% / 34.3% loss |
+| 32-element delay optimisation, 2D, 20 iterations | 1.4× focal gain, 1.8 s/iter |
+| 16-element delay optimisation, 3D 4 mm grid | 4.7× focal gain, 2.6 s/iter |
+| Sensitivity \|dp/dc\|, skull vs water | 232× |
+| Helmholtz (GMRES) vs PSTD | r = 0.82 (p_max 0.287 vs 0.311) |
+| 3-band FWI, 50→600 kHz, 256 elements | skull c recovered 4312 m/s (true 4080), 222 s |
+| 3D USCT, 96³ at 2 mm, 128 elements (DGX Spark) | brain RMSE 52.7 m/s, skull RMSE 1255.6 m/s, 13.3 min |
 
-**Analytical models** (fast, differentiable) for bulk training data:
-```python
-# Closed-form Gaussian compartments
-signal = volume_fraction * stick_signal + (1 - volume_fraction) * ball_signal
-```
+Caveats from the source (`sbi4dwi:docs/openlifu/README.md`):
 
-**Physics simulation** (slow, accurate) for validation:
-```python
-# FEM on tetrahedral meshes
-def fem_simulator(mesh, diffusivity, acquisition):
-    K, M = assemble_fem_matrices(mesh.vertices, mesh.tetrahedra, diffusivity)
-    return matrix_formalism_pgse(K, M, acquisition)
-```
+- The multi-target runs (53–55%) used a slab geometry, so they are not directly comparable with the 93% full-head figure.
+- The 3D 2 mm run gave an anomalous −7.6% attenuation, flagged as "needs investigation."
+- The README calls the suite "7-experiment" while the OpenLIFU doc reports "9/9 experiments."
 
-**External oracles** (non-differentiable) wrapped at HDF5 boundary:
-```python
-# Monte Carlo, DIPY, commercial simulators
-oracle_data = h5py.File("monte_carlo_library.h5")
-emulator = train_neural_emulator(oracle_data)  # Fast approximation
-```
+The planned extension chains j-Wave → radiation force F = 2αI/c → elastodynamics µ∇²u + F = ρü → Bloch-simulated MR-ARFI phase. It would use brain shear moduli from CANNs [@linka2023cann] and MR-ARFI encoding [@kaye2011mrarfi]. See [physics-bloch.md](physics-bloch.md).
 
-## Performance Characteristics
+The 256-element helmet reference [@martin2025tfus] has a title mismatch between sources. The bib entry reads "MRI-guided transcranial focused ultrasound neuromodulation with a 256-element helmet array". The sbi4dwi docs cite "Ultrasound system for precise neuromodulation of human deep brain circuits", *Nat. Commun.* 16:8024. Verify before citing.
 
-### Speed Benchmarks
+## Pattern 4 — Dynamics, Control and Inference Models
 
-| Task | Traditional | JAX | Speedup |
-|------|-------------|-----|---------|
-| DTI fitting (100k voxels) | 45 minutes | 2.3 seconds | **1170x** |
-| NODDI whole-brain | 6 hours | 8 seconds | **2700x** |
-| Flow posterior training | N/A | 3.2° median error in 200k steps | Novel capability |
-| TUS optimization (32 elements) | Minutes | 1.8s/iteration | **>100x** |
+These projects have no library-level dependency list in the current source material. Entries are taken from the schema project table.
 
-### Memory Efficiency
-- **Automatic batching** via `jax.vmap` eliminates explicit loops
-- **JIT compilation** fuses operations, reduces memory allocations
-- **Gradient accumulation** for large datasets exceeding GPU memory
+- **vbjax:** whole-brain neural mass simulation on connectomes. neurojax ships a `bench/` vbjax adapter. See [neural-mass-models.md](neural-mass-models.md) and [connectomics.md](connectomics.md).
+- **hnn-jax:** neocortical-column model producing MEG/EEG dipoles.
+- **gnf-jax:** stochastic Wilson–Cowan dynamics on connectome harmonics. See [method-neural-fields.md](method-neural-fields.md).
+- **hgx:** hypergraph neural networks in Equinox. See [method-hypergraph.md](method-hypergraph.md).
+- **jaxctrl:** differentiable controllability and Lyapunov analysis.
+- **alf:** active-inference agents [@friston2022active; @smith2022step]. See [method-active-inference.md](method-active-inference.md).
+- **inferjax:** amortized SBI and posterior calibration for any simulator. It generalises the sbi4dwi pipeline above.
+- **vpjax:** cerebrovascular and metabolic models, pharmacokinetics, and identifiability. See [physics-cerebrovascular.md](physics-cerebrovascular.md) and [method-pharmaco-eeg.md](method-pharmaco-eeg.md).
+- **mrs-jax:** MEGA-PRESS and HERMES [@chan2016hermes] quantification. See [mrs.md](mrs.md).
+- **setae:** contact mechanics and FEM for soft tissue.
+- **neurojax `models/`:** HMM and DyNeMo brain-state models. See [method-hmm-dynamics.md](method-hmm-dynamics.md) and [method-neural-ode.md](method-neural-ode.md).
 
-## Differentiable Physics Integration
+## Compute Targets
 
-JAX enables end-to-end differentiation through complex physics:
+- **Modal A100:** used for TUS, FWI and SBI experiments, launched with `modal run scripts/...`.
+- **DGX Spark:** local GPU, used for 3D USCT.
+- **CUDA 13+:** required for sbi4dwi GPU support.
 
-### Acoustic Simulation (sbi4dwi)
-```python
-# Transcranial focused ultrasound through heterogeneous skull
-def optimize_delays(delays, skull_properties, target_location):
-    pressure_field = jwave_simulation(delays, skull_properties)
-    focal_intensity = pressure_field[target_location]
-    return -focal_intensity  # Maximize at target
-
-optimal_delays = jax.scipy.optimize.minimize(optimize_delays, initial_delays)
-```
-
-### Electromagnetic Forward Models (neurojax)
-```python
-# MEG/EEG leadfield computation
-def differentiable_leadfield(conductivity_map, source_locations):
-    K = assemble_fem_stiffness(mesh, conductivity_map)
-    phi = solve_forward_potential(K, source_locations)
-    return sensor_projection(phi)
-
-# Optimize tissue conductivity to match MEG data
-grad_conductivity = jax.grad(lambda sigma: mse(Y, differentiable_leadfield(sigma, J)))
-```
-
-## Cross-Project Integration
-
-### VBJax Integration (neurojax)
-Neural mass models for MEG simulation:
-```python
-# Wendling-David-Friston cortical column
-def neural_mass_ode(state, conductivity, connectivity):
-    return wendling_dynamics(state) + connectivity @ state
-
-# Couple to MEG forward model  
-meg_signal = leadfield @ source_activity
-```
-
-### HGX Integration (hgx)
-Hypergraph neural networks on brain connectivity:
-```python
-# Higher-order brain dynamics
-hypergraph = construct_functional_hypergraph(meg_data)
-dynamics = hypergraph_neural_network(hypergraph, node_features)
-```
-
-### JaxCtrl Integration (jaxctrl)  
-Controllability analysis of brain networks:
-```python
-# Gramian-based controllability on structural connectivity
-def controllability_gramian(adjacency, control_nodes):
-    return jax.scipy.linalg.expm(adjacency @ adjacency.T)
-
-control_energy = trace(inv(controllability_gramian(connectome, stimulation_sites)))
-```
+See [compute-infrastructure.md](compute-infrastructure.md).
 
 ## Relevant Projects
 
-| Project | Domain | JAX Integration |
-|---------|--------|-----------------|
-| **sbi4dwi** | Diffusion MRI microstructure | Full SBI pipeline, 15+ biophysical models |
-| **neurojax** | Multi-modal M/EEG analysis | 15 source imaging methods, differentiable BEM/FEM |
-| **vbjax** | Whole-brain simulation | Neural mass models, connectome dynamics |
-| **hgx** | Hypergraph neural networks | Higher-order brain connectivity |
-| **alf** | Active inference | Generative models, Bayesian inference |
-| **jaxctrl** | Control theory | Network controllability, Lyapunov analysis |
-| **setae** | Bio-inspired mechanics | Contact mechanics, tissue deformation |
-
-## Key Advantages
-
-**Composability** — Forward models, inference networks, and physics simulators compose naturally as JAX functions.
-
-**Scalability** — Single GPU handles datasets that required HPC clusters (100k+ voxels in seconds).
-
-**Reproducibility** — Deterministic compilation and functional programming eliminate state-dependent bugs.
-
-**Extensibility** — New physics or inference methods integrate with existing pipeline infrastructure.
-
-**Clinical Translation** — Fast inference enables real-time applications (TUS optimization, MRI reconstruction).
-
-## Citations
-- **Bradbury2018jax**: Bradbury et al. (2018). JAX: composable transformations of Python+NumPy programs. Core autodiff and XLA compilation framework.
-- **Kidger2021equinox**: Kidger & Garcia (2021). Equinox: neural networks in JAX via callable PyTrees and filtered transformations.
-- **Kidger2022neuralDE**: Kidger (2022). On Neural Differential Equations. PhD thesis, University of Oxford. Diffrax library for neural ODEs/SDEs.
-- **Raissi2019pinns**: Raissi et al. (2019). Physics-informed neural networks for solving forward and inverse PDEs. J Comp Physics 378:686-707.
-- **Cranmer2020sbi**: Cranmer et al. (2020). The frontier of simulation-based inference. PNAS 117:30055-30062.
-- **deepmind2020jax**: DeepMind et al. (2020). The DeepMind JAX Ecosystem. Comprehensive ML infrastructure built on JAX.
+| Project | JAX role |
+|---|---|
+| `sbi4dwi` | Equinox signal models, FlowJAX/BlackJAX SBI, Diffrax SDEs, j-Wave TUS |
+| `neurojax` | Differentiable BEM/FEM, 15 inverse solvers, qMRI, MRS, HMM/DyNeMo |
+| `brain-fwi` | 3D multi-frequency ultrasound FWI (sigmoid-bounded velocity) |
+| `vbjax`, `hnn-jax`, `gnf-jax` | Neural mass / neural field forward models |
+| `hgx`, `jaxctrl` | Hypergraph networks, network control |
+| `alf`, `inferjax`, `PGMax` | Active inference, amortized SBI, factor graphs |
+| `vpjax`, `mrs-jax`, `setae` | Physiology, spectroscopy, mechanics |
 
 ## See Also
 
-- [neural-posterior-estimation.md](neural-posterior-estimation.md) — SBI methodology and benchmarks
-- [equinox-modules.md](equinox-modules.md) — PyTree neural network patterns  
-- [differentiable-programming.md](differentiable-programming.md) — Automatic differentiation principles
-- [scientific-ml.md](scientific-ml.md) — Physics-informed machine learning
+- [method-sbi.md](method-sbi.md)
+- [method-fem.md](method-fem.md)
+- [method-bem.md](method-bem.md)
+- [method-source-imaging.md](method-source-imaging.md)
+- [method-neural-ode.md](method-neural-ode.md)
+- [method-variational-inference.md](method-variational-inference.md)
+- [diffusion-mri.md](diffusion-mri.md)
+- [quantitative-mri.md](quantitative-mri.md)
+- [tus.md](tus.md)
+- [physics-acoustic.md](physics-acoustic.md)
+- [tissue-acoustic-properties.md](tissue-acoustic-properties.md)
+- [neural-mass-models.md](neural-mass-models.md)
+- [data-formats.md](data-formats.md)
+- [compute-infrastructure.md](compute-infrastructure.md)

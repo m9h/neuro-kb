@@ -9,7 +9,7 @@ measurement: induced electric field (V/m) in brain tissue
 spatial_resolution: mm (mesh-dependent)
 temporal_resolution: quasi-static (DC / low-frequency)
 implementations: ["simnibs:simnibs/simulation", "simnibs:simnibs/segmentation", "simnibs:simnibs/mesh_tools"]
-related: [tms.md, method-fem.md, tissue-electrical-properties.md, structural-mri.md, head-model-mida.md, eeg.md]
+related: [tms.md, method-fem.md, tissue-electrical-properties.md, structural-mri.md, head-model-mida.md, eeg.md, temporal-interference.md, acoustoelectric-imaging.md]
 ---
 
 # Transcranial Electric Stimulation E-Field Modeling
@@ -41,6 +41,8 @@ The governing equation and FEM machinery are shared with [method-fem.md](method-
 
 ## See Also
 
+- [Temporal Interference Stimulation](temporal-interference.md)
+- [Acoustoelectric Neuroimaging](acoustoelectric-imaging.md)
 - [tms.md](tms.md) - magnetic-stimulation sibling
 - [method-fem.md](method-fem.md) - numerical solver
 - [physics-electromagnetic.md](physics-electromagnetic.md) - shared forward physics

@@ -6,7 +6,7 @@ tags: [method, BEM, numerical-methods]
 description: "The Boundary Element Method (BEM) is a computational technique for solving partial differential equations in unbounded domains by reformulating volume integrals as surface integrals."
 category: BEM
 implementations: [neurojax:geometry/bem_forward.py]
-related: [method-fem.md, physics-bioelectromagnetics.md, head-model-mida.md, coordinate-system-mni152.md]
+related: [method-fem.md, physics-electromagnetic.md, head-model-mida.md, coordinate-systems.md]
 ---
 
 # Boundary Element Method
@@ -30,7 +30,7 @@ where G(r',r) = 1/|r-r'| is the free-space Green's function and ∂Ω represents
 - **Standard topology**: Brain-CSF-Skull-Scalp (3-layer) or Brain-CSF-Skull-Scalp-Air (4-layer)
 
 ### Conductivity Values
-Standard tissue conductivities at 1 kHz [@gabriel1996]:
+Standard tissue conductivities at 1 kHz [@gabriel1996dielectric]:
 
 | Tissue | Conductivity (S/m) |
 |--------|-------------------|
@@ -137,7 +137,7 @@ For high-resolution CHARM (60-tissue) head models:
 ## See Also
 
 - [method-fem.md](method-fem.md) - Finite Element Method comparison
-- [physics-bioelectromagnetics.md](physics-bioelectromagnetics.md) - Underlying electromagnetic theory
+- [physics-bioelectromagnetics.md](physics-electromagnetic.md) - Underlying electromagnetic theory
 - [head-model-mida.md](head-model-mida.md) - MIDA head model with BEM meshes
 - [tissue-csf.md](tissue-csf.md) - CSF conductivity and BEM modeling
-- [coordinate-system-mni152.md](coordinate-system-mni152.md) - Standard space for BEM templates
+- [coordinate-system-mni152.md](coordinate-systems.md) - Standard space for BEM templates

@@ -21,7 +21,7 @@ properties:
     air_cavities: "1e-15"
     eyeball: "1.5 ± 0.3"
 sources: [gabriel1996, mccann2019, huang2017]
-related: [head-model-charm.md, tissue-anisotropy.md, qmri-conductivity-mapping.md, bem-forward-modeling.md]
+related: [head-model-mida.md, tissue-white-matter.md, quantitative-mri.md, method-bem.md]
 ---
 
 # Tissue Electrical Conductivity (cross-tissue)
@@ -87,7 +87,7 @@ Conductivity ratio = σ_∥ / σ_⊥ ≈ 5:1
 ```
 
 This anisotropy significantly affects current flow patterns in:
-- [bem-forward-modeling.md](bem-forward-modeling.md)
+- [bem-forward-modeling.md](method-bem.md)
 - Source localization accuracy
 - tDCS/TMS current distribution
 
@@ -163,8 +163,8 @@ For stimulation applications, conductivity uncertainty requires:
 
 ## See Also
 
-- [head-model-charm.md](head-model-charm.md) - Multi-tissue head model implementation
-- [tissue-anisotropy.md](tissue-anisotropy.md) - Detailed anisotropic conductivity modeling
-- [qmri-conductivity-mapping.md](qmri-conductivity-mapping.md) - MRI-derived conductivity methods
-- [bem-forward-modeling.md](bem-forward-modeling.md) - Boundary element method applications
-- [coordinate-system-mni152.md](coordinate-system-mni152.md) - Standard space tissue atlases
+- [head-model-charm.md](head-model-mida.md) - Multi-tissue head model implementation
+- [tissue-anisotropy.md](tissue-white-matter.md) - Detailed anisotropic conductivity modeling
+- [qmri-conductivity-mapping.md](quantitative-mri.md) - MRI-derived conductivity methods
+- [bem-forward-modeling.md](method-bem.md) - Boundary element method applications
+- [coordinate-system-mni152.md](coordinate-systems.md) - Standard space tissue atlases

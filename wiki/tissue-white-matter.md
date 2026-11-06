@@ -15,7 +15,7 @@ properties:
   shear_modulus_kPa: "2.8-4.2 (from Kuhl CANN)"
   t2_relaxation_ms: "80"
 sources: ["gabriel1996", "aubry2022itrusst", "zhang2012noddi", "linka2023cann"]
-related: [tissue-gray-matter.md, tissue-csf.md, coordinate-system-rpi.md, modality-diffusion-mri.md, modality-focused-ultrasound.md]
+related: [tissue-gray-matter.md, tissue-csf.md, coordinate-systems.md, diffusion-mri.md, tus.md]
 ---
 
 # White Matter
@@ -152,6 +152,6 @@ White matter pathology affects multiple physical properties:
 
 - [tissue-gray-matter.md](tissue-gray-matter.md) - Contrasting tissue properties
 - [tissue-csf.md](tissue-csf.md) - CSF compartment modeling
-- [modality-diffusion-mri.md](modality-diffusion-mri.md) - Diffusion MRI physics
-- [modality-focused-ultrasound.md](modality-focused-ultrasound.md) - Acoustic modeling
-- [head-model-sci.md](head-model-sci.md) - SCI Institute head model with tissue segmentation
+- [modality-diffusion-mri.md](diffusion-mri.md) - Diffusion MRI physics
+- [modality-focused-ultrasound.md](tus.md) - Acoustic modeling
+- [head-model-sci.md](sci-head-model.md) - SCI Institute head model with tissue segmentation

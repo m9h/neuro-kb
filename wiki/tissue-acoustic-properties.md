@@ -30,7 +30,7 @@ properties:
     density_kg_m3: 1000
     attenuation_db_mhz_cm: 0.002
 sources: [aubry2022itrusst, stanziola2023jwave]
-related: [tissue-electrical-properties.md, head-models.md, acoustic-forward-modeling.md, tus-simulation.md]
+related: [tissue-electrical-properties.md, head-model-mida.md, physics-acoustic.md, tus.md]
 ---
 
 # Tissue Acoustic Properties (cross-tissue)
@@ -143,7 +143,7 @@ where γ ranges from 1.0-2.0 depending on tissue type. ITRUSST values represent 
 
 ## See Also
 
-- [head-models.md](head-models.md) — Anatomical head models with tissue segmentation
-- [acoustic-forward-modeling.md](acoustic-forward-modeling.md) — Forward simulation methods
-- [tus-simulation.md](tus-simulation.md) — Transcranial focused ultrasound applications
+- [head-models.md](head-model-mida.md) — Anatomical head models with tissue segmentation
+- [acoustic-forward-modeling.md](physics-acoustic.md) — Forward simulation methods
+- [tus-simulation.md](tus.md) — Transcranial focused ultrasound applications
 - [tissue-electrical-properties.md](tissue-electrical-properties.md) — Complementary electrical properties for EEG/MEG

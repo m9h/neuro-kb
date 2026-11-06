@@ -1,297 +1,251 @@
 ---
 type: method
-timestamp: 2026-04-08T20:55:09-07:00
 title: Neural Mass Models
-tags: [method, simulation, whole-brain-modeling]
-description: "Neural mass models (NMMs) describe the collective dynamics of large neuronal populations (10^4--10^7 neurons) as low-dimensional systems of ordinary or stochastic differential equations."
-category: simulation
-implementations: ["vbjax:vbjax/neural_mass.py", "vbjax:vbjax/connectome.py", "vpjax:vpjax/hemodynamics/riera.py", "neurojax:neural_models"]
-related: [method-neural-ode.md, physics-electromagnetic.md, eeg.md, meg.md, method-hmm-dynamics.md, method-spectral-analysis.md, connectomics.md]
+category: differentiable
+implementations: [vbjax:mpr_dfun, vbjax:make_sde, vbjax:autoresearch/program.md, neurojax:bench/models/rww.py, neurojax:bench, gnf-jax:gnfjax, hnn-jax:src/hnnjax/population.py, vc2008-netpyne:jaxmodel]
+related: [method-neural-fields.md, method-neural-ode.md, connectomics.md, eeg.md, meg.md, fmri.md, physics-electromagnetic.md, physics-hemodynamic.md, method-spectral-analysis.md, method-source-imaging.md, method-sbi.md, method-hmm-dynamics.md, method-pharmaco-eeg.md, method-active-inference.md, method-hypergraph.md, jax-ecosystem.md, tms.md, diffusion-mri.md, connectome-harmonics.md, in-vitro-mea-cultures.md]
+description: "Neural mass models (NMMs) describe the collective activity of large neuronal populations (~10^4–10^7 neurons) with low-dimensional ODEs/SDEs."
+timestamp: 2026-11-05T15:59:53-08:00
+tags: [method, dynamics, neural-mass, simulation]
 ---
 
 # Neural Mass Models
 
-Neural mass models (NMMs) describe the collective dynamics of large neuronal populations (10^4--10^7 neurons) as low-dimensional systems of ordinary or stochastic differential equations. Each "node" represents a cortical column or parcellated brain region, reducing the problem from millions of spiking neurons to 2--8 state variables per region. NMMs are the backbone of whole-brain simulation, linking structural connectivity to emergent oscillatory dynamics and, via forward models, to measurable EEG, MEG, and fMRI signals.
+Neural mass models (NMMs) describe the collective activity of large neuronal populations (~10^4–10^7 neurons) with low-dimensional ODEs/SDEs. Each node is a cortical column or parcellated region with 2–14 state variables. Networks of these nodes are coupled through a structural connectome ([connectomics.md](connectomics.md)). They are then mapped to EEG/MEG through a leadfield ([physics-electromagnetic.md](physics-electromagnetic.md)) or to BOLD through a hemodynamic model ([physics-hemodynamic.md](physics-hemodynamic.md)).
 
-## Major Model Families
+The workspace covers several levels of biological detail:
 
-| Model | States/node | Variables | Key feature | Primary reference |
-|-------|-------------|-----------|-------------|-------------------|
-| Wilson-Cowan | 2 | E, I firing rates | First rate model; excitatory-inhibitory balance | Wilson & Cowan 1972 |
-| Jansen-Rit (JR) | 6 | y0-y5 (PSPs + derivatives) | Alpha rhythm genesis; EEG forward model | Jansen & Rit 1995 |
-| Lopes da Silva | 4 | thalamo-cortical loop | Alpha rhythm via thalamic pacemaker | Lopes da Silva 1974 |
-| Montbrio-Pazo-Roxin (MPR) | 2 | r, V (rate, mean voltage) | Exact mean-field of QIF neurons | Montbrio et al. 2015 |
-| Canonical Microcircuit (CMC) | 8 | ss, sp, ii, dp populations | Laminar decomposition; predictive coding | Bastos et al. 2012 |
-| Reduced Wong-Wang | 2 | S_E, S_I (synaptic gating) | BOLD-fMRI coupling; DMF studies | Deco et al. 2014 |
+- **Phenomenological/mean-field NMMs**: vbjax, neurojax.
+- **Spatially continuous fields on graph eigenmodes**: gnf-jax.
+- **Biophysical column models that NMMs approximate**: hnn-jax, vc2008-netpyne.
 
-## Jansen-Rit Model
+## Model Families
 
-The Jansen-Rit model describes a cortical column as three interacting populations: pyramidal cells, excitatory interneurons, and inhibitory interneurons. The six state variables are membrane potentials and their derivatives for each population.
+| Model | States/node | Variables | Key feature | Workspace implementation |
+|-------|-------------|-----------|-------------|--------------------------|
+| Wilson-Cowan | 2 | E, I rates | Sigmoid E–I rate model | gnf-jax (graph field form) |
+| Jansen-Rit (JR) | 6 | 3 PSPs + derivatives | ~10 Hz alpha; EEG = y1 − y2 | vbjax `jr_dfun` |
+| Wendling | 8–10 | JR + fast somatic inhibition | Epileptiform/gamma activity | neurojax heritage (LTSI Rennes, Fijee) |
+| Montbrio-Pazo-Roxin (MPR) | 2 | r, V | Exact mean field of QIF/theta neurons | vbjax `mpr_dfun` |
+| Canonical Microcircuit (CMC) | 8 | ss, sp, ii, dp (×2) | Laminar; predictive coding | vbjax autoresearch |
+| Robinson corticothalamic (RRW) | 8 | cortex–thalamus loop | Alpha/beta via CT delays | vbjax autoresearch |
+| CBEI (next-gen E-I) | 8 | exact mean-field E–I | QIF-derived E–I pair | vbjax autoresearch |
+| Liley | 14 | conductance-based, long-range axonal | Used as ground-truth generator | vbjax autoresearch |
+| Reduced Wong-Wang (RWW) | 1–2 | S_E (, S_I) gating | BOLD/resting-state FC | neurojax `bench/models/rww.py` |
+| Epileptor (BVEP) | 2 | x, z | Seizure onset/offset | vbjax `bvep_dfun` |
 
-### Equations
+State counts for Liley, CMC, RRW and CBEI follow the vbjax spectral-fitting table (`vbjax:autoresearch/program.md`).
 
-The model uses a sigmoid activation function to convert average membrane potential to firing rate:
+## Jansen-Rit
+
+The JR model contains three populations: pyramidal cells, excitatory interneurons and inhibitory interneurons. Each population uses a second-order PSP kernel, and a sigmoid converts membrane potential to firing rate.
 
 ```
-S(v) = 2e0 / (1 + exp(r(v0 - v)))
+S(v) = 2 e0 / (1 + exp(r (v0 − v)))
+dy0/dt = y3;  dy3/dt = A a S(y1 − y2)              − 2a y3 − a² y0
+dy1/dt = y4;  dy4/dt = A a (p(t) + C2 S(C1 y0))    − 2a y4 − a² y1
+dy2/dt = y5;  dy5/dt = B b C4 S(C3 y0)             − 2b y5 − b² y2
 ```
-
-with `e0 = 2.5 s^-1`, `v0 = 6 mV`, `r = 0.56 mV^-1`.
-
-The dynamics of each population follow second-order equations (here in first-order form):
-
-```
-dy0/dt = y3
-dy3/dt = Aa * S(y1 - y2) - 2a*y3 - a^2*y0          # pyramidal PSP
-dy1/dt = y4
-dy4/dt = Aa * (p(t) + C2*S(C1*y0)) - 2a*y4 - a^2*y1  # excitatory interneuron PSP
-dy2/dt = y5
-dy5/dt = Bb * C4*S(C3*y0) - 2b*y5 - b^2*y2          # inhibitory interneuron PSP
-```
-
-### Standard Parameters
 
 | Parameter | Symbol | Value | Units |
 |-----------|--------|-------|-------|
+| Max firing rate / 2 | e0 | 2.5 | s⁻¹ |
+| Sigmoid midpoint | v0 | 6 | mV |
+| Sigmoid slope | r | 0.56 | mV⁻¹ |
 | Excitatory gain | A | 3.25 | mV |
 | Inhibitory gain | B | 22.0 | mV |
-| Excitatory time constant | 1/a | 10 | ms |
-| Inhibitory time constant | 1/b | 20 | ms |
-| Connectivity C1 | C1 | 135 | - |
-| Connectivity C2 | C2 | 0.8 * C1 | - |
-| Connectivity C3 | C3 | 0.25 * C1 | - |
-| Connectivity C4 | C4 | 0.25 * C1 | - |
-| External input mean | p | 120-320 | s^-1 |
+| Excitatory rate constant | a | 100 (τ = 10 ms) | s⁻¹ |
+| Inhibitory rate constant | b | 50 (τ = 20 ms) | s⁻¹ |
+| Connectivity | C1, C2, C3, C4 | 135, 0.8·C1, 0.25·C1, 0.25·C1 | – |
+| Input rate | p | ~120–320 | s⁻¹ |
 
-### Bifurcation and Alpha Rhythm
+The external input p is the main bifurcation parameter:
 
-The JR model exhibits a Hopf bifurcation as external input p increases. For p in the range 120--320 s^-1, the model produces ~10 Hz alpha oscillations. Below p ~ 90 s^-1 the system is quiescent; above p ~ 350 s^-1 it saturates to a fixed point. The transition between regimes passes through a bistable region generating epileptiform spikes, making JR a standard model for seizure dynamics.
+- Within roughly 120–320 s⁻¹, a Hopf-born limit cycle produces ~10 Hz alpha.
+- At the edges of this range, bistable regions produce spike-wave-like transients. This is why JR and its Wendling extension are standard seizure models.
+- The EEG observable is `y1 − y2`.
 
-### EEG Observable
+## Montbrio-Pazo-Roxin (MPR)
 
-The model EEG signal is the difference of excitatory and inhibitory postsynaptic potentials at the pyramidal population: `V_EEG(t) = y1(t) - y2(t)`.
-
-## Montbrio-Pazo-Roxin (MPR) Model
-
-The MPR model is the exact mean-field reduction of an infinite population of all-to-all coupled quadratic integrate-and-fire (QIF) neurons. It is the analytically most principled NMM: no phenomenological sigmoid is needed, since the firing rate emerges from the Lorentzian ansatz on the Ott-Antonsen manifold.
-
-### Equations
+MPR is the exact Ott–Antonsen reduction of an infinite all-to-all network of quadratic integrate-and-fire (QIF) neurons. The neurons have Lorentzian-distributed excitabilities, so no phenomenological sigmoid is needed.
 
 ```
-tau * dr/dt = Delta / (pi * tau) + 2*r*V
-tau * dV/dt = V^2 + eta + J*tau*r - (pi*tau*r)^2 + I_ext(t)
+τ dr/dt = Δ/(π τ) + 2 r V
+τ dV/dt = V² + η + J τ r − (π τ r)² + I + coupling
 ```
 
-where:
-- `r`: population firing rate (Hz)
-- `V`: mean membrane potential (mV)
-- `tau`: membrane time constant (ms)
-- `Delta`: heterogeneity width of the Lorentzian distribution of excitabilities (mV)
-- `eta`: center of the excitability distribution (mV, bifurcation parameter)
-- `J`: recurrent synaptic weight (mV*s)
-- `I_ext`: external input (coupling from other regions)
+| Parameter | Symbol | vbjax default (`mpr_default_theta`) |
+|-----------|--------|--------------------------------------|
+| Time constant | tau | 1.0 |
+| External current | I | 0.0 |
+| Excitability spread | Delta | 1.0 |
+| Recurrent weight | J | 15.0 |
+| Mean excitability | eta | −5.0 |
+| Rate-coupling gain | cr | 1.0 |
+| Voltage-coupling gain | cv | 0.0 |
 
-### Default Parameters (vbjax)
+The vbjax README neural-field example uses `eta = −3.9, cr = 5.0`. Its parameter sweep explores η ∈ [−6, −4] and log k ∈ [−9, −2] with noise σ ∈ {0, 0.2, 0.3, 0.4} [@woodman2024insamuvbjax].
 
-| Parameter | Symbol | vbjax default | Units |
-|-----------|--------|---------------|-------|
-| Time constant | tau | 1.0 | ms |
-| Heterogeneity | Delta | 1.0 | mV |
-| Excitability | eta | -5.0 | mV |
-| Coupling strength | J | 15.0 | mV*s |
-| Coupling rate | cr | 1.0 | - |
-| Coupling voltage | cv | 0.0 | - |
+**Correction to an earlier version of this page.** The 2-D MPR system with instantaneous synapses has no stable limit cycle. As η varies, two saddle-node bifurcations bound a bistable region. In that region, a low-activity node coexists with a high-activity focus that shows damped oscillations. Sustained oscillations require synaptic kinetics, delays, or noise-driven excitation of the focus. An earlier version described a SNIC bifurcation into a limit cycle; that statement has been removed.
 
-### Bifurcation Structure
+Because QIF neurons are equivalent to theta neurons, MPR is also the mean-field limit of the theta-neuron network in `vc2008-netpyne/jaxmodel` (see "Spiking-network ground truth" below).
 
-The MPR model undergoes a saddle-node on invariant circle (SNIC) bifurcation as eta increases through a critical value eta_c ~ -((pi*Delta)^2 + J^2)/(4*J). Below eta_c the system is at a stable fixed point (low firing rate). Above eta_c the system enters a limit cycle with oscillation frequency that increases continuously from zero (Type I excitability). The parameter J controls the bistability region: higher J widens the hysteresis loop.
+## Graph Neural Fields (gnf-jax)
 
-## Canonical Microcircuit (CMC)
-
-The CMC model implements a 4-population laminar cortical circuit with 8 state variables, designed for hierarchical predictive coding:
-
-| Population | Abbreviation | Layer | Role |
-|-----------|--------------|-------|------|
-| Spiny stellate | ss | L4 | Granular input |
-| Superficial pyramidal | sp | L2/3 | Prediction errors (forward) |
-| Inhibitory interneurons | ii | L2/3 | Intrinsic inhibition |
-| Deep pyramidal | dp | L5/6 | Predictions (backward) |
-
-Hierarchical coupling is asymmetric: forward connections (lower to higher cortical areas) drive spiny stellate cells; backward connections (higher to lower) modulate superficial pyramidal and inhibitory populations. This architecture implements Bayesian message passing: `sp` encodes prediction errors, `dp` encodes predictions.
-
-```python
-# vbjax CMC example: 2-node hierarchy
-import vbjax as vb
-G_fwd, G_bwd = 80.0, 80.0
-p = (G_fwd, G_bwd, vb.cmc_default_theta._replace(I=220.0))
-_, loop = vb.make_sde(dt=0.5, dfun=vb.cmc_hier_2node_dfun, gfun=1e-3)
-ys = loop(vb.np.zeros((8, 2)), vb.randn(4000, 8, 2), p)
-
-# Separate observables by cortical layer
-sp_signal = vb.cmc_observe_sp(ys.T)  # prediction errors
-dp_signal = vb.cmc_observe_dp(ys.T)  # predictions
-```
-
-## Coupling on Structural Connectomes
-
-Individual NMM nodes are coupled into whole-brain networks via the structural connectome. The coupling term for node i takes the general form:
+gnf-jax places a stochastic Wilson-Cowan model on the eigenmodes of a negative combinatorial graph Laplacian `L = −(D − W)`, with eigenvalues λ_k ≤ 0 [@aqil2021graph; @aqil2026brain]. The field equations are:
 
 ```
-I_i(t) = k * sum_j [ W_ij * G(x_j(t - d_ij)) ]
+τ_e dE/dt = −d_e E + S(α_ee K_ee E − α_ie K_ie I + P) + noise_e dW
+τ_i dI/dt = −d_i I + S(α_ei K_ei E − α_ii K_ii I + Q) + noise_i dW
 ```
 
-where:
-- `W_ij`: connection weight from the structural connectome (typically from diffusion MRI tractography)
-- `d_ij = L_ij / v`: conduction delay, with tract length L_ij (mm) and conduction velocity v (typically 1--10 m/s)
-- `G(x)`: coupling function (may act on firing rate, membrane potential, or both)
-- `k`: global coupling scaling parameter
+- **Kernel.** The default heat kernel is `K(λ, t) = exp(t λ)` with `t = σ²/2D`.
+- **Linearised dynamics.** Around a steady state, each mode is an independent 2-state Ornstein–Uhlenbeck process.
+- **Harmonic spectrum.** Solved as the 2×2 Lyapunov equation `A S + S Aᵀ = D`. This stays exact for unequal E/I noise; the original code assumed equal noise.
+- **Temporal spectrum.** Given by `2 Σ_k S_k(ω)`.
+- **Functional connectivity.** Predicted by the CHAOSS method, `corr(U diag(P) Uᵀ)`.
+- **Fitting.** The loss is a log-L2 distance plus a log-slope distance. It is compatible with `jax.grad` and `scipy.optimize.differential_evolution`, and unstable parameter sets are penalised.
 
-### Coupling Parameters
+Example parameters from the gnf-jax README:
 
-| Parameter | Typical range | Notes |
-|-----------|--------------|-------|
-| Global coupling k | 0.01--100 | Model-specific; often the primary bifurcation parameter |
-| Conduction velocity v | 1--10 m/s | Myelination-dependent; 3--6 m/s most common |
-| Mean delay | 5--20 ms | For cortical parcellations (~80 mm mean tract length) |
-| Parcellation size | 68--1000 regions | Desikan-Killiany (68), Destrieux (164), Schaefer (100--1000) |
+| Parameter | Value |
+|-----------|-------|
+| α_ee, α_ie, α_ei, α_ii | 20, 15, 15, 5 |
+| P, Q | −5, −8 |
+| σ (all four kernels) | 2 |
+| τ_e, τ_i | 1.0, 0.5 |
 
-In vbjax, coupling is typically applied to the firing rate variable (for MPR, the `r` component):
+Use 64-bit mode for spectra that span many decades. See [method-neural-fields.md](method-neural-fields.md) for the broader field-model context. vbjax offers a related approach: MPR on the sphere with spherical-harmonic local coupling (`make_shtdiff`, lmax = 16, 32×64 grid).
 
-```python
-import vbjax as vb
-import jax.numpy as np
+## Biophysical Column Models (hnn-jax)
 
-def network(x, p):
-    c = 0.03 * x.sum(axis=1)   # global coupling on firing rate
-    return vb.mpr_dfun(x, c, p)
+hnn-jax is a differentiable Diffrax reimplementation of the Human Neocortical Neurosolver. It maps drive parameters θ to a current dipole(t) that underlies ERP components such as auditory P1/N1/P2.
 
-_, loop = vb.make_sde(dt=0.01, dfun=network, gfun=0.1)
+- **v0 (mean-field):** correlation with the `hnn_core` oracle was +0.22.
+- **v1 (population):** N cells, each with a reparameterized drive time `t_i = μ + σ ε_i`, vmapped and then averaged. Correlation rose to +0.43, and the CI floor is set at `FORWARD_CORR_MIN = 0.40`.
+
+The gain from v0 to v1 shows the core limitation of a mean-field closure: averaging cell *responses* is not the same as the response to the *average* drive. Only the population version carries a gradient through `tc_sync`, the thalamocortical synchrony parameter.
+
+Oracle reproducibility caveat: `hnn_core` 0.6.1 and 0.3 produce dipoles of the same scale but different waveforms. The RMS ratio is 0.76–1.13, while waveform correlation is only 0.62 (range 0.45–0.81). The project therefore pins `hnn_core ≥ 0.6.0`.
+
+## Spiking-Network Ground Truth (vc2008-netpyne)
+
+vc2008-netpyne is a NetPyNE re-implementation of the Vierling-Claassen et al. auditory-entrainment model [@vierlingclaassen2008modeling]. It is a reference for which oscillatory phenomena a mean-field model must reproduce.
+
+Network structure:
+
+- 240 two-compartment HH cells: 160 pyramidal, 40 basket, 40 chandelier.
+- 4 Hz Poisson background input.
+- 20/30/40 Hz click-train drive.
+- MEG proxy = mean EPSC onto pyramidal cells.
+
+The only manipulation is the chandelier IPSC decay, τ2,ch = 8 ms (control) → 25 ms (schizophrenia). Results from 600 simulations:
+
+| Measure | Control | SZ |
+|---------|---------|----|
+| P40 under 40 Hz drive (evoked) | 83.9 | 8.7 (~9.7× lower) |
+| P20 under 20 Hz drive | 59.6 | 93.6 |
+| P20 under 40 Hz drive (total power) | 0.03 | 0.40 (13×) |
+
+The 20 Hz subharmonic arises from pulse skipping with random phase. It therefore cancels in evoked averages, so total and evoked spectra must be distinguished when fitting NMMs to ASSR data.
+
+The JAX theta-neuron version (20 E + 10 I) is fully differentiable. Its network phase response inherits Type I excitability, whereas the HH version is Type II and gives the opposite alignment. This choice of single-neuron model is invisible to rate models that use a sigmoid.
+
+## Coupling on Connectomes
+
+The coupling input to node i is:
+
+```
+I_i(t) = k Σ_j W_ij G(x_j(t − d_ij)),    d_ij = L_ij / v
 ```
 
-For distance-dependent delays, vbjax supports delay differential equation integration or discretized delay buffers indexed by the tract-length matrix.
+| Parameter | Typical value | Notes |
+|-----------|---------------|-------|
+| Global coupling k | e^−9 – e^−2 (vbjax sweep); model-specific | Primary network bifurcation parameter |
+| Conduction velocity v | 1–10 m/s (3–6 common) | Myelin-dependent |
+| Parcellation | Desikan 68; Destrieux 148 cortical (164 with subcortical in vbjax benchmark); Schaefer 100–1000 | neurojax WAND derivatives: `(T, 68)`, `(T, 148)` |
+| W_ij source | SIFT2 tractography weights + mean lengths | neurojax `fsl-connectome` derivatives |
 
-## Connection to Observables
+In vbjax, coupling is applied to r in the simplest case, for example `c = 0.03*x.sum(axis=1)`. The network is then integrated with `make_sde(dt, dfun, gfun)`, an Euler–Maruyama scan.
 
-### EEG/MEG Forward Model
+W_ij comes from diffusion tractography ([diffusion-mri.md](diffusion-mri.md)). hgx extends pairwise coupling W_ij to hyperedges ([method-hypergraph.md](method-hypergraph.md)).
 
-NMM output couples to sensor-level EEG/MEG via the leadfield matrix L (see [physics-electromagnetic.md](physics-electromagnetic.md)):
+## Observables
 
-```
-Y_EEG(t) = L * x_obs(t) + noise
-```
+- **EEG/MEG**: `Y = L x_obs + n`.
+  - x_obs is `y1 − y2` for JR, superficial pyramidal current for CMC, or the HNN dipole.
+  - L comes from BEM/FEM ([method-bem.md](method-bem.md), [method-fem.md](method-fem.md)).
+  - neurojax can invert the same L with 15 solvers ([method-source-imaging.md](method-source-imaging.md)).
+- **fMRI**: NMM activity drives the Balloon–Windkessel model, which adds a ~5 s lag and low-pass filtering to ~0.5 Hz ([fmri.md](fmri.md)). RWW gating S_E is the conventional driver.
+- **Spectra**: linearised transfer functions predict M/EEG spectral peaks. This is the basis of DCM for cross-spectral densities ([method-spectral-analysis.md](method-spectral-analysis.md), [method-pharmaco-eeg.md](method-pharmaco-eeg.md)).
+- **TMS-evoked potentials**: neurojax WAND stage N fits a global G and per-region A to empirical TEPs. It outputs region × time contribution matrices and virtual-lesion effects ([tms.md](tms.md)).
 
-where `x_obs` depends on the model: `y1 - y2` for JR, superficial pyramidal current for CMC, or a projection of `V` for MPR. The leadfield L encodes volume conduction through skull and scalp tissues, computed via BEM or FEM on an anatomical head model (see [method-fem.md](method-fem.md), [method-bem.md](method-bem.md)).
+## Differentiable Fitting
 
-### fMRI via Balloon-Windkessel
+All implementations listed here are JAX-native, so `jax.grad`, `vmap`, `pmap` and `jit` compose with them ([jax-ecosystem.md](jax-ecosystem.md), [method-neural-ode.md](method-neural-ode.md)).
 
-For fMRI observables, neural activity from the NMM drives the Balloon-Windkessel hemodynamic model (see [physics-hemodynamic.md](physics-hemodynamic.md)):
+- **Jacobian / bifurcation analysis.** `jax.jacobian(vb.mpr_dfun)(y0, (0.4, 0.), theta)` gives the local Jacobian, and vmapping over τ ∈ [1, 2] tracks eigenvalues.
+- **Gradient descent.** In the vbjax MVAR demo, log loss falls from 5.80 to −3.78 in 50 steps, with a final parameter MSE of 8.4×10⁻⁵.
+- **MCMC.** NumPyro NUTS with 500 warmup and 500 samples on a neural field requires ESS > 100, shrinkage > 0.7 and z < 1.5. Runtime is ~5 min on GPU and ~12 min on an x86 core.
+- **SBI.** Amortized posteriors are covered in [method-sbi.md](method-sbi.md). hnn-jax enables flow- and score-based SBI over thousands of vmapped θ.
+- **Spectral model comparison** (`vbjax:autoresearch/program.md`):
+  - CMC, RRW and CBEI are fitted to synthetic Liley EEG.
+  - Models are compared by BIC free energy (Stephan et al. 2009 framework), since the Hessian is too slow on an RTX 2080 with 8 GB.
+  - The metric is `spectral_fit = −mean log-spectral distance`, with a <5 min budget per experiment.
+  - Known failure mode: gradient descent gets stuck, giving identical fits across subjects.
 
-```
-Neural activity z(t) → blood flow f(t) → blood volume v(t) → BOLD y(t)
-```
-
-The neural-to-hemodynamic coupling introduces a ~5 s lag and acts as a severe low-pass filter, limiting effective temporal resolution to ~0.5 Hz. The reduced Wong-Wang model was specifically designed for this use case, with synaptic gating variables S_E and S_I that directly drive the hemodynamic cascade.
-
-### Spectral Observables
-
-NMM simulations can also be compared to data via their power spectral density. The linearized transfer function of the JR model around its operating point predicts spectral peaks that match empirical M/EEG spectra (see [method-spectral-analysis.md](method-spectral-analysis.md)). This is the basis of Dynamic Causal Modelling (DCM) for M/EEG, which fits NMM parameters to cross-spectral densities.
-
-## Bifurcation Analysis
-
-Bifurcation analysis maps the qualitative behavior of NMMs as parameters vary, identifying transitions between:
-
-- **Fixed points** (asynchronous / resting state)
-- **Limit cycles** (sustained oscillations, e.g., alpha rhythm at ~10 Hz)
-- **Bistable regimes** (coexistence of rest and oscillation, relevant to epilepsy)
-- **Chaotic attractors** (complex dynamics in coupled networks)
-
-Key bifurcation types in NMMs:
-
-| Bifurcation | Model | Control parameter | Dynamical signature |
-|-------------|-------|-------------------|---------------------|
-| Hopf | Jansen-Rit | external input p | Onset of alpha oscillation |
-| SNIC | MPR | excitability eta | Type I oscillation onset |
-| Pitchfork | Wilson-Cowan | coupling strength | Symmetry breaking |
-| Period-doubling | Coupled JR | inter-regional coupling k | Route to chaos |
-
-In vbjax, Jacobian-based bifurcation analysis is straightforward via `jax.jacobian`:
-
-```python
-import jax
-import vbjax as vb
-import jax.numpy as jp
-
-y0 = jp.r_[0.1, -2.0]
-
-def eig1_tau(tau):
-    theta = vb.mpr_default_theta._replace(tau=tau)
-    J = jax.jacobian(vb.mpr_dfun)(y0, (0.4, 0.), theta)
-    return jp.linalg.eigvals(J)[0]
-
-# Sweep tau to find bifurcation
-eigs = jax.vmap(eig1_tau)(jp.r_[1.0:2.0:32j])
-```
-
-## JAX / Differentiable Implementation
-
-vbjax provides NMMs as pure JAX functions, making them composable with `jax.grad`, `jax.vmap`, `jax.pmap`, and `jax.jit`. The core pattern is:
-
-1. **Define `dfun`**: a function `(state, coupling, params) -> d(state)/dt`
-2. **Wrap with `make_sde`**: creates an Euler-Maruyama integrator with configurable dt and noise
-3. **Run via `loop`**: the returned scan-based loop function integrates the SDE
-
-Available model functions in vbjax:
-
-| Function | Model | States | Notes |
-|----------|-------|--------|-------|
-| `vb.mpr_dfun` | Montbrio-Pazo-Roxin | 2 (r, V) | Default for most applications |
-| `vb.jr_dfun` | Jansen-Rit | 6 (y0-y5) | Well-characterized alpha generator |
-| `vb.cmc_dfun` | Canonical Microcircuit | 8 (ss, sp, ii, dp) | Laminar + predictive coding |
-| `vb.bvep_dfun` | Epileptor (BVEP) | 2 | Seizure dynamics |
-| `vb.dopa_dfun` | Dopamine-modulated | 6 (r, V, u, Sa, Sg, Dp) | Neuromodulation, 3-channel coupling |
-
-Default parameter sets are available as named tuples (e.g., `vb.mpr_default_theta`, `vb.cmc_default_theta`) and can be modified via `._replace()`.
-
-### Performance
-
-vbjax achieves high throughput for network simulations (164-node Destrieux parcellation):
+Throughput reported in the vbjax README, from the `bench_vmap.py` benchmark; single-threaded C typically reaches 50–200 Kiter/s per core:
 
 | Hardware | Throughput | Efficiency |
 |----------|-----------|------------|
-| Xeon W-2133 (Skylake, 88W) | 5.7 Miter/s | 65 Kiter/W |
-| Quadro RTX 5000 (Turing, 200W) | 26 Miter/s | 130 Kiter/W |
-| M1 Air (5nm, 18W) | 3.7 Miter/s | 205 Kiter/W |
+| Xeon W-2133 (88 W) | 5.7 Miter/s | 65 Kiter/W |
+| Quadro RTX 5000 (200 W) | 26 Miter/s | 130 Kiter/W |
+| M1 Air (18 W) | 3.7 Miter/s | 205 Kiter/W |
 
-### Parameter Estimation
+## Pitfalls
 
-Because vbjax models are fully differentiable, they support:
-
-- **Gradient descent**: Direct optimization of NMM parameters to fit empirical time series or spectral features
-- **MCMC with NumPyro**: Bayesian posterior estimation via NUTS (see [method-neural-ode.md](method-neural-ode.md))
-- **Parallel parameter sweeps**: `jax.vmap` over parameter grids, `jax.pmap` over CPU cores or GPUs
+- **Units.** neurojax `bench/models/rww.py` originally had `gamma_E = 0.641/1000` and `gamma_I = 1.0/1000`. With τ in seconds, γ must be in s⁻¹, so the correct values are `gamma_E = 0.641` and `gamma_I = 1.0`. With the bug, the fixed point was S_E ≈ 0.0002 instead of ≈ 0.164 (Deco 2013). The fix is commit `49acac2` (`neurojax:docs/BUG_REPORTS.md`).
+- **Oracle versions.** Biophysical reference simulators differ across releases (hnn_core 0.3 vs 0.6.1), so pin versions before validating an NMM against them.
+- **Evoked vs total power.** Non-phase-locked subharmonics vanish in evoked spectra (vc2008-netpyne).
+- **Mean-field closure.** Jitter and synchrony effects require population averaging (hnn-jax v0 → v1).
+- **Published equations.** The vc2008 paper's printed α_n prefactor (0.1) prevents spiking; the canonical HH value is 0.01. Check printed parameters before porting.
 
 ## Citations
-- **Deco2013rww**: Deco et al. (2013). Resting-state functional connectivity emerges from structurally and dynamically shaped slow linear fluctuations. J Neurosci 33:11239-11252. Reduced Wong-Wang model for resting-state simulation.
-- **SanzLeon2013tvb**: Sanz Leon et al. (2013). The Virtual Brain: a simulator of primate brain network dynamics. Frontiers in Neuroinformatics 7:10. TVB framework for connectome-coupled NMMs.
-- **Griffiths2024whobpyt**: Griffiths et al. (2024). WhoBPyT: Whole-Brain Modelling in PyTorch. Differentiable NMM fitting.
-- **ValdesSosa2026xialphanet**: Valdes-Sosa et al. (2026). xi-alphaNet: conduction delays shape alpha oscillations across the lifespan. National Science Review.
-- **Vidaurre2018hmm**: Vidaurre et al. (2018). Spontaneous cortical activity transiently organises into frequency specific phase-coupling networks. Nature Communications 9:2987. HMM state inference on NMM outputs.
+- vbjax: Woodman et al., ins-amu/vbjax [@woodman2024insamuvbjax]
+- Graph neural fields [@aqil2021graph; @aqil2026brain]
+- GABA/chandelier entrainment model [@vierlingclaassen2008modeling]
+- WAND dataset used for neurojax NMM/TMS fitting [@mcnabb2025wand]
+- Literature without local bibliography keys:
+  - Jansen & Rit 1995
+  - Montbrio, Pazo & Roxin 2015
+  - Wendling et al. 2002
+  - Deco et al. 2013
+  - Bastos et al. 2012
+  - Sanz Leon et al. 2013
 
 ## Relevant Projects
 
-- **vbjax** (primary): Full NMM library with MPR, JR, CMC, BVEP, Dopa models; SDE integration; connectome coupling; EEG/MEG forward models; neural field simulation on spherical harmonics; NumPyro-based Bayesian inference. Source: `github.com/ins-amu/vbjax`
-- **neurojax**: Provides `bench/` module for vbjax adapter, monitors, and leadfield-based forward modeling. HMM/DyNeMo models for state inference on NMM-generated time series. Uses Diffrax for neural ODE/SDE integration.
-- **alf**: Active inference agents can use NMMs as their generative model of brain dynamics, enabling agents that infer neural parameters from observations while selecting actions that minimize expected free energy. The B matrix (transition model) can be parameterized by NMM dynamics.
-- **hgx**: Higher-order coupling beyond pairwise connectomes. Standard NMMs use linear pairwise coupling `W_ij`; hgx extends this to hyperedge interactions where triplets or k-tuples of regions interact simultaneously, capturing structure not present in the structural connectome alone.
-- **jaxctrl**: Control-theoretic analysis of NMM networks, including controllability metrics and optimal perturbation design for brain stimulation protocols.
+- **vbjax**: MPR, JR, Epileptor and dopamine models; `make_sde`; spherical-harmonic neural fields; NumPyro inference; spectral-fitting autoresearch across Liley, CMC, RRW and CBEI.
+- **neurojax**: RWW (`bench/models/rww.py`), vbjax adapter and monitors in `bench/`, and leadfield forward models. Fits TEPs on WAND and applies HMM/DyNeMo to simulated output ([method-hmm-dynamics.md](method-hmm-dynamics.md)). Heritage: Wendling NMM → Fijee.
+- **gnf-jax**: stochastic Wilson-Cowan graph neural field with closed-form spectra, stability analysis and FC.
+- **hnn-jax**: differentiable HNN neocortical column; dipole forward model with a gradient oracle.
+- **vc2008-netpyne**: HH and theta-neuron E/I networks as spiking ground truth for 40 Hz ASSR mean-field models.
+- **alf**: NMMs as generative models for active inference ([method-active-inference.md](method-active-inference.md)).
+- **hgx**: higher-order coupling beyond pairwise W_ij.
+- **jaxctrl**: controllability and optimal perturbation of NMM networks.
+- **inferjax**: amortized SBI with posterior calibration for NMM simulators.
 
 ## See Also
 
-- [method-neural-ode.md](method-neural-ode.md) -- Differentiable simulation and adjoint methods underlying NMM integration
-- [physics-electromagnetic.md](physics-electromagnetic.md) -- Forward problem linking NMM output to EEG/MEG sensors
-- [physics-hemodynamic.md](physics-hemodynamic.md) -- Balloon-Windkessel model for NMM-to-BOLD coupling
-- [eeg.md](eeg.md) -- EEG modality: the primary observable for NMM validation
-- [meg.md](meg.md) -- MEG modality: complementary observable with different lead field structure
-- [method-hmm-dynamics.md](method-hmm-dynamics.md) -- HMM state inference applied to NMM-generated time series
-- [method-spectral-analysis.md](method-spectral-analysis.md) -- Spectral comparison between NMM output and empirical data
-- [method-active-inference.md](method-active-inference.md) -- Active inference framework using NMMs as generative models
+- [Connectome Harmonics](connectome-harmonics.md)
+- [In-Vitro MEA Cortical Cultures](in-vitro-mea-cultures.md)
+- [method-neural-fields.md](method-neural-fields.md): spatially continuous and graph field models
+- [method-neural-ode.md](method-neural-ode.md): differentiable ODE/SDE integration
+- [connectomics.md](connectomics.md): structural coupling matrices
+- [physics-electromagnetic.md](physics-electromagnetic.md), [eeg.md](eeg.md), [meg.md](meg.md): electrophysiological observables
+- [physics-hemodynamic.md](physics-hemodynamic.md), [fmri.md](fmri.md): BOLD observables
+- [method-spectral-analysis.md](method-spectral-analysis.md), [method-pharmaco-eeg.md](method-pharmaco-eeg.md): spectral fitting
+- [method-sbi.md](method-sbi.md), [method-variational-inference.md](method-variational-inference.md): parameter inference
+- [method-source-imaging.md](method-source-imaging.md): inverse problem on the same leadfield
+- [method-hypergraph.md](method-hypergraph.md): higher-order coupling
+- [tms.md](tms.md): TMS-evoked potential modelling

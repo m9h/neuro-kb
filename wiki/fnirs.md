@@ -171,9 +171,9 @@ Source: MCX Colin27 benchmark values
 ## See Also
 
 - [diffuse-optical-tomography.md](diffuse-optical-tomography.md) — Tomographic reconstruction methods
-- [hemodynamics.md](hemodynamics.md) — Neurovascular coupling mechanisms  
-- [photon-transport.md](photon-transport.md) — Light propagation in tissue
-- [beer-lambert-law.md](beer-lambert-law.md) — Spectroscopic foundations
-- [head-models.md](head-models.md) — Anatomical models for forward simulation
+- [hemodynamics.md](physics-hemodynamic.md) — Neurovascular coupling mechanisms  
+- [photon-transport.md](physics-diffusion-equation.md) — Light propagation in tissue
+- beer-lambert-law.md — Spectroscopic foundations
+- [head-models.md](head-model-mida.md) — Anatomical models for forward simulation
 - [eeg.md](eeg.md) — Complementary electrophysiological measurements
-- [skull-tissue.md](skull-tissue.md) — Optical properties of skull tissue
+- [skull-tissue.md](tissue-skull.md) — Optical properties of skull tissue

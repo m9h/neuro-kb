@@ -9,7 +9,7 @@ implementations:
   - dot-jax:analytical
   - MCMRSimulator.jl:Spins
   - sbi4dwi:forward_models
-related: [method-finite-element.md, physics-diffusion.md, physics-photon-transport.md]
+related: [method-fem.md, physics-diffusion-equation.md]
 ---
 
 # Monte Carlo Simulation
@@ -195,8 +195,8 @@ Monte Carlo estimators must satisfy:
 
 ## See Also
 
-- [method-finite-element.md](method-finite-element.md) - Complementary numerical approach
-- [physics-diffusion.md](physics-diffusion.md) - Underlying transport physics
-- [physics-photon-transport.md](physics-photon-transport.md) - Optical Monte Carlo physics
+- [method-finite-element.md](method-fem.md) - Complementary numerical approach
+- [physics-diffusion.md](physics-diffusion-equation.md) - Underlying transport physics
+- [physics-photon-transport.md](physics-diffusion-equation.md) - Optical Monte Carlo physics
 - [tissue-white-matter.md](tissue-white-matter.md) - Microstructural modeling target
-- [method-bayesian-inference.md](method-bayesian-inference.md) - Parameter estimation framework
+- [method-bayesian-inference.md](method-variational-inference.md) - Parameter estimation framework

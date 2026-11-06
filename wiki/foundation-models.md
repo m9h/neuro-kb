@@ -5,7 +5,7 @@ title: Neuroimaging Foundation Models
 tags: [foundation-models]
 description: "A foundation model (FM) here is a large model self-supervised on brain data (masked autoencoding, contrastive, or diffusion objectives) that is then *frozen* and evaluated by training light linear…"
 implementations: ["CortexMAE:src/cortex_mae", "BrainIAC:src", "smri-fm-fomo26:src/smri_mae", "reve_eeg:src/train.py", "emeg-fm:emeg_fm", "neural-decoding-transfer:poyo_harness"]
-related: [method-masked-autoencoding.md, fm-diagnostics.md, brain-age-benchmarking.md, spiking-neural-decoding.md, htsr-weight-analysis.md, benchmark-datasets.md, structural-mri.md, fmri.md, eeg.md, meg.md]
+related: [method-masked-autoencoding.md, fm-diagnostics.md, brain-age-benchmarking.md, spiking-neural-decoding.md, htsr-weight-analysis.md, benchmark-datasets.md, structural-mri.md, fmri.md, eeg.md, meg.md, method-eeg-foundation-models.md]
 ---
 
 # Neuroimaging Foundation Models
@@ -112,6 +112,7 @@ analogue of the weight-space dominant-tail regime. See
 
 ## See Also
 
+- [EEG Foundation Models and Representation Learning](method-eeg-foundation-models.md)
 - [htsr-weight-analysis.md](htsr-weight-analysis.md) — the weights-first scoring axis
 - [benchmark-datasets.md](benchmark-datasets.md) — fMRI-FM evaluation cohorts (Brainmarks)
 - [structural-mri.md](structural-mri.md) — morphometry baselines for smri-fm

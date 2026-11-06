@@ -138,7 +138,7 @@ Tested on hypergraphs up to 10^4 nodes and 10^3 hyperedges. Performance bottlene
 
 ## See Also
 
-- [method-tensor-decomposition.md](method-tensor-decomposition.md) - CP decomposition for THNN layers
+- method-tensor-decomposition.md - CP decomposition for THNN layers
 - [method-neural-ode.md](method-neural-ode.md) - Continuous-time dynamics on hypergraphs  
-- [concept-controllability.md](concept-controllability.md) - Network control theory fundamentals
-- [concept-higher-order-interactions.md](concept-higher-order-interactions.md) - Multi-way interaction modeling
+- [concept-controllability.md](connectomics.md) - Network control theory fundamentals
+- concept-higher-order-interactions.md - Multi-way interaction modeling

@@ -6,7 +6,7 @@ description: "PDE-constrained inversion that recovers a spatial physical-propert
 timestamp: 2026-07-03T00:00:00-07:00
 category: optimization
 implementations: ["brain-fwi:src/brain_fwi/simulation/forward.py", "brain-fwi:src/brain_fwi/simulation/checkpointed_scan.py", "stride:stride/optimisation/optimisation_loop.py", "jwave:jwave/acoustics/time_varying.py"]
-related: [physics-acoustic.md, tus.md, method-fem.md, method-pinn.md, tissue-acoustic-properties.md, diffuse-optical-tomography.md]
+related: [physics-acoustic.md, tus.md, method-fem.md, method-pinn.md, tissue-acoustic-properties.md, diffuse-optical-tomography.md, fus.md, acoustoelectric-imaging.md]
 ---
 
 # Full-Waveform Inversion
@@ -42,6 +42,8 @@ Memory is the bottleneck: the adjoint needs the forward wavefield at every times
 
 ## See Also
 
+- [Functional Ultrasound Imaging](fus.md)
+- [Acoustoelectric Neuroimaging](acoustoelectric-imaging.md)
 - [physics-acoustic.md](physics-acoustic.md) - governing wave equation
 - [tus.md](tus.md) - transcranial ultrasound modality
 - [method-fem.md](method-fem.md) - alternative forward discretization

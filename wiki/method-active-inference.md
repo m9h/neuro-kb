@@ -6,7 +6,7 @@ tags: [method, inference, active-inference]
 description: "Active Inference (AIF) is a unified framework for perception, action selection, and learning based on the minimization of variational free energy."
 category: inference
 implementations: [alf:agent, spinning-up-alf:notebooks/08-12]
-related: [method-variational-inference.md, method-free-energy-principle.md, method-belief-propagation.md]
+related: [method-variational-inference.md]
 ---
 
 # Active Inference
@@ -185,7 +185,7 @@ exploration_efficiency = 0.78       # Information gain per action
 ## See Also
 
 - [method-variational-inference.md](method-variational-inference.md) — Mathematical foundations
-- [method-free-energy-principle.md](method-free-energy-principle.md) — Broader theoretical framework  
-- [method-belief-propagation.md](method-belief-propagation.md) — Message passing implementation
-- [concept-exploration-exploitation.md](concept-exploration-exploitation.md) — Principled exploration in AIF
-- [concept-generative-models.md](concept-generative-models.md) — World model learning
+- method-free-energy-principle.md — Broader theoretical framework  
+- [method-belief-propagation.md](method-variational-inference.md) — Message passing implementation
+- concept-exploration-exploitation.md — Principled exploration in AIF
+- concept-generative-models.md — World model learning

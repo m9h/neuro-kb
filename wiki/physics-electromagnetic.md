@@ -6,7 +6,7 @@ tags: [physics, electromagnetic]
 description: "The electromagnetic forward problem in neuroimaging computes the electric potential and magnetic field at sensor locations given a current source distribution in the brain."
 physics: electromagnetic
 governing_equations: Maxwell equations in quasistatic approximation
-related: [tissue-conductivity.md, head-model-bem.md, head-model-fem.md, leadfield-matrix.md]
+related: [tissue-electrical-properties.md, method-bem.md, method-fem.md, method-source-imaging.md]
 ---
 
 # Electromagnetic Forward Problem
@@ -180,8 +180,8 @@ Used for efficient leadfield computation and validation.
 
 ## See Also
 
-- [tissue-conductivity.md](tissue-conductivity.md)
-- [head-model-bem.md](head-model-bem.md) 
-- [head-model-fem.md](head-model-fem.md)
-- [leadfield-matrix.md](leadfield-matrix.md)
-- [source-imaging-methods.md](source-imaging-methods.md)
+- [tissue-conductivity.md](tissue-electrical-properties.md)
+- [head-model-bem.md](method-bem.md) 
+- [head-model-fem.md](method-fem.md)
+- [leadfield-matrix.md](method-source-imaging.md)
+- [source-imaging-methods.md](method-source-imaging.md)

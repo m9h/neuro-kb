@@ -12,7 +12,7 @@ properties:
   optical_scattering_1_cm: 0.01
   density_kg_m3: 1007
 sources: [Gabriel1996, Baumann2000, Duck1990]
-related: [tissue-gray-matter.md, tissue-white-matter.md, head-model-colin27.md, modality-fnirs.md, physics-diffusion-equation.md]
+related: [tissue-gray-matter.md, tissue-white-matter.md, head-model-mida.md, fnirs.md, physics-diffusion-equation.md]
 ---
 
 # Cerebrospinal Fluid
@@ -140,6 +140,6 @@ In multi-tissue head models (MIDA, Colin27, SimNIBS):
 
 - [tissue-gray-matter.md](tissue-gray-matter.md) - Primary neural tissue compartment
 - [tissue-white-matter.md](tissue-white-matter.md) - Myelinated tissue properties  
-- [head-model-colin27.md](head-model-colin27.md) - Standard 4-tissue head model including CSF
-- [modality-fnirs.md](modality-fnirs.md) - Optical neuroimaging affected by CSF transparency
+- [head-model-colin27.md](head-model-mida.md) - Standard 4-tissue head model including CSF
+- [modality-fnirs.md](fnirs.md) - Optical neuroimaging affected by CSF transparency
 - [physics-diffusion-equation.md](physics-diffusion-equation.md) - Photon transport through low-scattering media

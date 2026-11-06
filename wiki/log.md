@@ -1,5 +1,14 @@
 # Change Log
 
+## 2026-11-05
+- **Refresh across the July-November 2026 work**, rebased onto the 2026-07-03 OKF-conformance state. Fetched raw docs from 34 changed repos (241 files); 28 repos new to the KB incl. ti-sim, ae-sim, neuroelectric-mri, mri-rf-stack, open-fus-plan, hnn-jax, gnf-jax, inferjax, vpjax, nanoeeg, nsg-agent-kit, bsccm-jax, openconfocal-cm, insula.
+- **references.bib**: 456 → 696 entries (ingest_refs over the same repos, merged by key and DOI; gabriel1996dielectric and fountas2020deep added by hand; ingest_refs no longer crashes on empty author fields).
+- **11 new pages**: fus, temporal-interference, acoustoelectric-imaging, neuronal-current-mri, optical-microscopy, neural-mass-models (now maintained by distill.py), method-neural-fields, method-pharmaco-eeg, method-eeg-foundation-models, physics-cerebrovascular, compute-infrastructure. **11 existing pages re-distilled** with their new sources (eeg, meg, fmri, tus, structural-mri, method-fem, method-sbi, method-neural-ode, physics-hemodynamic, jax-ecosystem, data-formats). New pages cross-linked to the July pages they overlap (connectome-harmonics, foundation-models, method-masked-autoencoding, tes-efield-modeling, diffuse-optical-tomography, method-full-waveform-inversion); merging method-neural-fields into connectome-harmonics and method-eeg-foundation-models into foundation-models is an open editorial decision.
+- **distill.py**: model claude-opus-5-5 (effort high, server-side refusal fallbacks), 16k output cap (the 4096 cap that blocked mass re-runs in June is gone), `--pages` selector (`--pages refresh` = this set), prompt lists the valid link targets and requires OKF `description`/`timestamp`/`tags` and a `## Citations` heading; `update_index()` now emits the OKF index (okf_version only, inline descriptions) instead of the pre-OKF form.
+- **Link sweep**: 94 legacy broken cross-links in 23 April pages remapped to existing pages; audit reports 0 broken links, 0 unknown citation keys, OKF fields on all 65 concept pages.
+- Scripts and CLAUDE.md refer to `~/Workspace` (was `~/dev`); CLAUDE.md project table extended; anthropic SDK pin 0.91 → 2.6.
+- Re-distilled structural-mri.md after the merge (kept the June T1Prep/smri-fm content, added insula).
+
 ## 2026-07-03
 - **OKF conformance pass**: aligned the bundle to Google's Open Knowledge Format v0.1. Reduced `index.md` frontmatter to only `okf_version: "0.1"`; stripped frontmatter from `log.md` (reserved files); backfilled `description` (first-sentence) and `timestamp` (git last-commit, ISO 8601) on all 46 concept pages; normalized 43 reference headings to `## Citations`. Body-link graph (`## See Also`) was already OKF-visible.
 - **Repo sweep of ~/dev/ (~80 repos)** across 5 clusters (acoustic/optical, dMRI/qMRI, foundation-models, simulation/connectomics, segmentation/tools). Created 11 new cross-cutting pages, each recurring across ≥2 repos:
@@ -64,3 +73,5 @@
 - **distill.py**: registered a `foundation-models` topic cluster and added the new projects (smri-fm, emeg-fm, ephys-tokenizer-jax, T1Prep, brainmarks-*) to existing modality/method clusters so the pipeline maintains the new pages.
 - **Pruned** 9 stale renamed/deleted raw dirs (Thinking_Higher, quantum-cognition, QuantumComp4Neuro, quantum-deeponet, jsPsych2, stac-mjx, track-mjx, organoid-hgx-benchmark, organoid_regulomes); kept LAYNII + neurotech-primer-book (declared connected projects).
 - NOTE: did not mass-re-run distill.py over existing pages — its MAX_TOKENS=4096 cap truncates longer curated pages. New pages hand-authored; existing pages refreshed selectively.
+
+

@@ -13,7 +13,7 @@ properties:
   optical_musp_1_mm: 0.86
   optical_n: 1.37
 sources: ["Gabriel1996", "Prahl1999", "MCX_Colin27"]
-related: ["tissue-skull.md", "tissue-csf.md", "tissue-gray-matter.md", "head-model-colin27.md", "modality-fnirs.md", "modality-eeg.md"]
+related: [tissue-skull.md, tissue-csf.md, tissue-gray-matter.md, head-model-mida.md, fnirs.md, eeg.md]
 ---
 
 # Scalp
@@ -126,8 +126,8 @@ For TMS/tDCS modeling:
 
 - [tissue-skull.md](tissue-skull.md) - Next inward tissue layer
 - [tissue-gray-matter.md](tissue-gray-matter.md) - Primary imaging target beneath skull
-- [head-model-colin27.md](head-model-colin27.md) - Reference head model with 4-layer tissue segmentation
-- [modality-eeg.md](modality-eeg.md) - Electrical neuroimaging sensitive to scalp conductivity
-- [modality-fnirs.md](modality-fnirs.md) - Optical neuroimaging through scalp tissue
-- [physics-bioelectric.md](physics-bioelectric.md) - Electrical field propagation through tissues
-- [physics-diffusion.md](physics-diffusion.md) - Light propagation in scattering media
+- [head-model-colin27.md](head-model-mida.md) - Reference head model with 4-layer tissue segmentation
+- [modality-eeg.md](eeg.md) - Electrical neuroimaging sensitive to scalp conductivity
+- [modality-fnirs.md](fnirs.md) - Optical neuroimaging through scalp tissue
+- [physics-bioelectric.md](physics-electromagnetic.md) - Electrical field propagation through tissues
+- [physics-diffusion.md](physics-diffusion-equation.md) - Light propagation in scattering media

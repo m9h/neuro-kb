@@ -4,7 +4,7 @@ timestamp: 2026-04-08T20:55:09-07:00
 title: Tissue Optical Properties (cross-tissue)
 tags: [optical]
 description: "Optical properties of biological tissues in the near-infrared (NIR) spectral window (650-950 nm) that determine photon propagation for diffuse optical tomography (DOT) and functional near-infrared…"
-related: [diffuse-optical-tomography.md, chromophore-spectroscopy.md, fem-forward-modeling.md, nirs-signal-processing.md]
+related: [diffuse-optical-tomography.md, fnirs.md, method-fem.md]
 ---
 
 # Tissue Optical Properties (cross-tissue)
@@ -147,7 +147,7 @@ For validation, tissue-mimicking phantoms use:
 ## See Also
 
 - [diffuse-optical-tomography.md](diffuse-optical-tomography.md) - Forward and inverse DOT modeling
-- [chromophore-spectroscopy.md](chromophore-spectroscopy.md) - Beer-Lambert law and extinction spectra
-- [fem-forward-modeling.md](fem-forward-modeling.md) - Numerical solution of diffusion equation
-- [tissue-conductivity-properties.md](tissue-conductivity-properties.md) - Electrical properties for EEG/MEG
-- [head-models.md](head-models.md) - Anatomical models with tissue segmentation
+- [chromophore-spectroscopy.md](fnirs.md) - Beer-Lambert law and extinction spectra
+- [fem-forward-modeling.md](method-fem.md) - Numerical solution of diffusion equation
+- [tissue-conductivity-properties.md](tissue-electrical-properties.md) - Electrical properties for EEG/MEG
+- [head-models.md](head-model-mida.md) - Anatomical models with tissue segmentation

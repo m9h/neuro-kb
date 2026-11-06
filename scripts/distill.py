@@ -6,7 +6,7 @@ Reads raw/projects/ and references.bib, then uses Claude API to generate
 wiki pages following the CLAUDE.md schema. Outputs to wiki/.
 
 Usage:
-    cd ~/dev/neuro-kb
+    cd ~/Workspace/neuro-kb
     python3 scripts/distill.py --plan                # show what pages would be created
     python3 scripts/distill.py --topic tissues        # distill one topic cluster
     python3 scripts/distill.py --topic modalities
@@ -35,23 +35,29 @@ WIKI_DIR = ROOT / "wiki"
 BIB_FILE = ROOT / "references.bib"
 SCHEMA_FILE = ROOT / "CLAUDE.md"
 
-MODEL = "claude-sonnet-4-20250514"
-MAX_TOKENS = 4096
+MODEL = "claude-opus-5-5"
+MAX_TOKENS = 16000  # pages run 100-250 lines; the old 4096 cap truncated long tables
+EFFORT = "high"
 
 # Topic clusters — which projects contribute to which wiki pages
 TOPIC_CLUSTERS = {
     "modalities": {
         "description": "Imaging and stimulation modality pages",
         "pages": [
-            ("eeg.md", "Electroencephalography", ["neurojax", "coffeine", "vbjax", "emeg-fm", "ephys-tokenizer-jax"]),
-            ("meg.md", "Magnetoencephalography", ["neurojax", "coffeine", "hippy-feat", "emeg-fm", "ephys-tokenizer-jax"]),
+            ("eeg.md", "Electroencephalography", ["neurojax", "coffeine", "vbjax", "emeg-fm", "ephys-tokenizer-jax", "hnn-jax", "nanoeeg", "zuna-eeg-pipeline"]),
+            ("meg.md", "Magnetoencephalography", ["neurojax", "coffeine", "hippy-feat", "emeg-fm", "ephys-tokenizer-jax", "hnn-jax"]),
             ("fnirs.md", "Functional Near-Infrared Spectroscopy", ["dot-jax", "sbi4dwi"]),
-            ("structural-mri.md", "Structural MRI", ["neurojax", "sbi4dwi", "hippy-feat", "smri-fm", "T1Prep"]),
+            ("structural-mri.md", "Structural MRI", ["neurojax", "sbi4dwi", "hippy-feat", "smri-fm", "T1Prep", "insula"]),
             ("diffusion-mri.md", "Diffusion MRI", ["sbi4dwi", "SpinDoctor.jl", "MCMRSimulator.jl"]),
-            ("fmri.md", "Functional MRI", ["neurojax", "hippy-feat", "vbjax", "brainmarks-hbn", "brainmarks-wand", "brainmarks-dlbs", "brainmarks-syn"]),
+            ("fmri.md", "Functional MRI", ["neurojax", "hippy-feat", "vbjax", "brainmarks-hbn", "brainmarks-wand", "brainmarks-dlbs", "brainmarks-syn", "vpjax"]),
             ("mrs.md", "MR Spectroscopy", ["mrs-jax", "neurojax"]),
-            ("tus.md", "Transcranial Ultrasound", ["sbi4dwi", "jwave", "brain-fwi", "openlifu-python"]),
+            ("tus.md", "Transcranial Ultrasound", ["sbi4dwi", "jwave", "brain-fwi", "openlifu-python", "open-fus-plan"]),
+            ("fus.md", "Functional Ultrasound Imaging", ["open-fus-plan", "brain-fwi", "jwave"]),
             ("tms.md", "Transcranial Magnetic Stimulation", ["neurojax", "vbjax"]),
+            ("temporal-interference.md", "Temporal Interference Stimulation", ["ti-sim", "fem-trials", "neurojax"]),
+            ("acoustoelectric-imaging.md", "Acoustoelectric Neuroimaging", ["ae-sim", "fem-trials", "jwave", "brain-fwi"]),
+            ("neuronal-current-mri.md", "Neuronal-Current MRI, MREIT and MRCDI", ["neuroelectric-mri", "mri-rf-stack", "neurojax"]),
+            ("optical-microscopy.md", "Computational Optical Microscopy", ["bsccm-jax", "openconfocal-cm", "dot-jax"]),
         ],
     },
     "tissues": {
@@ -70,17 +76,21 @@ TOPIC_CLUSTERS = {
     "methods": {
         "description": "Computational method pages",
         "pages": [
-            ("method-fem.md", "Finite Element Method", ["neurojax", "sbi4dwi", "SpinDoctor.jl"]),
+            ("method-fem.md", "Finite Element Method", ["neurojax", "sbi4dwi", "SpinDoctor.jl", "ti-sim", "ae-sim", "fem-trials"]),
             ("method-bem.md", "Boundary Element Method", ["neurojax"]),
             ("method-monte-carlo.md", "Monte Carlo Simulation", ["dot-jax", "MCMRSimulator.jl", "sbi4dwi"]),
-            ("method-sbi.md", "Simulation-Based Inference", ["sbi4dwi"]),
-            ("method-neural-ode.md", "Neural ODEs / Differentiable Simulation", ["sbi4dwi", "jaxctrl", "vbjax"]),
+            ("method-sbi.md", "Simulation-Based Inference", ["sbi4dwi", "inferjax", "hnn-jax", "vpjax"]),
+            ("method-neural-ode.md", "Neural ODEs / Differentiable Simulation", ["sbi4dwi", "jaxctrl", "vbjax", "vpjax"]),
             ("method-source-imaging.md", "Source Imaging / Inverse Problems", ["neurojax", "brain-fwi"]),
             ("method-spectral-analysis.md", "Spectral Analysis (multitaper, wavelets)", ["neurojax", "coffeine"]),
             ("method-hmm-dynamics.md", "Hidden Markov Models for Brain Dynamics", ["neurojax", "vbjax"]),
             ("method-active-inference.md", "Active Inference", ["alf", "spinning-up-alf"]),
             ("method-hypergraph.md", "Hypergraph Methods", ["hgx", "jaxctrl"]),
             ("htsr-weight-analysis.md", "HT-SR Weight-Spectrum Analysis", ["wwj", "WeightWatcher", "emeg-fm", "smri-fm"]),
+            ("neural-mass-models.md", "Neural Mass Models", ["vbjax", "hnn-jax", "vc2008-netpyne", "gnf-jax", "neurojax"]),
+            ("method-neural-fields.md", "Neural Field Models on Connectome Harmonics", ["gnf-jax", "vbjax"]),
+            ("method-pharmaco-eeg.md", "Pharmaco-EEG: Spectral Parameterization and Drug Effects", ["neurojax", "vpjax"]),
+            ("method-eeg-foundation-models.md", "EEG Foundation Models and Representation Learning", ["nanoeeg", "emeg-fm", "zuna-eeg-pipeline"]),
         ],
     },
     "physics": {
@@ -90,14 +100,16 @@ TOPIC_CLUSTERS = {
             ("physics-diffusion-equation.md", "Diffusion Equation (water, photon)", ["sbi4dwi", "SpinDoctor.jl", "dot-jax"]),
             ("physics-acoustic.md", "Acoustic Wave Propagation", ["jwave", "brain-fwi", "sbi4dwi"]),
             ("physics-bloch.md", "Bloch Equations / MR Physics", ["sbi4dwi", "mrs-jax", "MCMRSimulator.jl"]),
-            ("physics-hemodynamic.md", "Hemodynamic Response / Neurovascular Coupling", ["neurojax", "vbjax", "hippy-feat"]),
+            ("physics-hemodynamic.md", "Hemodynamic Response / Neurovascular Coupling", ["neurojax", "vbjax", "hippy-feat", "vpjax"]),
+            ("physics-cerebrovascular.md", "Cerebrovascular, Metabolic and Pharmacokinetic Physiology", ["vpjax", "vbjax"]),
         ],
     },
     "infrastructure": {
         "description": "Shared JAX infrastructure and tooling",
         "pages": [
-            ("jax-ecosystem.md", "JAX Ecosystem for Neuroimaging", ["sbi4dwi", "neurojax", "vbjax", "hgx", "alf", "jaxctrl", "setae"]),
-            ("data-formats.md", "Neuroimaging Data Formats", ["neurojax", "sbi4dwi", "dot-jax"]),
+            ("jax-ecosystem.md", "JAX Ecosystem for Neuroimaging", ["sbi4dwi", "neurojax", "vbjax", "hgx", "alf", "jaxctrl", "setae", "inferjax", "vpjax", "hnn-jax", "gnf-jax", "mrs-jax"]),
+            ("data-formats.md", "Neuroimaging Data Formats", ["neurojax", "sbi4dwi", "dot-jax", "hippy-feat"]),
+            ("compute-infrastructure.md", "Compute: NSG, NeuroFedora, NeuroDebian and Containers", ["nsg-agent-kit", "neurofedora", "neurodebian", "neurocontainers", "research-infra"]),
         ],
     },
     "foundation-models": {
@@ -108,6 +120,15 @@ TOPIC_CLUSTERS = {
         ],
     },
 }
+
+# Pages added or whose sources changed in the 2026-11 refresh (for --pages shorthand)
+REFRESH_2026_11 = [
+    "fus.md", "temporal-interference.md", "acoustoelectric-imaging.md", "neuronal-current-mri.md",
+    "optical-microscopy.md", "neural-mass-models.md", "method-neural-fields.md", "method-pharmaco-eeg.md",
+    "method-eeg-foundation-models.md", "physics-cerebrovascular.md", "compute-infrastructure.md",
+    "eeg.md", "meg.md", "fmri.md", "tus.md", "structural-mri.md", "method-fem.md", "method-sbi.md",
+    "method-neural-ode.md", "physics-hemodynamic.md", "jax-ecosystem.md", "data-formats.md",
+]
 
 
 def load_project_content(project: str, max_chars: int = 50000) -> str:
@@ -182,12 +203,19 @@ def generate_wiki_page(
     bib_entries = load_bib_for_projects(projects)
     schema = load_schema()
 
+    # Every page that exists or is planned, so cross-links resolve
+    planned = {f for info in TOPIC_CLUSTERS.values() for f, _, _ in info["pages"]}
+    on_disk = {p.name for p in WIKI_DIR.glob("*.md")} - {"index.md", "log.md"}
+    existing_pages = ", ".join(sorted(planned | on_disk))
+
     # Check for existing page to update rather than overwrite
     existing = ""
     existing_path = WIKI_DIR / filename
     if existing_path.exists():
         existing = existing_path.read_text()
 
+    from datetime import datetime
+    timestamp = datetime.now().astimezone().replace(microsecond=0).isoformat()
     prompt = f"""You are a knowledge engineer building a wiki page for a shared neuroimaging knowledge base.
 
 ## Schema (from CLAUDE.md)
@@ -202,14 +230,18 @@ Source projects: {', '.join(projects)}
 
 ## Requirements
 
-1. Start with YAML frontmatter matching the appropriate entity type from the schema
+1. Start with YAML frontmatter matching the appropriate entity type from the schema, plus the OKF fields: `description` (one sentence, quoted), `timestamp` (ISO 8601 with offset; use {timestamp}), and `tags` (3-6 lowercase keywords). Name the reference section `## Citations`
 2. Write clear, specific, quantitative content — prefer "CSF conductivity is 1.79 S/m at 10 Hz (Gabriel 1996)" over "CSF is conductive"
 3. Include a Properties/Parameters table where applicable with actual numerical values from the source material
-4. Cross-reference other wiki pages using markdown links: [page-name.md](page-name.md)
-5. Cite bibliography entries using BibTeX keys: [@key]
-6. Include a "Relevant Projects" section listing which ~/dev/ projects implement this concept
+4. Cross-reference other wiki pages using markdown links: [page-name.md](page-name.md). Link ONLY to pages in the "Existing wiki pages" list below (plus `{filename}` itself); never invent a filename. The `related:` frontmatter list must obey the same rule.
+5. Cite bibliography entries using BibTeX keys: [@key]. Use only keys that appear in the bibliography excerpt below; if a fact has no matching key, cite the raw source file path instead.
+6. Include a "Relevant Projects" section listing which ~/Workspace/ projects implement this concept
 7. Include a "See Also" section with links to related wiki pages
 8. Keep the page focused — one concept per page, aim for 100-250 lines
+
+## Existing wiki pages (the only valid link targets)
+
+{existing_pages}
 
 ## Source Material
 
@@ -223,62 +255,71 @@ Source projects: {', '.join(projects)}
 
 Generate ONLY the wiki page content (frontmatter + markdown). No preamble or explanation."""
 
-    response = client.messages.create(
+    # Opus 5.5: thinking is always on; effort is the depth control. Server-side
+    # fallbacks re-run a safety-declined request on another model automatically.
+    response = client.beta.messages.create(
         model=MODEL,
         max_tokens=MAX_TOKENS,
+        output_config={"effort": EFFORT},
+        betas=["server-side-fallback-2026-07-01"],
+        fallbacks="default",
         messages=[{"role": "user", "content": prompt}],
     )
-    return response.content[0].text
+    if response.stop_reason == "refusal":
+        detail = response.stop_details.explanation if response.stop_details else ""
+        raise RuntimeError(f"refused: {detail}")
+    if response.stop_reason == "max_tokens":
+        raise RuntimeError(f"truncated at {MAX_TOKENS} tokens; page too long")
+    text = "".join(b.text for b in response.content if b.type == "text").strip()
+    # Strip a stray ```markdown fence if the model wrapped the page
+    text = re.sub(r"^```(?:markdown|md)?\n", "", text)
+    text = re.sub(r"\n```\s*$", "", text)
+    return text + "\n"
 
 
 def update_index():
-    """Regenerate wiki/index.md from all wiki pages."""
+    """Regenerate wiki/index.md in OKF form: root frontmatter carries only
+    okf_version; every entry has an inline description from the page's
+    `description:` field (falls back to the first body sentence)."""
     pages_by_type = {}
     for f in sorted(WIKI_DIR.glob("*.md")):
         if f.name in ("index.md", "log.md"):
             continue
         text = f.read_text()
-        # Extract type from frontmatter
-        type_match = re.search(r'^type:\s*(.+)$', text, re.MULTILINE)
-        title_match = re.search(r'^title:\s*(.+)$', text, re.MULTILINE)
-        page_type = type_match.group(1).strip() if type_match else "concept"
-        title = title_match.group(1).strip() if title_match else f.stem
+        fm = re.match(r"^---\n(.*?)\n---\n(.*)$", text, re.S)
+        head, body = (fm.group(1), fm.group(2)) if fm else ("", text)
+        def field(name):
+            m = re.search(rf"^{name}:\s*(.+)$", head, re.M)
+            return m.group(1).strip().strip("'\"") if m else ""
+        page_type = field("type") or "concept"
+        title = field("title") or f.stem
+        desc = field("description")
+        if not desc:
+            para = next((x for x in re.split(r"\n\s*\n", body)
+                         if x.strip() and not x.lstrip().startswith(("#", "|", "`", "-", "*", "$", "<"))), "")
+            desc = re.split(r"(?<=[.!?])\s", re.sub(r"\*\*|`", "", para).replace("\n", " ").strip())[0]
+        if len(desc) > 110:
+            desc = desc[:109].rstrip() + "…"
+        if desc:
+            desc = desc[0].lower() + desc[1:] if not desc[:2].isupper() else desc
+        pages_by_type.setdefault(page_type, []).append((f.name, title, desc))
 
-        pages_by_type.setdefault(page_type, []).append((f.name, title))
-
-    lines = [
-        "---",
-        "title: Index",
-        "description: Master catalog of all wiki pages",
-        "---",
-        "",
-        "# Wiki Index",
-        "",
-    ]
-
+    lines = ["---", 'okf_version: "0.1"', "---", "# Wiki Index", ""]
     type_labels = {
-        "head-model": "Head Models",
-        "modality": "Modalities",
-        "physics": "Physics",
-        "tissue": "Tissues",
-        "method": "Methods",
-        "coordinate-system": "Coordinate Systems",
-        "concept": "Concepts",
-        "infrastructure": "Infrastructure",
+        "head-model": "Head Models", "modality": "Modalities", "physics": "Physics",
+        "tissue": "Tissues", "method": "Methods", "coordinate-system": "Coordinate Systems",
+        "infrastructure": "Infrastructure", "concept": "Concepts",
     }
-
-    for ptype in ["head-model", "modality", "physics", "tissue", "method",
-                   "coordinate-system", "infrastructure", "concept"]:
-        label = type_labels.get(ptype, ptype.title())
+    order = ["head-model", "modality", "physics", "tissue", "method",
+             "coordinate-system", "infrastructure", "concept"]
+    for ptype in order + sorted(set(pages_by_type) - set(order)):
         pages = pages_by_type.get(ptype, [])
-        lines.append(f"## {label}")
-        if pages:
-            for filename, title in sorted(pages, key=lambda x: x[1]):
-                lines.append(f"- [{title}]({filename})")
-        else:
-            lines.append("*(none yet)*")
+        if not pages:
+            continue
+        lines.append(f"## {type_labels.get(ptype, ptype.title())}")
+        for filename, title, desc in sorted(pages, key=lambda x: x[1].lower()):
+            lines.append(f"- [{title}]({filename})" + (f" - {desc}" if desc else ""))
         lines.append("")
-
     (WIKI_DIR / "index.md").write_text("\n".join(lines))
 
 
@@ -321,15 +362,23 @@ def distill(
     project: str | None = None,
     all_topics: bool = False,
     dry_run: bool = False,
+    pages: list[str] | None = None,
 ):
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print("ERROR: Set ANTHROPIC_API_KEY environment variable")
-        sys.exit(1)
+    # Credentials resolve from ANTHROPIC_API_KEY, ANTHROPIC_AUTH_TOKEN, or an
+    # `ant auth login` profile; the zero-arg client handles all three.
+    client = anthropic.Anthropic()
 
-    client = anthropic.Anthropic(api_key=api_key)
-
-    if all_topics:
+    if pages:
+        wanted = set(pages)
+        clusters = {}
+        for topic, info in TOPIC_CLUSTERS.items():
+            sel = [(f, t, p) for f, t, p in info["pages"] if f in wanted]
+            if sel:
+                clusters[topic] = {"description": info["description"], "pages": sel}
+        missing = wanted - {f for info in clusters.values() for f, _, _ in info["pages"]}
+        if missing:
+            print(f"WARNING: not in TOPIC_CLUSTERS: {', '.join(sorted(missing))}")
+    elif all_topics:
         clusters = TOPIC_CLUSTERS
     elif topics:
         clusters = {t: TOPIC_CLUSTERS[t] for t in topics if t in TOPIC_CLUSTERS}
@@ -400,8 +449,14 @@ def main():
                         help="Distill all topic clusters")
     parser.add_argument("--dry-run", action="store_true",
                         help="Show what would happen without API calls")
+    parser.add_argument("--pages", nargs="+",
+                        help="Distill only these page filenames (use 'refresh' for the 2026-11 set)")
 
     args = parser.parse_args()
+
+    pages = args.pages
+    if pages == ["refresh"]:
+        pages = REFRESH_2026_11
 
     if args.plan:
         plan_pages(args.topic)
@@ -411,6 +466,7 @@ def main():
             project=args.project,
             all_topics=args.all_topics,
             dry_run=args.dry_run,
+            pages=pages,
         )
 
 

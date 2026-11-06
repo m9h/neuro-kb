@@ -6,7 +6,7 @@ tags: [method, spectral]
 description: "Spectral analysis methods for extracting frequency-domain features from neural signals, including multitaper spectral estimation and wavelet transforms."
 category: spectral
 implementations: [neurojax:analysis.spectral, coffeine:compute_coffeine]
-related: [method-time-frequency-analysis.md, method-hilbert-transform.md, method-fourier-transform.md, method-covariance-estimation.md]
+related: []
 ---
 
 # Spectral Analysis (multitaper, wavelets)
@@ -141,7 +141,7 @@ where ψ is the mother wavelet, a is scale, b is translation.
 
 ## See Also
 
-- [method-hilbert-transform.md](method-hilbert-transform.md) - Analytic signal and instantaneous frequency
-- [method-time-frequency-analysis.md](method-time-frequency-analysis.md) - General time-frequency methods
-- [method-covariance-estimation.md](method-covariance-estimation.md) - Covariance matrices in frequency bands
-- [concept-neural-oscillations.md](concept-neural-oscillations.md) - Biological basis of neural rhythms
+- method-hilbert-transform.md - Analytic signal and instantaneous frequency
+- method-time-frequency-analysis.md - General time-frequency methods
+- method-covariance-estimation.md - Covariance matrices in frequency bands
+- concept-neural-oscillations.md - Biological basis of neural rhythms

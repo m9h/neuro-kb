@@ -8,11 +8,11 @@ Resolves DOIs via CrossRef and arXiv IDs via arXiv API into BibTeX.
 Deduplicates against the master references.bib and appends new entries.
 
 Usage:
-    cd ~/dev/neuro-kb
+    cd ~/Workspace/neuro-kb
     uv run scripts/ingest_refs.py                  # all repos since 2025-01-01
     uv run scripts/ingest_refs.py --repos neurojax sbi4dwi  # specific repos
     uv run scripts/ingest_refs.py --dry-run         # show what would be added
-    uv run scripts/ingest_refs.py --local           # scan ~/dev/ instead of GitHub
+    uv run scripts/ingest_refs.py --local           # scan ~/Workspace/ instead of GitHub
 """
 
 import argparse
@@ -34,7 +34,7 @@ from urllib.request import Request, urlopen
 GITHUB_ORG = "m9h"
 SINCE_DATE = "2025-01-01"
 MASTER_BIB = Path(__file__).resolve().parent.parent / "references.bib"
-LOCAL_DEV = Path.home() / "dev"
+LOCAL_DEV = Path.home() / "Workspace"
 
 # File patterns to scan for references
 SCAN_GLOBS = [
@@ -321,10 +321,11 @@ def normalize_crossref_key(bib_text: str, doi: str) -> str:
     year_m = re.search(r'year\s*=\s*\{?(\d{4})\}?', bib_text, re.IGNORECASE)
     title_m = re.search(r'title\s*=\s*\{([^}]+)\}', bib_text, re.IGNORECASE)
 
-    if author_m and year_m and title_m:
-        first_author = author_m.group(1).split(",")[0].split(" and ")[0].strip()
-        last_name = first_author.split()[-1].lower()
-        last_name = re.sub(r'[^a-z]', '', last_name)
+    first_author = ""
+    if author_m:
+        first_author = author_m.group(1).split(" and ")[0].split(",")[0].strip()
+    if first_author and year_m and title_m:
+        last_name = re.sub(r'[^a-z]', '', first_author.split()[-1].lower()) or "anon"
         year = year_m.group(1)
         # First significant word of title (skip articles)
         title_words = title_m.group(1).split()
@@ -565,7 +566,7 @@ def main():
     )
     parser.add_argument(
         "--local", action="store_true",
-        help="Scan ~/dev/ locally instead of GitHub API"
+        help="Scan ~/Workspace/ locally instead of GitHub API"
     )
     parser.add_argument(
         "--verbose", "-v", action="store_true",

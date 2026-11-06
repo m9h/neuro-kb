@@ -7,10 +7,10 @@ repo into raw/projects/{repo_name}/, preserving directory structure.
 These become the immutable source documents for wiki distillation.
 
 Usage:
-    cd ~/dev/neuro-kb
+    cd ~/Workspace/neuro-kb
     python3 scripts/fetch_raw.py                    # all repos
     python3 scripts/fetch_raw.py --repos neurojax sbi4dwi
-    python3 scripts/fetch_raw.py --local            # copy from ~/dev/
+    python3 scripts/fetch_raw.py --local            # copy from ~/Workspace/
     python3 scripts/fetch_raw.py --refresh           # overwrite existing
 """
 
@@ -27,7 +27,7 @@ from pathlib import Path
 GITHUB_ORG = "m9h"
 SINCE_DATE = "2025-01-01"
 RAW_DIR = Path(__file__).resolve().parent.parent / "raw" / "projects"
-LOCAL_DEV = Path.home() / "dev"
+LOCAL_DEV = Path.home() / "Workspace"
 
 # Files to fetch from each repo
 FETCH_PATTERNS = [

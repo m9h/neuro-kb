@@ -6,7 +6,7 @@ description: "A structure-function basis in which brain activity is expressed as
 timestamp: 2026-07-03T00:00:00-07:00
 category: spectral
 implementations: ["connectome_harmonic_core:construct_harmonics.py", "connectome_harmonic_core:compute_spectra.py", "HADES:utils", "anatomical-compiler:src"]
-related: [connectomics.md, structural-mri.md, diffusion-mri.md, fmri.md, method-spectral-analysis.md, method-hypergraph.md]
+related: [connectomics.md, structural-mri.md, diffusion-mri.md, fmri.md, method-spectral-analysis.md, method-hypergraph.md, method-neural-fields.md]
 ---
 
 # Connectome Harmonics
@@ -41,6 +41,7 @@ The **Hodge Laplacian** generalizes this to higher-order (edge/triangle) structu
 
 ## See Also
 
+- [Neural Field Models on Connectome Harmonics](method-neural-fields.md)
 - [connectomics.md](connectomics.md) - structural connectome construction
 - [method-spectral-analysis.md](method-spectral-analysis.md) - spectral decomposition methods
 - [diffusion-mri.md](diffusion-mri.md) - tractography source of the connectome

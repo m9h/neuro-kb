@@ -12,7 +12,7 @@ properties:
   density_kg_m3: 1850
   attenuation_dB_cm_MHz: 4.0
 sources: ["aubry2022itrusst", "gabriel1996", "iacono2015mida"]
-related: [tissue-csf.md, tissue-brain.md, head-model-mida.md, head-model-sci.md, physics-acoustic-wave-equation.md, modality-tfus.md]
+related: [tissue-csf.md, tissue-gray-matter.md, head-model-mida.md, sci-head-model.md, physics-acoustic.md, tus.md]
 ---
 
 # Skull / Cortical Bone
@@ -128,8 +128,8 @@ Skull modeling accuracy directly impacts:
 ## See Also
 
 - [tissue-csf.md](tissue-csf.md) - Cerebrospinal fluid properties
-- [tissue-brain.md](tissue-brain.md) - Gray and white matter  
+- [tissue-brain.md](tissue-gray-matter.md) - Gray and white matter  
 - [head-model-mida.md](head-model-mida.md) - MIDA 153-structure model
-- [head-model-sci.md](head-model-sci.md) - SCI Institute head model
-- [physics-acoustic-wave-equation.md](physics-acoustic-wave-equation.md) - Wave propagation physics
-- [modality-tfus.md](modality-tfus.md) - Transcranial focused ultrasound
+- [head-model-sci.md](sci-head-model.md) - SCI Institute head model
+- [physics-acoustic-wave-equation.md](physics-acoustic.md) - Wave propagation physics
+- [modality-tfus.md](tus.md) - Transcranial focused ultrasound

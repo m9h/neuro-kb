@@ -6,7 +6,7 @@ tags: [physics, electromagnetic, mr-physics]
 description: "The Bloch equations describe the quantum mechanical evolution of nuclear magnetic moments in external magnetic fields, forming the fundamental physics underlying all MRI modalities including…"
 physics: electromagnetic
 governing_equations: dM/dt = γ(M × B) - R(M - M₀)
-related: [physics-nmr.md, modality-fmri.md, modality-dti.md, coordinate-system-scanner.md, tissue-brain.md, tissue-csf.md]
+related: [fmri.md, diffusion-mri.md, coordinate-systems.md, tissue-gray-matter.md, tissue-csf.md]
 ---
 
 # Bloch Equations / MR Physics
@@ -168,11 +168,11 @@ def epg_rf(F, alpha):
 
 ## See Also
 
-- [physics-nmr.md](physics-nmr.md) - Nuclear magnetic resonance fundamentals
-- [modality-fmri.md](modality-fmri.md) - BOLD contrast mechanisms
-- [modality-dti.md](modality-dti.md) - Diffusion encoding gradients
-- [tissue-brain.md](tissue-brain.md) - Brain tissue relaxation properties
-- [coordinate-system-scanner.md](coordinate-system-scanner.md) - Scanner coordinate reference frames
+- physics-nmr.md - Nuclear magnetic resonance fundamentals
+- [modality-fmri.md](fmri.md) - BOLD contrast mechanisms
+- [modality-dti.md](diffusion-mri.md) - Diffusion encoding gradients
+- [tissue-brain.md](tissue-gray-matter.md) - Brain tissue relaxation properties
+- [coordinate-system-scanner.md](coordinate-systems.md) - Scanner coordinate reference frames
 
 ## Citations
 - **stanisz2005t1**: Stanisz et al. (2005). T1, T2 relaxation and magnetization transfer in tissue at 3T. MRM 54:507-512. doi:10.1002/mrm.20605

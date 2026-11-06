@@ -9,7 +9,7 @@ measurement: near-infrared light attenuation / photon fluence at the scalp
 spatial_resolution: 1-3 cm
 temporal_resolution: 10-100 ms
 implementations: ["dot-jax:src/dot_jax/forward.py", "dot-jax:src/dot_jax/recon.py", "redbirdpy:redbirdpy/forward.py", "redbirdpy:redbirdpy/recon.py"]
-related: [fnirs.md, physics-diffusion-equation.md, method-fem.md, method-monte-carlo.md, tissue-optical-properties.md]
+related: [fnirs.md, physics-diffusion-equation.md, method-fem.md, method-monte-carlo.md, tissue-optical-properties.md, optical-microscopy.md]
 ---
 
 # Diffuse Optical Tomography
@@ -42,6 +42,7 @@ Reconstruction minimizes the misfit between measured and predicted boundary flue
 
 ## See Also
 
+- [Computational Optical Microscopy](optical-microscopy.md)
 - [fnirs.md](fnirs.md) - channel-space optical modality
 - [physics-diffusion-equation.md](physics-diffusion-equation.md) - photon diffusion forward physics
 - [method-fem.md](method-fem.md) / [method-monte-carlo.md](method-monte-carlo.md) - forward solvers

@@ -174,9 +174,9 @@ Absorbing boundary conditions prevent artificial reflections:
 
 ## See Also
 
-- [modality-fus.md](modality-fus.md) - Focused ultrasound applications
-- [modality-us.md](modality-us.md) - Ultrasound imaging principles  
+- [modality-fus.md](fus.md) - Focused ultrasound applications
+- [modality-us.md](tus.md) - Ultrasound imaging principles  
 - [tissue-skull.md](tissue-skull.md) - Skull acoustic properties and modeling
-- [tissue-brain.md](tissue-brain.md) - Brain tissue acoustic characteristics
-- [method-pseudospectral.md](method-pseudospectral.md) - Spectral methods for wave simulation
-- [method-finite-difference.md](method-finite-difference.md) - Finite difference acoustic solvers
+- [tissue-brain.md](tissue-gray-matter.md) - Brain tissue acoustic characteristics
+- method-pseudospectral.md - Spectral methods for wave simulation
+- method-finite-difference.md - Finite difference acoustic solvers

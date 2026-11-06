@@ -12,7 +12,7 @@ properties:
   optical_scattering_1_cm: 0.99
   density_kg_m3: 1040
 sources: [Prahl1999omlc, Gabriel1996, Duck1990]
-related: [white-matter.md, cerebrospinal-fluid.md, tissue-skull.md, tissue-scalp.md, hemodynamic-response-function.md, beer-lambert-law.md]
+related: [tissue-white-matter.md, tissue-csf.md, tissue-skull.md, tissue-scalp.md, physics-hemodynamic.md, fnirs.md]
 ---
 
 # Gray Matter
@@ -179,9 +179,9 @@ Gray matter exhibits structure across scales:
 
 ## See Also
 
-- [white-matter.md](white-matter.md) - Complementary brain tissue type
-- [cerebrospinal-fluid.md](cerebrospinal-fluid.md) - CSF interface properties  
-- [hemodynamic-response-function.md](hemodynamic-response-function.md) - Functional activation patterns
-- [beer-lambert-law.md](beer-lambert-law.md) - Optical absorption principles
+- [white-matter.md](tissue-white-matter.md) - Complementary brain tissue type
+- [cerebrospinal-fluid.md](tissue-csf.md) - CSF interface properties  
+- [hemodynamic-response-function.md](physics-hemodynamic.md) - Functional activation patterns
+- [beer-lambert-law.md](fnirs.md) - Optical absorption principles
 - [tissue-skull.md](tissue-skull.md) - Overlying tissue layer
-- [conductivity-mapping.md](conductivity-mapping.md) - EIT and qMRI approaches
+- [conductivity-mapping.md](quantitative-mri.md) - EIT and qMRI approaches
